@@ -106,7 +106,7 @@ const TRANSLATIONS: Record<Language, any> = {
       p2Part1: 'पर', p2Part2: 'हम फिल्म नहीं करते,', p2Part3: 'हम बनाते हैं', p2Part4: '। हम विचारों को बिना किसी सीमा के दृश्य वास्तविकताओं में बदलने के लिए अत्याधुनिक जनरेटिव आर्टिफिशियल इंटेलिजेंस का उपयोग करते हैं।',
       cards: [
         { title: 'अनंत रचनात्मकता', text: 'मंगल ग्रह पर एक विज्ञापन? एक साइबरपंक संगीत वीडियो? यदि आप इसकी कल्पना कर सकते हैं, तो हम इसे उत्पन्न कर सकते हैं।' },
-        { title: 'रिकॉर्ड समय', text: 'जिसमें महीनों की शूटिंग और पोस्ट-प्रोडक्शन लगता था, अब हम उसे बहुत कम समय में हल करते हैं।' },
+        { title: 'रिकॉर्ड समय', text: 'जिसमें महीनों की शूटिंग और पोस्ट-प्रोडक्शन लगता था, अब हम उसे बहुत कम समय में हल ক্ষমতায় करते हैं।' },
         { title: 'अनुकूलन', text: 'हम सिनेमाई गुणवत्ता का त्याग किए बिना परिचालन लागत को काफी कम करते हैं।' }
       ],
       cta: 'पीछे न रहें। आपके ब्रांड का भविष्य AI के साथ उत्पन्न होता है।'
@@ -367,10 +367,35 @@ const VIDEOS = [
 export default function App() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<'trabajos' | 'nosotros'>('trabajos');
-  const [currentLang, setCurrentLang] = useState<Language>('es');
+  
+  // Inicializar idioma desde la URL (?lang=en) o el navegador
+  const [currentLang, setCurrentLang] = useState<Language>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const langParam = params.get('lang') as Language;
+    if (langParam && LANGUAGES.some(l => l.code === langParam)) return langParam;
+    
+    const browserLang = navigator.language.split('-')[0] as Language;
+    if (LANGUAGES.some(l => l.code === browserLang)) return browserLang;
+    
+    return 'es';
+  });
+
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
   const langMenuRef = useRef<HTMLDivElement>(null);
+
+  // Actualizar el atributo lang del HTML para SEO
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
+
+  // Cambiar idioma y actualizar URL
+  const handleLanguageChange = (langCode: Language) => {
+    setCurrentLang(langCode);
+    setIsLangMenuOpen(false);
+    const newUrl = `${window.location.pathname}?lang=${langCode}`;
+    window.history.pushState({ path: newUrl }, '', newUrl);
+  };
 
   // Close language menu when clicking outside
   useEffect(() => {
@@ -381,15 +406,6 @@ export default function App() {
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Auto-detect language
-  useEffect(() => {
-    const browserLang = navigator.language.split('-')[0];
-    const supportedLang = LANGUAGES.find(l => l.code === browserLang);
-    if (supportedLang) {
-      setCurrentLang(supportedLang.code);
-    }
   }, []);
 
   // Hide WhatsApp on scroll bottom
@@ -467,10 +483,7 @@ export default function App() {
                     {LANGUAGES.map((lang) => (
                       <button
                         key={lang.code}
-                        onClick={() => {
-                          setCurrentLang(lang.code);
-                          setIsLangMenuOpen(false);
-                        }}
+                        onClick={() => handleLanguageChange(lang.code)}
                         className={`w-full text-left px-4 py-2 text-xs sm:text-sm hover:bg-white/10 transition-colors flex items-center gap-2 ${currentLang === lang.code ? 'text-[#F27D26]' : 'text-white'}`}
                       >
                         <span>{lang.flag}</span>

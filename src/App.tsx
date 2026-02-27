@@ -5,7 +5,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
 
 // --- CONFIGURACIÓN DE IDIOMAS ---
@@ -248,14 +248,19 @@ const VIDEOS = [
     descKey: "ai_100"
   },
   { 
+    id: "ils5lSAB3x0", isShort: true,
+    titles: { es: "Publicidad Helados Franui", en: "Franui Ice Cream Ad", zh: "Franui 冰淇淋广告", hi: "फ्रानुई आइसक्रीम विज्ञापन", fr: "Publicité Glaces Franui", ar: "إعلان آيس كريم فرانوي", bn: "ফ্রানুই আইসক্রিম বিজ্ঞাপন", pt: "Publicidade Sorvetes Franui", ru: "Реклама мороженого Franui", id: "Iklan Es Krim Franui" },
+    descKey: "ai_100"
+  },
+  { 
     id: "w8-AnteKVSw", isShort: true,
     titles: { es: "Comercial Neo QLED 85", en: "Neo QLED 85 Commercial", zh: "Neo QLED 85 广告", hi: "Neo QLED 85 विज्ञापन", fr: "Publicité Neo QLED 85", ar: "إعلان Neo QLED 85", bn: "Neo QLED 85 বিজ্ঞাপন", pt: "Comercial Neo QLED 85", ru: "Реклама Neo QLED 85", id: "Iklan Neo QLED 85" },
     descKey: "commercial_ai"
   },
   { 
-    id: "ils5lSAB3x0", isShort: true,
-    titles: { es: "Publicidad Helados Franui", en: "Franui Ice Cream Ad", zh: "Franui 冰淇淋广告", hi: "फ्रानुई आइसक्रीम विज्ञापन", fr: "Publicité Glaces Franui", ar: "إعلان آيس كريم فرانوي", bn: "ফ্রানুই আইসক্রিম বিজ্ঞাপন", pt: "Publicidade Sorvetes Franui", ru: "Реклама мороженого Franui", id: "Iklan Es Krim Franui" },
-    descKey: "ai_100"
+    id: "Ya0bY_G_EnY", isShort: true,
+    titles: { es: "Comercial de Cacho", en: "Cacho Commercial", zh: "Cacho 广告", hi: "कैचो विज्ञापन", fr: "Publicité Cacho", ar: "إعلان كاتشو", bn: "ক্যাচো বিজ্ঞাপন", pt: "Comercial de Cacho", ru: "Реклама Cacho", id: "Iklan Cacho" },
+    descKey: "generated_ai"
   },
   { 
     id: "FvZHPkUbr3w", isShort: false,
@@ -300,11 +305,6 @@ const VIDEOS = [
   { 
     id: "YDtcXKXq5e8", isShort: true,
     titles: { es: "Creación de Contenido", en: "Content Creation", zh: "内容创作", hi: "सामग्री निर्माण", fr: "Création de contenu", ar: "صناعة المحتوى", bn: "কন্টেন্ট তৈরি", pt: "Criação de Conteúdo", ru: "Создание контента", id: "Pembuatan Konten" },
-    descKey: "generated_ai"
-  },
-  { 
-    id: "Ya0bY_G_EnY", isShort: true,
-    titles: { es: "Comercial de Cacho", en: "Cacho Commercial", zh: "Cacho 广告", hi: "कैचो विज्ञापन", fr: "Publicité Cacho", ar: "إعلان كاتشو", bn: "ক্যাচো বিজ্ঞাপন", pt: "Comercial de Cacho", ru: "Реклама Cacho", id: "Iklan Cacho" },
     descKey: "generated_ai"
   },
   { 
@@ -370,6 +370,18 @@ export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('es');
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Auto-detect language
   useEffect(() => {
@@ -435,7 +447,7 @@ export default function App() {
             </motion.div>
             
             {/* Language Selector (Absolute positioned below logo) */}
-            <div className="absolute top-full left-0 mt-1">
+            <div className="absolute top-full left-0 mt-1" ref={langMenuRef}>
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center gap-1 text-[10px] sm:text-xs text-white/50 hover:text-white transition-colors uppercase font-semibold tracking-wider"
@@ -505,10 +517,10 @@ export default function App() {
             {/* Hero Section */}
             <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-left relative overflow-hidden">
               {/* Logo de Fondo (Placeholder - User should replace src) */}
-              <div className="absolute top-[15%] -right-10 w-[250px] sm:top-1/2 sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-10 pointer-events-none z-0">
+              <div className="absolute top-[15%] -right-10 w-[250px] sm:top-1/2 sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-20 pointer-events-none z-0">
                  {/* Reemplazar este src con la URL del logo real */}
                  <img 
-                    src="/logo-cacho.png"
+                    src="/logo-cacho.png" 
                     alt="Cacho.ai Logo Background" 
                     className="w-full h-full object-contain mix-blend-screen"
                  />
@@ -575,7 +587,7 @@ export default function App() {
             className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 max-w-4xl mx-auto relative"
           >
              {/* Logo de Fondo en Nosotros también */}
-             <div className="absolute top-0 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] opacity-5 pointer-events-none z-0">
+             <div className="absolute top-0 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] opacity-20 pointer-events-none z-0">
                  <img 
                     src="/logo-cacho.png" 
                     alt="Logo Background" 
@@ -658,10 +670,16 @@ export default function App() {
             href="https://wa.me/message/JBNNVGX4UNKBH1"
             target="_blank"
             rel="noreferrer"
-            className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#1ebe5d] transition-colors flex items-center gap-2"
+            className={`fixed z-50 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#1ebe5d] transition-all flex items-center justify-center ${
+              activeIndex !== null 
+                ? 'bottom-4 right-4 w-10 h-10 p-0' // Más chico cuando hay video
+                : 'bottom-6 right-6 px-5 py-3 gap-2' // Tamaño normal
+            }`}
           >
-            <MessageCircle className="w-6 h-6" />
-            <span className="text-xs font-bold uppercase tracking-wider">WhatsApp</span>
+            <MessageCircle className={activeIndex !== null ? 'w-5 h-5' : 'w-6 h-6'} />
+            {activeIndex === null && (
+              <span className="text-xs font-bold uppercase tracking-wider">WhatsApp</span>
+            )}
           </motion.a>
         )}
       </AnimatePresence>
@@ -722,12 +740,14 @@ export default function App() {
                     playsinline: 1,
                     iv_load_policy: 3,
                     showinfo: 0,
+                    mute: 0, // Asegurar que no esté muteado por defecto
                   },
                 }}
                 onEnd={handleNext}
                 onReady={(e) => {
-                  // Intenta forzar 1080p, aunque YouTube decide basado en ancho de banda
+                  // Intenta forzar 1080p y reproducir automáticamente
                   e.target.setPlaybackQuality('hd1080');
+                  e.target.playVideo();
                 }}
               />
 

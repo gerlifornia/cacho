@@ -670,7 +670,7 @@ export default function App() {
             href="https://wa.me/message/JBNNVGX4UNKBH1"
             target="_blank"
             rel="noreferrer"
-            className={`fixed z-50 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#1ebe5d] transition-all flex items-center justify-center ${
+            className={`fixed z-[100] bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#1ebe5d] transition-all flex items-center justify-center ${
               activeIndex !== null 
                 ? 'bottom-4 right-4 w-10 h-10 p-0' // Más chico cuando hay video
                 : 'bottom-6 right-6 px-5 py-3 gap-2' // Tamaño normal

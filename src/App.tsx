@@ -5,7 +5,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
 
 // --- CONFIGURACIÓN DE IDIOMAS ---
@@ -106,7 +106,7 @@ const TRANSLATIONS: Record<Language, any> = {
       p2Part1: 'पर', p2Part2: 'हम फिल्म नहीं करते,', p2Part3: 'हम बनाते हैं', p2Part4: '। हम विचारों को बिना किसी सीमा के दृश्य वास्तविकताओं में बदलने के लिए अत्याधुनिक जनरेटिव आर्टिफिशियल इंटेलिजेंस का उपयोग करते हैं।',
       cards: [
         { title: 'अनंत रचनात्मकता', text: 'मंगल ग्रह पर एक विज्ञापन? एक साइबरपंक संगीत वीडियो? यदि आप इसकी कल्पना कर सकते हैं, तो हम इसे उत्पन्न कर सकते हैं।' },
-        { title: 'रिकॉर्ड समय', text: 'जिसमें महीनों की शूटिंग और पोस्ट-प्रोडक्शन लगता था, अब हम उसे बहुत कम समय में हल ক্ষমতায় करते हैं।' },
+        { title: 'रिकॉर्ड समय', text: 'जिसमें महीनों की शूटिंग और पोस्ट-प्रोडक्शन लगता था, अब हम उसे बहुत कम समय में हल करते हैं।' },
         { title: 'अनुकूलन', text: 'हम सिनेमाई गुणवत्ता का त्याग किए बिना परिचालन लागत को काफी कम करते हैं।' }
       ],
       cta: 'पीछे न रहें। आपके ब्रांड का भविष्य AI के साथ उत्पन्न होता है।'
@@ -382,7 +382,10 @@ export default function App() {
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<any>(null);
 
   // Actualizar el atributo lang del HTML para SEO
   useEffect(() => {
@@ -430,6 +433,24 @@ export default function App() {
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev !== null && prev < VIDEOS.length - 1 ? prev + 1 : 0));
   }, []);
+
+  // Touch handlers para swipe en móviles
+  const minSwipeDistance = 50;
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) handleNext();
+    if (isRightSwipe) handlePrevious();
+  };
 
   // Navegación con teclado
   useEffect(() => {
@@ -685,7 +706,7 @@ export default function App() {
             rel="noreferrer"
             className={`fixed z-[100] bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#1ebe5d] transition-all flex items-center justify-center ${
               activeIndex !== null 
-                ? 'bottom-4 right-4 w-10 h-10 p-0' // Más chico cuando hay video
+                ? 'bottom-24 right-4 w-10 h-10 p-0' // Más chico y más arriba cuando hay video
                 : 'bottom-6 right-6 px-5 py-3 gap-2' // Tamaño normal
             }`}
           >
@@ -710,6 +731,9 @@ export default function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-0"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
             {/* Botón Cerrar */}
             <button 
@@ -739,33 +763,54 @@ export default function App() {
 
             {/* Contenedor del Video */}
             <div className={`relative w-full mx-auto flex flex-col justify-center ${VIDEOS[activeIndex].isShort ? 'max-w-sm aspect-[9/16]' : 'max-w-5xl aspect-video sm:px-24'}`}>
-              <YouTube
-                videoId={VIDEOS[activeIndex].id}
-                title={VIDEOS[activeIndex].titles[currentLang] || VIDEOS[activeIndex].titles['es']}
-                className={`w-full h-full shadow-2xl ${VIDEOS[activeIndex].isShort ? 'rounded-2xl' : 'sm:rounded-2xl'}`}
-                iframeClassName="w-full h-full rounded-2xl"
-                opts={{
-                  playerVars: {
-                    autoplay: 1,
-                    controls: 0,
-                    rel: 0,
-                    modestbranding: 1,
-                    playsinline: 1,
-                    iv_load_policy: 3,
-                    showinfo: 0,
-                    mute: 0, // Asegurar que no esté muteado por defecto
-                  },
-                }}
-                onEnd={handleNext}
-                onReady={(e) => {
-                  // Intenta forzar 1080p y reproducir automáticamente
-                  e.target.setPlaybackQuality('hd1080');
-                  e.target.playVideo();
-                }}
-              />
+              
+              <div className={`relative w-full h-full shadow-2xl overflow-hidden ${VIDEOS[activeIndex].isShort ? 'rounded-2xl' : 'sm:rounded-2xl'}`}>
+                {/* Overlay transparente para capturar swipes y clics */}
+                <div 
+                  className="absolute inset-0 z-10 cursor-pointer"
+                  onClick={() => {
+                    if (playerRef.current) {
+                      const state = playerRef.current.getPlayerState();
+                      if (state === 1) playerRef.current.pauseVideo();
+                      else playerRef.current.playVideo();
+                    }
+                  }}
+                />
+                <YouTube
+                  videoId={VIDEOS[activeIndex].id}
+                  title={VIDEOS[activeIndex].titles[currentLang] || VIDEOS[activeIndex].titles['es']}
+                  className="w-full h-full pointer-events-none"
+                  iframeClassName="w-full h-full"
+                  opts={{
+                    playerVars: {
+                      autoplay: 1,
+                      controls: 0,
+                      rel: 0,
+                      modestbranding: 1,
+                      playsinline: 1,
+                      iv_load_policy: 3,
+                      showinfo: 0,
+                      mute: 0, // Asegurar que no esté muteado por defecto
+                    },
+                  }}
+                  onEnd={handleNext}
+                  onReady={(e) => {
+                    playerRef.current = e.target;
+                    // Intenta forzar 1080p y reproducir automáticamente
+                    e.target.setPlaybackQuality('hd1080');
+                    e.target.playVideo();
+                  }}
+                  onStateChange={(e) => {
+                    // Si el video está "unstarted" (-1) o "cued" (5), forzamos el play.
+                    if (e.data === -1 || e.data === 5) {
+                      e.target.playVideo();
+                    }
+                  }}
+                />
+              </div>
 
               {/* Controles de Navegación Móvil (Abajo del video) */}
-              <div className="flex sm:hidden justify-between items-center mt-6 px-2">
+              <div className="flex sm:hidden justify-between items-center mt-6 px-2 relative z-20">
                 <button 
                   onClick={handlePrevious}
                   className="flex items-center gap-2 text-white/70 hover:text-white"

@@ -508,7 +508,7 @@ export default function App() {
               <div className="absolute top-[15%] -right-10 w-[250px] sm:top-1/2 sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-10 pointer-events-none z-0">
                  {/* Reemplazar este src con la URL del logo real */}
                  <img 
-                    src="https://via.placeholder.com/500x500/F27D26/000000?text=LOGO+CACHO.AI" 
+                    src="/logo-cacho.png"
                     alt="Cacho.ai Logo Background" 
                     className="w-full h-full object-contain mix-blend-screen"
                  />
@@ -577,7 +577,7 @@ export default function App() {
              {/* Logo de Fondo en Nosotros también */}
              <div className="absolute top-0 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] opacity-5 pointer-events-none z-0">
                  <img 
-                    src="https://via.placeholder.com/500x500/F27D26/000000?text=LOGO" 
+                    src="/logo-cacho.png" 
                     alt="Logo Background" 
                     className="w-full h-full object-contain mix-blend-screen"
                  />

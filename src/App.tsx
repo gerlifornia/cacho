@@ -238,31 +238,6 @@ const COMMON_DESCS: Record<string, Record<Language, string>> = {
 // Lista de videos con soporte multilenguaje
 const VIDEOS = [
   { 
-    id: "UMchZoJYREI", isShort: true,
-    titles: { es: "Campaña Aderezos TAU", en: "TAU Dressings Campaign", zh: "TAU调味品活动", hi: "TAU ड्रेसिंग अभियान", fr: "Campagne de pansements TAU", ar: "حملة صلصات TAU", bn: "TAU ড্রেসিং ক্যাম্পেইন", pt: "Campanha de Molhos TAU", ru: "Кампания соусов TAU", id: "Kampanye Saus TAU" },
-    descKey: "ai_100"
-  },
-  { 
-    id: "hugScc-tf8c", isShort: true,
-    titles: { es: "Comercial Fernet Branca", en: "Fernet Branca Commercial", zh: "Fernet Branca 广告", hi: "फर्नेट ब्रांका विज्ञापन", fr: "Publicité Fernet Branca", ar: "إعلان فيرنت برانكا", bn: "ফার্নেট ব্রাঙ্কা বিজ্ঞাপন", pt: "Comercial Fernet Branca", ru: "Реклама Fernet Branca", id: "Iklan Fernet Branca" },
-    descKey: "ai_100"
-  },
-  { 
-    id: "ils5lSAB3x0", isShort: true,
-    titles: { es: "Publicidad Helados Franui", en: "Franui Ice Cream Ad", zh: "Franui 冰淇淋广告", hi: "फ्रानुई आइसक्रीम विज्ञापन", fr: "Publicité Glaces Franui", ar: "إعلان آيس كريم فرانوي", bn: "ফ্রানুই আইসক্রিম বিজ্ঞাপন", pt: "Publicidade Sorvetes Franui", ru: "Реклама мороженого Franui", id: "Iklan Es Krim Franui" },
-    descKey: "ai_100"
-  },
-  { 
-    id: "w8-AnteKVSw", isShort: true,
-    titles: { es: "Comercial Neo QLED 85", en: "Neo QLED 85 Commercial", zh: "Neo QLED 85 广告", hi: "Neo QLED 85 विज्ञापन", fr: "Publicité Neo QLED 85", ar: "إعلان Neo QLED 85", bn: "Neo QLED 85 বিজ্ঞাপন", pt: "Comercial Neo QLED 85", ru: "Реклама Neo QLED 85", id: "Iklan Neo QLED 85" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "Ya0bY_G_EnY", isShort: true,
-    titles: { es: "Comercial de Cacho", en: "Cacho Commercial", zh: "Cacho 广告", hi: "कैचो विज्ञापन", fr: "Publicité Cacho", ar: "إعلان كاتشو", bn: "ক্যাচো বিজ্ঞাপন", pt: "Comercial de Cacho", ru: "Реклама Cacho", id: "Iklan Cacho" },
-    descKey: "generated_ai"
-  },
-  { 
     id: "FvZHPkUbr3w", isShort: false,
     titles: { es: "Obra de Teatro Campanella", en: "Campanella Theater Play", zh: "Campanella 戏剧", hi: "कैम्पानेला थिएटर प्ले", fr: "Pièce de théâtre Campanella", ar: "مسرحية كامبانيلا", bn: "কাম্পানেলা থিয়েটার নাটক", pt: "Peça de Teatro Campanella", ru: "Театральная пьеса Кампанелла", id: "Pertunjukan Teater Campanella" },
     descKey: "generated_ai"
@@ -311,21 +286,6 @@ const VIDEOS = [
     id: "RiyWWRydKWo", isShort: true,
     titles: { es: "Animación IA", en: "AI Animation", zh: "AI 动画", hi: "AI एनीमेशन", fr: "Animation IA", ar: "رسوم متحركة بالذكاء الاصطناعي", bn: "এআই অ্যানিমেশন", pt: "Animação IA", ru: "ИИ анимация", id: "Animasi AI" },
     descKey: "generated_ai"
-  },
-  { 
-    id: "hynSfvLLeSU", isShort: true,
-    titles: { es: "Spot Philips", en: "Philips Spot", zh: "Philips 广告", hi: "फिलिप्स स्पॉट", fr: "Spot Philips", ar: "إعلان فيليبس", bn: "ফিলিপস স্পট", pt: "Spot Philips", ru: "Рекламный ролик Philips", id: "Spot Philips" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "G1Vb-IWnSuc", isShort: false,
-    titles: { es: "Comercial Pico de Oro", en: "Pico de Oro Commercial", zh: "Pico de Oro 广告", hi: "पिको डी ओरो विज्ञापन", fr: "Publicité Pico de Oro", ar: "إعلان بيكو دي أورو", bn: "পिको डी ओरो विज्ञापन", pt: "Comercial Pico de Oro", ru: "Реклама Pico de Oro", id: "Iklan Pico de Oro" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "7gf_WCqGKJU", isShort: true,
-    titles: { es: "Comercial Arroz Gallo", en: "Arroz Gallo Commercial", zh: "Arroz Gallo 广告", hi: "अरोज़ गैलो विज्ञापन", fr: "Publicité Arroz Gallo", ar: "إعلان أرز جالو", bn: "আরোজ গ্যালো বিজ্ঞাপন", pt: "Comercial Arroz Gallo", ru: "Реклама Arroz Gallo", id: "Iklan Arroz Gallo" },
-    descKey: "commercial_ai"
   },
   { 
     id: "ofoSYhA3Bp4", isShort: false,
@@ -396,7 +356,6 @@ export default function App() {
   }, []);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const langMenuRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
 
   // Actualizar el atributo lang del HTML para SEO
@@ -411,17 +370,6 @@ export default function App() {
     const newUrl = `${window.location.pathname}?lang=${langCode}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
   };
-
-  // Close language menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
-        setIsLangMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   // Hide WhatsApp on scroll bottom
   useEffect(() => {
@@ -846,5 +794,3 @@ export default function App() {
     </div>
   );
 }
-
-

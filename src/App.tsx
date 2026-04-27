@@ -278,16 +278,6 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   { 
-    id: "G1Vb-IWnSuc", isShort: false,
-    titles: { es: "Comercial Pico de Oro", en: "Pico de Oro Commercial", zh: "Pico de Oro 广告", hi: "पिको डी ओरो विज्ञापन", fr: "Publicité Pico de Oro", ar: "إعلان بيكو دي أورو", bn: "পিকো ডি ওরো বিজ্ঞাপন", pt: "Comercial Pico de Oro", ru: "Реклама Pico de Oro", id: "Iklan Pico de Oro" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "7gf_WCqGKJU", isShort: true,
-    titles: { es: "Comercial Arroz Gallo", en: "Arroz Gallo Commercial", zh: "Arroz Gallo 广告", hi: "अरोज़ गैलो विज्ञापन", fr: "Publicité Arroz Gallo", ar: "إعلان أرز جالو", bn: "আরোজ গ্যালো বিজ্ঞাপন", pt: "Comercial Arroz Gallo", ru: "Реклама Arroz Gallo", id: "Iklan Arroz Gallo" },
-    descKey: "commercial_ai"
-  },
-  { 
     id: "F5FLomhMJvc", isShort: true,
     titles: { es: "Parodia Política", en: "Political Parody", zh: "政治模仿", hi: "राजनीतिक पैरोडी", fr: "Parodie politique", ar: "محاكاة سياسية ساخرة", bn: "রাজনৈতিক প্যারোডি", pt: "Paródia Política", ru: "Политическая пародия", id: "Parodi Politik" },
     descKey: "generated_ai"
@@ -328,14 +318,14 @@ const VIDEOS = [
     descKey: "commercial_ai"
   },
   { 
-    id: "iM3y0K-WCSI", isShort: true,
-    titles: { es: "Personajes UGC", en: "UGC Characters", zh: "UGC 角色", hi: "यूजीसी पात्र", fr: "Personnages UGC", ar: "شخصيات UGC", bn: "ইউজিসি চরিত্র", pt: "Personagens UGC", ru: "Персонажи UGC", id: "Karakter UGC" },
-    descKey: "generated_ai"
+    id: "G1Vb-IWnSuc", isShort: false,
+    titles: { es: "Comercial Pico de Oro", en: "Pico de Oro Commercial", zh: "Pico de Oro 广告", hi: "पिको डी ओरो विज्ञापन", fr: "Publicité Pico de Oro", ar: "إعلان بيكو دي أورو", bn: "পिको डी ओरो विज्ञापन", pt: "Comercial Pico de Oro", ru: "Реклама Pico de Oro", id: "Iklan Pico de Oro" },
+    descKey: "commercial_ai"
   },
   { 
-    id: "WCwsfVAZt7U", isShort: false,
-    titles: { es: "Videoclip Rodrigo", en: "Rodrigo Music Video", zh: "Rodrigo 音乐视频", hi: "रोड्रिगो संगीत वीडियो", fr: "Clip vidéo Rodrigo", ar: "فيديو كليب رودريجو", bn: "রদ্রিগো মিউজিক ভিডিও", pt: "Videoclipe Rodrigo", ru: "Музыкальное видео Родриго", id: "Video Musik Rodrigo" },
-    descKey: "music_video"
+    id: "7gf_WCqGKJU", isShort: true,
+    titles: { es: "Comercial Arroz Gallo", en: "Arroz Gallo Commercial", zh: "Arroz Gallo 广告", hi: "अरोज़ गैलो विज्ञापन", fr: "Publicité Arroz Gallo", ar: "إعلان أرز جالو", bn: "আরোজ গ্যালো বিজ্ঞাপন", pt: "Comercial Arroz Gallo", ru: "Реклама Arroz Gallo", id: "Iklan Arroz Gallo" },
+    descKey: "commercial_ai"
   },
   { 
     id: "ofoSYhA3Bp4", isShort: false,
@@ -348,13 +338,23 @@ const VIDEOS = [
     descKey: "commercial_ai"
   },
   { 
-    id: "gXnDKUg4UVA", isShort: true,
-    titles: { es: "Spot Parodia", en: "Parody Spot", zh: "模仿广告", hi: "पैरोडी स्पॉट", fr: "Spot parodique", ar: "إعلان ساخر", bn: "প্যারোডি স্পট", pt: "Spot Paródia", ru: "Пародийный ролик", id: "Spot Parodi" },
+    id: "Ngsagu0H-00", isShort: true,
+    titles: { es: "Noticiero UGC", en: "UGC News", zh: "UGC 新闻", hi: "यूजीसी समाचार", fr: "Actualités UGC", ar: "أخبار UGC", bn: "ইউজিসি সংবাদ", pt: "Noticiário UGC", ru: "Новости UGC", id: "Berita UGC" },
     descKey: "generated_ai"
   },
   { 
-    id: "Ngsagu0H-00", isShort: true,
-    titles: { es: "Noticiero UGC", en: "UGC News", zh: "UGC 新闻", hi: "यूजीसी समाचार", fr: "Actualités UGC", ar: "أخبار UGC", bn: "ইউজিসি সংবাদ", pt: "Noticiário UGC", ru: "Новости UGC", id: "Berita UGC" },
+    id: "iM3y0K-WCSI", isShort: true,
+    titles: { es: "Personajes UGC", en: "UGC Characters", zh: "UGC 角色", hi: "यूजीसी पात्र", fr: "Personnages UGC", ar: "شخصيات UGC", bn: "ইউজিসি চরিত্র", pt: "Personagens UGC", ru: "Персонажи UGC", id: "Karakter UGC" },
+    descKey: "generated_ai"
+  },
+  { 
+    id: "WCwsfVAZt7U", isShort: false,
+    titles: { es: "Videoclip Rodrigo", en: "Rodrigo Music Video", zh: "Rodrigo 音乐视频", hi: "रोड्रिगो संगीत वीडियो", fr: "Clip vidéo Rodrigo", ar: "فيديو كليب رودريجو", bn: "রদ্রিগো মিউজিক ভিডিও", pt: "Videoclipe Rodrigo", ru: "Музыкальное видео Родриго", id: "Video Musik Rodrigo" },
+    descKey: "music_video"
+  },
+  { 
+    id: "gXnDKUg4UVA", isShort: true,
+    titles: { es: "Spot Parodia", en: "Parody Spot", zh: "模仿广告", hi: "पैरोडी स्पॉट", fr: "Spot parodique", ar: "إعلان ساخر", bn: "প্যারোডি স্পট", pt: "Spot Paródia", ru: "Пародийный ролик", id: "Spot Parodi" },
     descKey: "generated_ai"
   },
   { 
@@ -382,6 +382,18 @@ export default function App() {
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
@@ -834,3 +846,4 @@ export default function App() {
     </div>
   );
 }
+

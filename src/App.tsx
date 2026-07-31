@@ -606,7 +606,7 @@ export default function App() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Leer en Clarín la historia de Cacho"
-                  className="group relative z-20 mt-8 block w-full max-w-xl overflow-hidden rounded-3xl border border-[#F27D26]/50 bg-gradient-to-br from-[#F27D26]/20 via-zinc-950/95 to-black p-4 shadow-[0_20px_70px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:border-[#F27D26] sm:p-5 xl:absolute xl:right-6 xl:top-20 xl:mt-0 xl:w-[360px] xl:max-w-none xl:rotate-2 xl:p-4"
+                  className="group relative z-20 mx-1 mt-8 block w-[calc(100%-0.5rem)] max-w-xl rotate-2 overflow-hidden rounded-3xl border border-[#F27D26]/50 bg-gradient-to-br from-[#F27D26]/20 via-zinc-950/95 to-black p-4 shadow-[0_20px_70px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:border-[#F27D26] sm:mx-0 sm:w-full sm:p-5 xl:absolute xl:right-6 xl:top-20 xl:mt-0 xl:w-[360px] xl:max-w-none xl:p-4"
                 >
                   <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F27D26]/20 blur-3xl transition-opacity group-hover:opacity-90" />
 

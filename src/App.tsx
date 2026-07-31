@@ -28,11 +28,13 @@ const TRANSLATIONS: Record<Language, any> = {
   es: {
     nav: { trabajos: 'Trabajos', nosotros: 'Nosotros', contacto: 'Contacto' },
     hero: {
-      title1: 'LA PRIMERA PRODUCTORA CREATIVA',
-      title2: '100% IA DE LATAM',
-      title3: 'SIN ACTORES EGOCÉNTRICOS, PERO CON CREATIVIDAD HUMANA',
-      subtitle: 'Productora audiovisual especializada en Inteligencia Artificial. Comerciales, cine, videos institucionales, streaming y contenido UGC sin límites.',
-      manifesto: 'Nos enfocamos en la creatividad y en sorprender. Basta de la pieza “linda”: queremos que la gente hable.'
+      eyebrow: 'LA PRIMERA PRODUCTORA CREATIVA 100% IA DE LATAM',
+      title1: 'CREATIVIDAD',
+      title2: 'HUMANA.',
+      title3: 'POTENCIA IA.',
+      subtitle: 'Creamos piezas que sorprenden y hacen hablar.',
+      badge: 'SIN ACTORES EGOCÉNTRICOS',
+      services: ['COMERCIALES', 'CINE', 'INSTITUCIONALES', 'UGC']
     },
     nosotros: {
       title: 'EL MUNDO CAMBIÓ.',
@@ -545,18 +547,51 @@ export default function App() {
                 transition={{ delay: 0.2 }}
                 className="max-w-5xl relative z-10"
               >
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tighter mb-6 uppercase">
-                  {t.hero.title1}<br/>
-                  <span className="text-[#F27D26]">{t.hero.title2}</span><br/>
-                  {t.hero.title3}{currentLang !== 'es' && <> <span className="text-[#F27D26]">IA.</span></>}
-                </h2>
-                <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
-                  {t.hero.subtitle}
-                </p>
-                {t.hero.manifesto && (
-                  <p className="mt-4 text-white/90 text-lg sm:text-xl font-semibold leading-relaxed max-w-2xl">
-                    {t.hero.manifesto}
-                  </p>
+                {currentLang === 'es' ? (
+                  <>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-white/70">
+                      <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                      {t.hero.eyebrow}
+                    </div>
+
+                    <h2 className="mt-5 max-w-3xl text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.86] tracking-tighter uppercase">
+                      {t.hero.title1}<br/>
+                      <span className="text-[#F27D26]">{t.hero.title2}</span><br/>
+                      {t.hero.title3}
+                    </h2>
+
+                    <div className="mt-7 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+                      <div className="inline-flex -rotate-2 items-center gap-2 rounded-full border-2 border-[#F27D26] bg-[#F27D26]/10 px-4 py-2 text-xs sm:text-sm font-black uppercase tracking-[0.12em] text-[#F27D26] shadow-[0_0_30px_rgba(242,125,38,0.12)]">
+                        <Sparkles className="h-4 w-4" />
+                        {t.hero.badge}
+                      </div>
+                      <p className="max-w-md border-l-2 border-white/15 pl-4 text-base sm:text-lg font-medium leading-relaxed text-white/75">
+                        {t.hero.subtitle}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {t.hero.services.map((service: string) => (
+                        <span
+                          key={service}
+                          className="rounded-full border border-white/10 bg-zinc-900/70 px-3 py-1.5 text-[10px] sm:text-xs font-bold tracking-[0.12em] text-white/55"
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tighter mb-6 uppercase">
+                      {t.hero.title1}<br/>
+                      <span className="text-[#F27D26]">{t.hero.title2}</span><br/>
+                      {t.hero.title3} <span className="text-[#F27D26]">IA.</span>
+                    </h2>
+                    <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
+                      {t.hero.subtitle}
+                    </p>
+                  </>
                 )}
               </motion.div>
             </section>

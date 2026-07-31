@@ -28,10 +28,11 @@ const TRANSLATIONS: Record<Language, any> = {
   es: {
     nav: { trabajos: 'Trabajos', nosotros: 'Nosotros', contacto: 'Contacto' },
     hero: {
-      title1: 'CREAMOS',
-      title2: 'VIDEOS',
-      title3: 'CON',
-      subtitle: 'Productora audiovisual especializada en Inteligencia Artificial. Comerciales, cine, videos institucionales, streaming y contenido UGC sin límites.'
+      title1: 'LA PRIMERA PRODUCTORA CREATIVA',
+      title2: '100% IA DE LATAM',
+      title3: 'SIN ACTORES EGOCÉNTRICOS, PERO CON CREATIVIDAD HUMANA',
+      subtitle: 'Productora audiovisual especializada en Inteligencia Artificial. Comerciales, cine, videos institucionales, streaming y contenido UGC sin límites.',
+      manifesto: 'Nos enfocamos en la creatividad y en sorprender. Basta de la pieza “linda”: queremos que la gente hable.'
     },
     nosotros: {
       title: 'EL MUNDO CAMBIÓ.',
@@ -542,23 +543,36 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="max-w-3xl relative z-10"
+                className="max-w-5xl relative z-10"
               >
-                <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-6 uppercase">
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tighter mb-6 uppercase">
                   {t.hero.title1}<br/>
                   <span className="text-[#F27D26]">{t.hero.title2}</span><br/>
-                  {t.hero.title3} <span className="text-[#F27D26]">IA.</span>
+                  {t.hero.title3}{currentLang !== 'es' && <> <span className="text-[#F27D26]">IA.</span></>}
                 </h2>
-                <p className="text-white/60 text-base sm:text-lg lg:text-xl leading-relaxed max-w-md">
+                <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
                   {t.hero.subtitle}
                 </p>
+                {t.hero.manifesto && (
+                  <p className="mt-4 text-white/90 text-lg sm:text-xl font-semibold leading-relaxed max-w-2xl">
+                    {t.hero.manifesto}
+                  </p>
+                )}
               </motion.div>
             </section>
 
             {/* Portfolio Feed - Grilla Responsiva (Izquierda a Derecha) */}
             <section className="px-4 sm:px-6 relative z-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 items-center">
-                {VIDEOS.map((video, index) => (
+              {[false, true].map((isShort) => (
+                <div
+                  key={isShort ? 'verticales' : 'horizontales'}
+                  className={`grid gap-4 sm:gap-6 items-start ${
+                    isShort
+                      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 sm:mt-6'
+                      : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                  }`}
+                >
+                  {VIDEOS.map((video, index) => video.isShort === isShort && (
                   <motion.article 
                     key={video.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -577,18 +591,19 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                     
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-6 h-6 text-white ml-1" fill="currentColor" />
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
+                        <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
                       </div>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 p-6 w-full">
-                      <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-1 leading-tight uppercase">{video.titles[currentLang] || video.titles['en'] || video.titles['es']}</h3>
-                      <p className="text-xs sm:text-sm text-white/70 line-clamp-2">{COMMON_DESCS[video.descKey][currentLang] || COMMON_DESCS[video.descKey]['en']}</p>
+                    <div className="absolute bottom-0 left-0 p-4 sm:p-5 w-full">
+                      <h3 className="text-base sm:text-lg font-bold tracking-tight mb-1 leading-tight uppercase line-clamp-3">{video.titles[currentLang] || video.titles['en'] || video.titles['es']}</h3>
+                      <p className="text-[11px] sm:text-xs text-white/70 line-clamp-2">{COMMON_DESCS[video.descKey][currentLang] || COMMON_DESCS[video.descKey]['en']}</p>
                     </div>
                   </motion.article>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ))}
             </section>
           </>
         ) : (

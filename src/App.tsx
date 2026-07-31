@@ -630,7 +630,7 @@ export default function App() {
                   </div>
 
                   <p className="relative mt-4 text-base sm:text-lg font-black uppercase leading-[1.05] tracking-tight text-white">
-                    Creamos el primer personaje masivo con <span className="text-[#F27D26]">iA</span> de LATAM.
+                    Cacho es el primer personaje masivo con <span className="text-[#F27D26]">iA</span> de LATAM.
                   </p>
                   <p className="relative mt-2 text-xs sm:text-sm font-bold text-white/65 transition-colors group-hover:text-white">
                     Conocé la historia en Clarín →

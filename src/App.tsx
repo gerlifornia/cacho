@@ -850,6 +850,21 @@ export default function App() {
                     }
                   }}
                 />
+
+                {/* Máscaras visuales para ocultar títulos, logos y sugerencias de YouTube */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-0 z-20 h-14 bg-black sm:h-16"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-0 top-14 z-20 h-14 w-20 bg-gradient-to-br from-black via-black/95 to-transparent sm:top-16"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-black sm:h-16"
+                />
+
                 <YouTube
                   key={VIDEOS[activeIndex].id}
                   videoId={VIDEOS[activeIndex].id}
@@ -860,6 +875,8 @@ export default function App() {
                     playerVars: {
                       autoplay: 1,
                       controls: 0,
+                      disablekb: 1,
+                      fs: 0,
                       rel: 0,
                       modestbranding: 1,
                       playsinline: 1,

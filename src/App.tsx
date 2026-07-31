@@ -534,7 +534,7 @@ export default function App() {
             {/* Hero Section */}
             <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-left relative overflow-hidden">
               {/* Logo de Fondo (Placeholder - User should replace src) */}
-              <div className="absolute top-[15%] -right-10 w-[250px] sm:top-1/2 sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-20 pointer-events-none z-0">
+              <div className="absolute top-[15%] -right-16 w-[250px] sm:top-[68%] sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-15 sm:opacity-20 pointer-events-none z-0">
                  {/* Reemplazar este src con la URL del logo real */}
                  <img 
                     src="/logo-cacho.png" 
@@ -547,7 +547,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="max-w-3xl lg:max-w-2xl xl:max-w-3xl relative z-10"
+                className="max-w-3xl relative z-10"
               >
                 {currentLang === 'es' ? (
                   <>
@@ -599,40 +599,40 @@ export default function App() {
 
               {currentLang === 'es' && (
                 <motion.a
-                  initial={{ opacity: 0, x: 24, rotate: 2 }}
-                  animate={{ opacity: 1, x: 0, rotate: 2 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
                   href="https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Leer en Clarín la historia de Cacho"
-                  className="group relative z-20 mt-10 block w-full max-w-sm overflow-hidden rounded-3xl border border-[#F27D26]/50 bg-gradient-to-br from-[#F27D26]/20 via-zinc-950/95 to-black p-5 shadow-[0_20px_70px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:border-[#F27D26] lg:absolute lg:right-6 lg:top-28 lg:mt-0"
+                  className="group relative z-20 mt-8 block w-full max-w-xl overflow-hidden rounded-3xl border border-[#F27D26]/50 bg-gradient-to-br from-[#F27D26]/20 via-zinc-950/95 to-black p-4 shadow-[0_20px_70px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:border-[#F27D26] sm:p-5 xl:absolute xl:right-6 xl:top-20 xl:mt-0 xl:w-[360px] xl:max-w-none xl:rotate-2 xl:p-4"
                 >
                   <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F27D26]/20 blur-3xl transition-opacity group-hover:opacity-90" />
 
-                  <div className="relative flex items-start justify-between gap-4">
-                    <div>
+                  <div className="relative flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-3">
                       <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#F27D26]">
-                        Cacho en los medios
+                        En los medios
                       </span>
-                      <div className="mt-3 inline-flex rounded-xl bg-white px-3 py-2 shadow-lg">
+                      <div className="inline-flex shrink-0 rounded-lg bg-white px-2.5 py-1.5 shadow-lg">
                         <img
                           src={CLARIN_LOGO_SRC}
                           alt="Clarín"
-                          className="h-7 w-auto object-contain"
+                          className="h-5 w-auto object-contain"
                         />
                       </div>
                     </div>
 
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#F27D26]/50 bg-[#F27D26]/15 text-[#F27D26] transition-transform group-hover:rotate-45 group-hover:bg-[#F27D26] group-hover:text-black">
-                      <ArrowUpRight className="h-5 w-5" />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F27D26]/50 bg-[#F27D26]/15 text-[#F27D26] transition-transform group-hover:rotate-45 group-hover:bg-[#F27D26] group-hover:text-black">
+                      <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>
 
-                  <p className="relative mt-5 text-xl font-black uppercase leading-[1.05] tracking-tight text-white">
+                  <p className="relative mt-4 text-base sm:text-lg font-black uppercase leading-[1.05] tracking-tight text-white">
                     Creamos el primer personaje masivo con <span className="text-[#F27D26]">iA</span> de LATAM.
                   </p>
-                  <p className="relative mt-3 text-sm font-bold text-white/65 transition-colors group-hover:text-white">
+                  <p className="relative mt-2 text-xs sm:text-sm font-bold text-white/65 transition-colors group-hover:text-white">
                     Conocé la historia en Clarín →
                   </p>
                 </motion.a>

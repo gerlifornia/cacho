@@ -4,9 +4,11 @@
  */
 
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
+import { Play, Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
+
+const CLARIN_LOGO_SRC = 'data:image/png;base64,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';
 
 // --- CONFIGURACIÓN DE IDIOMAS ---
 type Language = 'es' | 'en' | 'zh' | 'hi' | 'fr' | 'ar' | 'bn' | 'pt' | 'ru' | 'id';
@@ -31,7 +33,7 @@ const TRANSLATIONS: Record<Language, any> = {
       eyebrow: 'LA PRIMERA PRODUCTORA CREATIVA 100% IA DE LATAM',
       title1: 'CREATIVIDAD',
       title2: 'HUMANA.',
-      title3: 'POTENCIA IA.',
+      title3: 'POTENCIA',
       subtitle: 'Creamos piezas que sorprenden y hacen hablar.',
       badge: 'SIN ACTORES EGOCÉNTRICOS',
       services: ['COMERCIALES', 'CINE', 'INSTITUCIONALES', 'UGC']
@@ -545,7 +547,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="max-w-5xl relative z-10"
+                className="max-w-3xl lg:max-w-2xl xl:max-w-3xl relative z-10"
               >
                 {currentLang === 'es' ? (
                   <>
@@ -557,7 +559,7 @@ export default function App() {
                     <h2 className="mt-5 max-w-3xl text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.86] tracking-tighter uppercase">
                       {t.hero.title1}<br/>
                       <span className="text-[#F27D26]">{t.hero.title2}</span><br/>
-                      {t.hero.title3}
+                      {t.hero.title3} <span className="text-[#F27D26]">iA.</span>
                     </h2>
 
                     <div className="mt-7 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
@@ -594,6 +596,47 @@ export default function App() {
                   </>
                 )}
               </motion.div>
+
+              {currentLang === 'es' && (
+                <motion.a
+                  initial={{ opacity: 0, x: 24, rotate: 2 }}
+                  animate={{ opacity: 1, x: 0, rotate: 2 }}
+                  transition={{ delay: 0.35 }}
+                  href="https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Leer en Clarín la historia de Cacho"
+                  className="group relative z-20 mt-10 block w-full max-w-sm overflow-hidden rounded-3xl border border-[#F27D26]/50 bg-gradient-to-br from-[#F27D26]/20 via-zinc-950/95 to-black p-5 shadow-[0_20px_70px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:border-[#F27D26] lg:absolute lg:right-6 lg:top-28 lg:mt-0"
+                >
+                  <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F27D26]/20 blur-3xl transition-opacity group-hover:opacity-90" />
+
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#F27D26]">
+                        Cacho en los medios
+                      </span>
+                      <div className="mt-3 inline-flex rounded-xl bg-white px-3 py-2 shadow-lg">
+                        <img
+                          src={CLARIN_LOGO_SRC}
+                          alt="Clarín"
+                          className="h-7 w-auto object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#F27D26]/50 bg-[#F27D26]/15 text-[#F27D26] transition-transform group-hover:rotate-45 group-hover:bg-[#F27D26] group-hover:text-black">
+                      <ArrowUpRight className="h-5 w-5" />
+                    </span>
+                  </div>
+
+                  <p className="relative mt-5 text-xl font-black uppercase leading-[1.05] tracking-tight text-white">
+                    Creamos el primer personaje masivo con <span className="text-[#F27D26]">iA</span> de LATAM.
+                  </p>
+                  <p className="relative mt-3 text-sm font-bold text-white/65 transition-colors group-hover:text-white">
+                    Conocé la historia en Clarín →
+                  </p>
+                </motion.a>
+              )}
             </section>
 
             {/* Portfolio Feed - Grilla Responsiva (Izquierda a Derecha) */}

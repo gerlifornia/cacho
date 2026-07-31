@@ -851,6 +851,7 @@ export default function App() {
                   }}
                 />
                 <YouTube
+                  key={VIDEOS[activeIndex].id}
                   videoId={VIDEOS[activeIndex].id}
                   title={VIDEOS[activeIndex].titles[currentLang] || VIDEOS[activeIndex].titles['es']}
                   className="w-full h-full pointer-events-none"
@@ -863,6 +864,7 @@ export default function App() {
                       modestbranding: 1,
                       playsinline: 1,
                       iv_load_policy: 3,
+                      cc_load_policy: 0,
                       showinfo: 0,
                       mute: 0, // Asegurar que no esté muteado por defecto
                     },
@@ -870,9 +872,23 @@ export default function App() {
                   onEnd={handleNext}
                   onReady={(e) => {
                     playerRef.current = e.target;
-                    // Intenta forzar 1080p y reproducir automáticamente
+                    // Desactiva subtítulos y reproduce apenas se abre el modal.
+                    try {
+                      e.target.setOption('captions', 'track', {});
+                      e.target.setOption('cc', 'track', {});
+                    } catch {
+                      // YouTube puede tardar en cargar el módulo de subtítulos.
+                    }
                     e.target.setPlaybackQuality('hd1080');
                     e.target.playVideo();
+                  }}
+                  onPlay={(e) => {
+                    try {
+                      e.target.setOption('captions', 'track', {});
+                      e.target.setOption('cc', 'track', {});
+                    } catch {
+                      // Mantiene la reproducción aunque el módulo no esté disponible.
+                    }
                   }}
                   onStateChange={(e) => {
                     // Si el video está "unstarted" (-1) o "cued" (5), forzamos el play.

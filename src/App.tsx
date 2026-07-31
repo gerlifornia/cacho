@@ -236,91 +236,109 @@ const COMMON_DESCS: Record<string, Record<Language, string>> = {
 };
 
 // Lista de videos con soporte multilenguaje
+const localizedTitle = (title: string): Record<Language, string> =>
+  Object.fromEntries(LANGUAGES.map(({ code }) => [code, title])) as Record<Language, string>;
+
 const VIDEOS = [
-  { 
-    id: "FvZHPkUbr3w", isShort: false,
-    titles: { es: "Obra de Teatro Campanella", en: "Campanella Theater Play", zh: "Campanella 戏剧", hi: "कैम्पानेला थिएटर प्ले", fr: "Pièce de théâtre Campanella", ar: "مسرحية كامبانيلا", bn: "কাম্পানেলা থিয়েটার নাটক", pt: "Peça de Teatro Campanella", ru: "Театральная пьеса Кампанелла", id: "Pertunjukan Teater Campanella" },
+  {
+    id: "oomjGUHKFlY", isShort: false,
+    titles: localizedTitle("Creactive Hub x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "2qmk-FAnvYs", isShort: false,
-    titles: { es: "El Renacer de Gilda", en: "Gilda's Rebirth", zh: "吉尔达的重生", hi: "गिल्डा का पुनर्जन्म", fr: "La Renaissance de Gilda", ar: "ولادة جيلدا من جديد", bn: "গিল্ডার পুনর্জন্ম", pt: "O Renascimento de Gilda", ru: "Возрождение Джильды", id: "Kelahiran Kembali Gilda" },
-    descKey: "music_video"
-  },
-  { 
-    id: "r9CwY4R81_k", isShort: false,
-    titles: { es: "Trailer Película de Terror", en: "Horror Movie Trailer", zh: "恐怖电影预告片", hi: "हॉरर मूवी ट्रेलर", fr: "Bande-annonce de film d'horreur", ar: "مقطورة فيلم رعب", bn: "হরর মুভি ট্রেলার", pt: "Trailer de Filme de Terror", ru: "Трейлер фильма ужасов", id: "Trailer Film Horor" },
+  {
+    id: "67FMhfAcCBk", isShort: false,
+    titles: localizedTitle("Publicidad Mundial Argentina x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "F5FLomhMJvc", isShort: true,
-    titles: { es: "Parodia Política", en: "Political Parody", zh: "政治模仿", hi: "राजनीतिक पैरोडी", fr: "Parodie politique", ar: "محاكاة سياسية ساخرة", bn: "রাজনৈতিক প্যারোডি", pt: "Paródia Política", ru: "Политическая пародия", id: "Parodi Politik" },
+  {
+    id: "f7KgP33ytiA", isShort: false,
+    titles: localizedTitle("Avianca animada x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "kKKoV2tXTy4", isShort: true,
-    titles: { es: "Contenido UGC Polimarket", en: "Polimarket UGC Content", zh: "Polimarket UGC 内容", hi: "पोलिमार्केट यूजीसी सामग्री", fr: "Contenu UGC Polimarket", ar: "محتوى UGC Polimarket", bn: "পলিমার্কেট ইউজিসি কন্টেন্ট", pt: "Conteúdo UGC Polimarket", ru: "UGC контент Polimarket", id: "Konten UGC Polimarket" },
+  {
+    id: "otJEBDL1NXQ", isShort: false,
+    titles: localizedTitle("AVIANCA  seguros de la tierra al cielo x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "B_xxBGFUjXc", isShort: false,
-    titles: { es: "Videoclip Leo Mattioli", en: "Leo Mattioli Music Video", zh: "Leo Mattioli 音乐视频", hi: "लियो मटिओली संगीत वीडियो", fr: "Clip vidéo Leo Mattioli", ar: "فيديو كليب ليو ماتيولي", bn: "লিও ম্যাটিওলি মিউজিক ভিডিও", pt: "Videoclipe Leo Mattioli", ru: "Музыкальное видео Лео Маттиоли", id: "Video Musik Leo Mattioli" },
-    descKey: "music_video"
-  },
-  { 
-    id: "YDtcXKXq5e8", isShort: true,
-    titles: { es: "Creación de Contenido", en: "Content Creation", zh: "内容创作", hi: "सामग्री निर्माण", fr: "Création de contenu", ar: "صناعة المحتوى", bn: "কন্টেন্ট তৈরি", pt: "Criação de Conteúdo", ru: "Создание контента", id: "Pembuatan Konten" },
+  {
+    id: "IBh1BRPHbKo", isShort: false,
+    titles: localizedTitle("Otro Dia Perdido x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "GNTaILtDVQ0", isShort: false,
-    titles: { es: "Noticiero IA", en: "AI News", zh: "AI 新闻", hi: "AI समाचार", fr: "Actualités IA", ar: "أخبار الذكاء الاصطناعي", bn: "এআই সংবাদ", pt: "Noticiário IA", ru: "Новости ИИ", id: "Berita AI" },
+  {
+    id: "_16VPifqFgc", isShort: false,
+    titles: localizedTitle("Mercedes Corta x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "J3XXrOGaC4Y", isShort: false,
-    titles: { es: "Comercial The Beetles", en: "The Beetles Commercial", zh: "The Beetles 广告", hi: "द बीटल्स विज्ञापन", fr: "Publicité The Beetles", ar: "إعلان ذا بيتلز", bn: "দ্য বিটলস বিজ্ঞাপন", pt: "Comercial The Beetles", ru: "Реклама The Beetles", id: "Iklan The Beetles" },
+  {
+    id: "2Y8FpsZsIoo", isShort: false,
+    titles: localizedTitle("Torbe x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "RiyWWRydKWo", isShort: true,
-    titles: { es: "Animación IA", en: "AI Animation", zh: "AI 动画", hi: "AI एनीमेशन", fr: "Animation IA", ar: "رسوم متحركة بالذكاء الاصطناعي", bn: "এআই অ্যানিমেশন", pt: "Animação IA", ru: "ИИ анимация", id: "Animasi AI" },
+  {
+    id: "U2EtsosufFI", isShort: false,
+    titles: localizedTitle("Campenella x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "ofoSYhA3Bp4", isShort: false,
-    titles: { es: "Comercial TV", en: "TV Commercial", zh: "电视广告", hi: "टीवी विज्ञापन", fr: "Publicité TV", ar: "إعلان تلفزيوني", bn: "টিভি বিজ্ঞাপন", pt: "Comercial de TV", ru: "ТВ реклама", id: "Iklan TV" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "Ahi1sSIVwO4", isShort: false,
-    titles: { es: "Comercial TV 2", en: "TV Commercial 2", zh: "电视广告 2", hi: "टीवी विज्ञापन 2", fr: "Publicité TV 2", ar: "إعلان تلفزيوني 2", bn: "টিভি বিজ্ঞাপন ২", pt: "Comercial de TV 2", ru: "ТВ реклама 2", id: "Iklan TV 2" },
-    descKey: "commercial_ai"
-  },
-  { 
-    id: "Ngsagu0H-00", isShort: true,
-    titles: { es: "Noticiero UGC", en: "UGC News", zh: "UGC 新闻", hi: "यूजीसी समाचार", fr: "Actualités UGC", ar: "أخبار UGC", bn: "ইউজিসি সংবাদ", pt: "Noticiário UGC", ru: "Новости UGC", id: "Berita UGC" },
+  {
+    id: "zgWuAf2bI7A", isShort: true,
+    titles: localizedTitle("Borges x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "iM3y0K-WCSI", isShort: true,
-    titles: { es: "Personajes UGC", en: "UGC Characters", zh: "UGC 角色", hi: "यूजीसी पात्र", fr: "Personnages UGC", ar: "شخصيات UGC", bn: "ইউজিসি চরিত্র", pt: "Personagens UGC", ru: "Персонажи UGC", id: "Karakter UGC" },
+  {
+    id: "2tQwIZGvhPk", isShort: true,
+    titles: localizedTitle("Nike x Cacho"),
     descKey: "generated_ai"
   },
-  { 
-    id: "WCwsfVAZt7U", isShort: false,
-    titles: { es: "Videoclip Rodrigo", en: "Rodrigo Music Video", zh: "Rodrigo 音乐视频", hi: "रोड्रिगो संगीत वीडियो", fr: "Clip vidéo Rodrigo", ar: "فيديو كليب رودريجو", bn: "রদ্রিগো মিউজিক ভিডিও", pt: "Videoclipe Rodrigo", ru: "Музыкальное видео Родриго", id: "Video Musik Rodrigo" },
-    descKey: "music_video"
-  },
-  { 
-    id: "gXnDKUg4UVA", isShort: true,
-    titles: { es: "Spot Parodia", en: "Parody Spot", zh: "模仿广告", hi: "पैरोडी स्पॉट", fr: "Spot parodique", ar: "إعلان ساخر", bn: "প্যারোডি স্পট", pt: "Spot Paródia", ru: "Пародийный ролик", id: "Spot Parodi" },
+  {
+    id: "IMMDsV006bk", isShort: true,
+    titles: localizedTitle("Al Pastor Taco: Best Central Midfielder"),
     descKey: "generated_ai"
   },
-  { 
-    id: "4GXfQaOrhfw", isShort: false,
-    titles: { es: "Video Musical", en: "Music Video", zh: "音乐视频", hi: "संगीत वीडियो", fr: "Vidéo musicale", ar: "فيديو موسيقي", bn: "মিউজিক ভিডিও", pt: "Vídeo Musical", ru: "Музыкальное видео", id: "Video Musik" },
-    descKey: "music_video"
+  {
+    id: "sMqvtb7PvSQ", isShort: true,
+    titles: localizedTitle("Miss v x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "uuA2uO6F1n4", isShort: true,
+    titles: localizedTitle("Fernet x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "aeJ72DcaYC0", isShort: true,
+    titles: localizedTitle("Liliana x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "_sQgV29AmKQ", isShort: true,
+    titles: localizedTitle("Liliana x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "8jIrO55s1FM", isShort: true,
+    titles: localizedTitle("Tau x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "tTIRyt2Fmas", isShort: true,
+    titles: localizedTitle("Franui x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "-YkX1zSSMvQ", isShort: true,
+    titles: localizedTitle("Manchester x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "I4ZDCC7B6Bg", isShort: true,
+    titles: localizedTitle("Colgate x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
+    id: "Hcvqa2eruh8", isShort: true,
+    titles: localizedTitle("Mercado pago x cacho"),
+    descKey: "generated_ai"
   }
 ];
 
@@ -681,6 +699,9 @@ export default function App() {
       {/* Footer Semántico */}
       <footer className="border-t border-white/10 py-8 text-center text-white/40 text-sm">
         <p>&copy; {new Date().getFullYear()} Cacho.ai. Todos los derechos reservados.</p>
+        <p className="max-w-4xl mx-auto mt-3 px-6 text-[10px] sm:text-xs leading-relaxed text-white/30">
+          Algunas de las piezas exhibidas son SPEC ADS: conceptos audiovisuales independientes y no oficiales, creados por Cacho.ai exclusivamente como demostración creativa de portfolio. Algunas piezas no fueron encargadas, aprobadas, patrocinadas ni producidas en colaboración con las marcas representadas. Los nombres, logotipos, productos y demás elementos identificatorios pertenecen a sus respectivos titulares.
+        </p>
       </footer>
 
       {/* Video Modal con Navegación */}

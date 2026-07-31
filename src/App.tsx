@@ -858,10 +858,6 @@ export default function App() {
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-0 top-14 z-20 h-14 w-20 bg-gradient-to-br from-black via-black/95 to-transparent sm:top-16"
-                />
-                <div
-                  aria-hidden="true"
                   className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-black sm:h-16"
                 />
 

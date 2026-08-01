@@ -1008,16 +1008,6 @@ export default function App() {
                   }}
                 />
 
-                {/* Máscaras visuales para ocultar títulos, logos y sugerencias de YouTube */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 top-0 z-20 h-14 bg-black sm:h-16"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-black sm:h-16"
-                />
-
                 <YouTube
                   key={VIDEOS[activeIndex].id}
                   videoId={VIDEOS[activeIndex].id}

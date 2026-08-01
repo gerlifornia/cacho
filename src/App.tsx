@@ -755,8 +755,8 @@ export default function App() {
                                 onReady={(event) => {
                                   event.target.mute();
                                   event.target.playVideo();
+                                  setPreviewReadyIndex(index);
                                 }}
-                                onPlay={() => setPreviewReadyIndex(index)}
                               />
                             )}
 

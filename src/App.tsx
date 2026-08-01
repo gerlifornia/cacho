@@ -4,7 +4,7 @@
  */
 
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
+import { Instagram, MessageCircle, Sparkles, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
 
@@ -349,6 +349,9 @@ const VIDEOS = [
 
 export default function App() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hoveredVideoIndex, setHoveredVideoIndex] = useState<number | null>(null);
+  const [previewReadyIndex, setPreviewReadyIndex] = useState<number | null>(null);
+  const [canPreviewOnHover, setCanPreviewOnHover] = useState(false);
   const [activeTab, setActiveTab] = useState<'trabajos' | 'nosotros'>('trabajos');
   
   // Inicializar idioma desde la URL (?lang=en) o el navegador
@@ -380,6 +383,16 @@ export default function App() {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const playerRef = useRef<any>(null);
+
+  // Las vistas previas en movimiento se activan solo con mouse/trackpad.
+  // En pantallas táctiles mantenemos miniaturas livianas y nítidas.
+  useEffect(() => {
+    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const syncHoverSupport = () => setCanPreviewOnHover(hoverQuery.matches);
+    syncHoverSupport();
+    hoverQuery.addEventListener('change', syncHoverSupport);
+    return () => hoverQuery.removeEventListener('change', syncHoverSupport);
+  }, []);
 
   // Actualizar el atributo lang del HTML para SEO
   useEffect(() => {
@@ -630,7 +643,7 @@ export default function App() {
                   </div>
 
                   <p className="relative mt-4 text-base sm:text-lg font-black uppercase leading-[1.05] tracking-tight text-white">
-                    Cacho es el primer personaje masivo con <span className="text-[#F27D26]">iA</span> de LATAM.
+                    Cacho es el primer personaje <span className="text-[#F27D26]">IA</span> masivo de LATAM.
                   </p>
                   <p className="relative mt-2 text-xs sm:text-sm font-bold text-white/65 transition-colors group-hover:text-white">
                     Conocé la historia en Clarín →
@@ -639,49 +652,142 @@ export default function App() {
               )}
             </section>
 
-            {/* Portfolio Feed - Grilla Responsiva (Izquierda a Derecha) */}
-            <section className="px-4 sm:px-6 relative z-10">
-              {[false, true].map((isShort) => (
-                <div
-                  key={isShort ? 'verticales' : 'horizontales'}
-                  className={`grid gap-4 sm:gap-6 items-start ${
-                    isShort
-                      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 sm:mt-6'
-                      : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                  }`}
-                >
-                  {VIDEOS.map((video, index) => video.isShort === isShort && (
-                  <motion.article 
-                    key={video.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + (index % 10) * 0.05 }}
-                    className={`relative w-full overflow-hidden bg-zinc-900 group cursor-pointer shadow-lg rounded-3xl ${video.isShort ? 'aspect-[9/16]' : 'aspect-video'}`}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    {/* Usamos la miniatura de alta calidad de YouTube */}
-                    <img 
-                      src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-                      alt={`Miniatura del video: ${video.titles[currentLang] || video.titles['es']}`}
-                      className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                    
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
+            {/* Portfolio Feed - Galería cinematográfica */}
+            <section className="relative z-10 px-4 sm:px-6">
+              {[false, true].map((isShort) => {
+                const sectionVideos = VIDEOS
+                  .map((video, index) => ({ video, index }))
+                  .filter(({ video }) => video.isShort === isShort);
+
+                return (
+                  <div key={isShort ? 'verticales' : 'horizontales'} className={isShort ? 'mt-16 sm:mt-24' : ''}>
+                    <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
+                      <div className="flex items-center gap-3">
+                        <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                        <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
+                          {isShort ? 'Historias verticales' : 'Selección widescreen'}
+                        </p>
                       </div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
+                        {String(sectionVideos.length).padStart(2, '0')} piezas
+                      </p>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 p-4 sm:p-5 w-full">
-                      <h3 className="text-base sm:text-lg font-bold tracking-tight mb-1 leading-tight uppercase line-clamp-3">{video.titles[currentLang] || video.titles['en'] || video.titles['es']}</h3>
-                      <p className="text-[11px] sm:text-xs text-white/70 line-clamp-2">{COMMON_DESCS[video.descKey][currentLang] || COMMON_DESCS[video.descKey]['en']}</p>
+                    <div
+                      className={`grid items-start ${
+                        isShort
+                          ? 'grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3'
+                          : 'grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2'
+                      }`}
+                    >
+                      {sectionVideos.map(({ video, index }, position) => {
+                        const title = video.titles[currentLang] || video.titles['en'] || video.titles['es'];
+                        const isFeatured = !isShort && (position === 0 || position === 5);
+                        const isPreviewing = canPreviewOnHover && hoveredVideoIndex === index;
+
+                        return (
+                          <motion.article
+                            key={video.id}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.12 }}
+                            transition={{ duration: 0.55, delay: (position % 4) * 0.05 }}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`Ver video: ${title}`}
+                            className={`group relative w-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 outline-none transition-[border-color,transform] duration-500 hover:border-[#F27D26]/70 focus-visible:border-[#F27D26] focus-visible:ring-2 focus-visible:ring-[#F27D26]/60 sm:rounded-3xl ${
+                              video.isShort ? 'aspect-[9/16]' : 'aspect-video'
+                            } ${isFeatured ? 'lg:col-span-2' : ''}`}
+                            onMouseEnter={() => {
+                              if (!canPreviewOnHover) return;
+                              setPreviewReadyIndex(null);
+                              setHoveredVideoIndex(index);
+                            }}
+                            onMouseLeave={() => {
+                              setHoveredVideoIndex(null);
+                              setPreviewReadyIndex(null);
+                            }}
+                            onClick={() => setActiveIndex(index)}
+                            onKeyDown={(event) => {
+                              if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                setActiveIndex(index);
+                              }
+                            }}
+                          >
+                            <img
+                              src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                              onError={(event) => {
+                                event.currentTarget.onerror = null;
+                                event.currentTarget.src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+                              }}
+                              alt={`Miniatura del video: ${title}`}
+                              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                              loading={position < 3 && !isShort ? 'eager' : 'lazy'}
+                            />
+
+                            {isPreviewing && (
+                              <YouTube
+                                key={`preview-${video.id}`}
+                                videoId={video.id}
+                                title={`Vista previa: ${title}`}
+                                className={`pointer-events-none absolute -inset-[5%] h-[110%] w-[110%] transition-opacity duration-500 ${
+                                  previewReadyIndex === index ? 'opacity-100' : 'opacity-0'
+                                }`}
+                                iframeClassName="h-full w-full"
+                                opts={{
+                                  playerVars: {
+                                    autoplay: 1,
+                                    controls: 0,
+                                    disablekb: 1,
+                                    fs: 0,
+                                    loop: 1,
+                                    playlist: video.id,
+                                    rel: 0,
+                                    modestbranding: 1,
+                                    playsinline: 1,
+                                    iv_load_policy: 3,
+                                    cc_load_policy: 0,
+                                    showinfo: 0,
+                                    mute: 1,
+                                  },
+                                }}
+                                onReady={(event) => {
+                                  event.target.mute();
+                                  event.target.playVideo();
+                                }}
+                                onPlay={() => setPreviewReadyIndex(index)}
+                              />
+                            )}
+
+                            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-3 sm:p-5 lg:p-6">
+                              <div className="mb-2 flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-[#F27D26] drop-shadow-[0_2px_5px_rgba(0,0,0,1)] sm:text-[10px]">
+                                <span className="h-px w-5 bg-[#F27D26] sm:w-7" />
+                                {String(position + 1).padStart(2, '0')}
+                              </div>
+                              <h3
+                                className={`max-w-3xl font-black uppercase leading-[0.95] tracking-[-0.035em] text-white drop-shadow-[0_3px_7px_rgba(0,0,0,1)] ${
+                                  video.isShort
+                                    ? 'text-xs sm:text-base lg:text-xl'
+                                    : isFeatured
+                                      ? 'text-xl sm:text-3xl lg:text-5xl'
+                                      : 'text-base sm:text-xl lg:text-2xl'
+                                }`}
+                              >
+                                {title}
+                              </h3>
+                            </div>
+
+                            <div className="pointer-events-none absolute right-3 top-3 z-10 translate-y-1 rounded-full border border-white/40 bg-black/25 px-3 py-1.5 text-[8px] font-black uppercase tracking-[0.18em] text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:right-5 sm:top-5 sm:text-[10px]">
+                              Ver pieza
+                            </div>
+                          </motion.article>
+                        );
+                      })}
                     </div>
-                  </motion.article>
-                  ))}
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </section>
           </>
         ) : (

@@ -468,10 +468,23 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               event.target.mute();
               event.target.setVolume(0);
               event.target.playVideo();
-              setPreviewReady(true);
             }}
+            onPlay={() => setPreviewReady(true)}
           />
         </div>
+      )}
+
+      {shouldRenderPreview && previewReady && (
+        <>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-10 bg-gradient-to-b from-black via-black/90 to-transparent sm:h-12"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-14 bg-gradient-to-t from-black via-black/90 to-transparent sm:h-16"
+          />
+        </>
       )}
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-3 sm:p-5 lg:p-6">

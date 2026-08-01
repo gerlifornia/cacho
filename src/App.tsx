@@ -474,19 +474,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         </div>
       )}
 
-      {shouldRenderPreview && previewReady && (
-        <>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-10 bg-gradient-to-b from-black via-black/90 to-transparent sm:h-12"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-14 bg-gradient-to-t from-black via-black/90 to-transparent sm:h-16"
-          />
-        </>
-      )}
-
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-3 sm:p-5 lg:p-6">
         <div className="mb-2 flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-[#F27D26] drop-shadow-[0_2px_5px_rgba(0,0,0,1)] sm:text-[10px]">
           <span className="h-px w-5 bg-[#F27D26] sm:w-7" />
@@ -505,9 +492,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         </h3>
       </div>
 
-      <div className="pointer-events-none absolute right-3 top-3 z-10 rounded-full border border-white/40 bg-black/25 px-3 py-1.5 text-[8px] font-black uppercase tracking-[0.18em] text-white opacity-70 backdrop-blur-sm transition-all duration-300 group-hover:bg-[#F27D26] group-hover:text-black group-hover:opacity-100 sm:right-5 sm:top-5 sm:text-[10px]">
-        Tocá para escuchar
-      </div>
     </motion.article>
   );
 });

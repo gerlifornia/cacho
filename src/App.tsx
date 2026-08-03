@@ -993,7 +993,7 @@ export default function App() {
             </motion.button>
             
             {/* Language Selector (Absolute positioned below logo) */}
-            <div className="absolute top-full left-0 mt-1" ref={langMenuRef}>
+            <div className="absolute top-full start-0 mt-1" ref={langMenuRef}>
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center gap-1 text-[10px] sm:text-xs text-white/50 hover:text-white transition-colors uppercase font-semibold tracking-wider"
@@ -1008,13 +1008,13 @@ export default function App() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 mt-2 bg-zinc-900 border border-white/10 rounded-xl overflow-hidden shadow-xl min-w-[160px] z-50"
+                    className="absolute top-full start-0 mt-2 bg-zinc-900 border border-white/10 rounded-xl overflow-hidden shadow-xl min-w-[160px] z-50"
                   >
                     {LANGUAGES.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => handleLanguageChange(lang.code)}
-                        className={`w-full text-left px-4 py-2 text-xs sm:text-sm hover:bg-white/10 transition-colors flex items-center gap-2 ${currentLang === lang.code ? 'text-[#F27D26]' : 'text-white'}`}
+                        className={`w-full text-start px-4 py-2 text-xs sm:text-sm hover:bg-white/10 transition-colors flex items-center gap-2 ${currentLang === lang.code ? 'text-[#F27D26]' : 'text-white'}`}
                       >
                         <span>{lang.flag}</span>
                         {lang.name}
@@ -1058,7 +1058,7 @@ export default function App() {
         {activeTab === 'trabajos' ? (
           <>
             {/* Hero Section */}
-            <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-left relative overflow-hidden">
+            <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-start relative overflow-hidden">
               {/* Logo de Fondo (Placeholder - User should replace src) */}
               <div className="pointer-events-none absolute -right-20 top-[14%] z-0 h-[300px] w-[300px] opacity-15 sm:-right-24 sm:top-[64%] sm:h-[580px] sm:w-[580px] sm:-translate-y-1/2 sm:opacity-20 lg:-right-20 lg:h-[760px] lg:w-[760px] xl:-right-16 xl:h-[900px] xl:w-[900px] xl:opacity-25">
                  {/* Reemplazar este src con la URL del logo real */}

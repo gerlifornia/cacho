@@ -687,7 +687,7 @@ export default function App() {
             {/* Hero Section */}
             <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-left relative overflow-hidden">
               {/* Logo de Fondo (Placeholder - User should replace src) */}
-              <div className="absolute top-[15%] -right-16 w-[250px] sm:top-[68%] sm:right-0 sm:-translate-y-1/2 sm:w-[500px] h-[250px] sm:h-[500px] opacity-15 sm:opacity-20 pointer-events-none z-0">
+              <div className="pointer-events-none absolute -right-20 top-[14%] z-0 h-[300px] w-[300px] opacity-15 sm:-right-24 sm:top-[64%] sm:h-[580px] sm:w-[580px] sm:-translate-y-1/2 sm:opacity-20 lg:-right-20 lg:h-[760px] lg:w-[760px] xl:-right-16 xl:h-[900px] xl:w-[900px] xl:opacity-25">
                  {/* Reemplazar este src con la URL del logo real */}
                  <img 
                     src="/logo-cacho.png" 

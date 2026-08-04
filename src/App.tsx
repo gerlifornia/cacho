@@ -603,6 +603,11 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   {
+    id: "M3VQ0VydAUc", isShort: false,
+    titles: localizedTitle("Planchabragas - Torbe"),
+    descKey: "generated_ai"
+  },
+  {
     id: "zgWuAf2bI7A", isShort: true,
     titles: localizedTitle("Borges x Cacho"),
     descKey: "generated_ai"

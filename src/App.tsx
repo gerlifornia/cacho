@@ -945,6 +945,19 @@ const COMMON_DESCS: Record<string, Record<Language, string>> = {
   }
 };
 
+const CREATIVE_HUB_CREDIT: Record<Language, string> = {
+  es: 'Pieza realizada para la agencia Creative Hub.',
+  en: 'Piece created for the Creative Hub agency.',
+  zh: '为 Creative Hub 代理公司制作。',
+  hi: 'Creative Hub एजेंसी के लिए निर्मित।',
+  fr: 'Pièce réalisée pour l’agence Creative Hub.',
+  ar: 'عمل أُنجز لصالح وكالة Creative Hub.',
+  bn: 'Creative Hub এজেন্সির জন্য নির্মিত।',
+  pt: 'Peça realizada para a agência Creative Hub.',
+  ru: 'Работа создана для агентства Creative Hub.',
+  id: 'Karya dibuat untuk agensi Creative Hub.',
+};
+
 // Lista de videos con soporte multilenguaje
 const localizedTitle = (title: string): Record<Language, string> =>
   Object.fromEntries(LANGUAGES.map(({ code }) => [code, title])) as Record<Language, string>;
@@ -1202,6 +1215,11 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         >
           {title}
         </h3>
+        {video.id === 'oomjGUHKFlY' && (
+          <p className="mt-2 max-w-2xl text-[8px] font-semibold leading-snug tracking-[0.04em] text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px] lg:text-xs">
+            {CREATIVE_HUB_CREDIT[currentLang]}
+          </p>
+        )}
       </div>
 
     </motion.article>
@@ -1717,7 +1735,12 @@ export default function App() {
                   alt="CACHO.Ai"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <span className="absolute bottom-5 start-5 bg-black px-3 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white sm:bottom-7 sm:start-7 sm:text-xs">CACHO.Ai / FILM PRODUCTION</span>
+                <div className="absolute bottom-5 start-5 max-w-[calc(100%-2.5rem)] bg-black px-3 py-2 text-white sm:bottom-7 sm:start-7">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] sm:text-xs">CACHO.Ai / FILM PRODUCTION</p>
+                  <p className="mt-1 text-[8px] font-semibold leading-snug tracking-[0.04em] text-white/70 sm:text-[10px]">
+                    {CREATIVE_HUB_CREDIT[currentLang]}
+                  </p>
+                </div>
               </div>
               <div className="flex flex-col justify-center border-t border-white/15 p-6 sm:p-10 lg:border-s lg:border-t-0 lg:p-12">
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26] sm:text-xs">{aboutStory.craftEyebrow}</p>

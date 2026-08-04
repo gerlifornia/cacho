@@ -1368,7 +1368,10 @@ export default function App() {
             </button>
 
             {/* Contenedor del Video */}
-            <div className={`relative w-full mx-auto flex flex-col justify-center ${VIDEOS[activeIndex].isShort ? 'max-w-sm aspect-[9/16]' : 'max-w-5xl aspect-video sm:px-24'}`}>
+            <div
+              className={`relative mx-auto flex flex-col justify-center ${VIDEOS[activeIndex].isShort ? 'w-full max-w-sm aspect-[9/16]' : 'aspect-video'}`}
+              style={VIDEOS[activeIndex].isShort ? undefined : { width: 'min(90vw, calc(88vh * 16 / 9))' }}
+            >
               
               <div className={`relative w-full h-full shadow-2xl overflow-hidden ${VIDEOS[activeIndex].isShort ? 'rounded-2xl' : 'sm:rounded-2xl'}`}>
                 {/* Overlay transparente para capturar swipes y clics */}

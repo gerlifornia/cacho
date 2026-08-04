@@ -4,7 +4,7 @@
  */
 
 import { motion, AnimatePresence } from 'motion/react';
-import { Instagram, MessageCircle, Sparkles, Flame, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
+import { Instagram, MessageCircle, Flame, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
 
@@ -36,7 +36,6 @@ type SiteCopy = {
     aiLabel: string;
     subtitle: string;
     badge: string;
-    services: string[];
   };
   press: {
     eyebrow: string;
@@ -71,9 +70,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'LA PRIMERA PRODUCTORA CREATIVA 100% IA DE LATAM',
       title1: 'CREATIVIDAD', title2: 'HUMANA.', title3: 'POTENCIA', aiLabel: 'iA.',
-      subtitle: 'Creamos piezas que sorprenden y hacen hablar.',
+      subtitle: 'La CREATIVIDAD es HUMANA, pero nuestra POTENCIA es IA. Desarrollamos conceptos, escribimos historias, diseñamos campañas y producimos contenido audiovisual para que las marcas sean imposibles de ignorar.',
       badge: 'SIN ACTORES EGOCÉNTRICOS',
-      services: ['COMERCIALES', 'CINE', 'INSTITUCIONALES', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO EN LOS MEDIOS',
@@ -100,9 +98,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: "LATIN AMERICA'S FIRST 100% AI CREATIVE PRODUCTION COMPANY",
       title1: 'HUMAN', title2: 'CREATIVITY.', title3: 'POWERED BY', aiLabel: 'AI.',
-      subtitle: 'We create work that surprises people and gets them talking.',
+      subtitle: 'CREATIVITY is HUMAN, but our POWER is AI. We develop concepts, write stories, design campaigns, and produce audiovisual content that makes brands impossible to ignore.',
       badge: 'NO EGOCENTRIC ACTORS',
-      services: ['COMMERCIALS', 'FILM', 'CORPORATE', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO IN THE MEDIA',
@@ -129,9 +126,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: '拉丁美洲首家 100% AI 创意制作公司',
       title1: '人类', title2: '创意。', title3: 'AI 驱动。', aiLabel: '',
-      subtitle: '我们创作令人惊喜并引发讨论的作品。',
+      subtitle: '创意源于人类，但我们的力量来自 AI。我们开发概念、撰写故事、设计营销活动并制作视听内容，让品牌令人无法忽视。',
       badge: '不用自恋的演员',
-      services: ['广告', '影视', '企业视频', 'UGC'],
     },
     press: {
       eyebrow: '媒体报道', headline: 'Cacho 是拉丁美洲首个大众化 AI 角色。',
@@ -156,9 +152,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'लैटिन अमेरिका की पहली 100% AI क्रिएटिव प्रोडक्शन कंपनी',
       title1: 'मानवीय', title2: 'रचनात्मकता।', title3: 'AI की शक्ति।', aiLabel: '',
-      subtitle: 'हम ऐसी रचनाएँ बनाते हैं जो चौंकाती हैं और चर्चा शुरू करती हैं।',
+      subtitle: 'रचनात्मकता मानवीय है, लेकिन हमारी शक्ति AI है। हम अवधारणाएँ विकसित करते हैं, कहानियाँ लिखते हैं, अभियान डिज़ाइन करते हैं और ऐसा ऑडियोविज़ुअल कंटेंट बनाते हैं जिसे नज़रअंदाज़ करना असंभव हो।',
       badge: 'अहंकारी अभिनेताओं के बिना',
-      services: ['विज्ञापन', 'फ़िल्म', 'कॉर्पोरेट', 'UGC'],
     },
     press: {
       eyebrow: 'मीडिया में CACHO', headline: 'Cacho लैटिन अमेरिका का पहला व्यापक रूप से लोकप्रिय AI किरदार है।',
@@ -183,9 +178,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: "LA PREMIÈRE SOCIÉTÉ DE PRODUCTION CRÉATIVE 100 % IA D'AMÉRIQUE LATINE",
       title1: 'CRÉATIVITÉ', title2: 'HUMAINE.', title3: 'PUISSANCE', aiLabel: 'IA.',
-      subtitle: 'Nous créons des œuvres qui surprennent et font parler.',
+      subtitle: "La CRÉATIVITÉ est HUMAINE, mais notre PUISSANCE est l’IA. Nous développons des concepts, écrivons des histoires, concevons des campagnes et produisons des contenus audiovisuels qui rendent les marques impossibles à ignorer.",
       badge: 'SANS ACTEURS ÉGOCENTRIQUES',
-      services: ['PUBLICITÉS', 'CINÉMA', 'INSTITUTIONNEL', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO DANS LES MÉDIAS', headline: "Cacho est le premier personnage IA grand public d'Amérique latine.",
@@ -210,9 +204,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'أول شركة إنتاج إبداعي بالذكاء الاصطناعي 100٪ في أمريكا اللاتينية',
       title1: 'إبداع', title2: 'بشري.', title3: 'بقوة', aiLabel: 'الذكاء الاصطناعي.',
-      subtitle: 'نصنع أعمالًا تفاجئ الناس وتثير الحديث.',
+      subtitle: 'الإبداع إنساني، لكن قوتنا هي الذكاء الاصطناعي. نطوّر المفاهيم، ونكتب القصص، ونصمّم الحملات، وننتج محتوى سمعيًا بصريًا يجعل تجاهل العلامات التجارية أمرًا مستحيلًا.',
       badge: 'بدون ممثلين أنانيين',
-      services: ['إعلانات', 'سينما', 'مؤسسات', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO في الإعلام', headline: 'Cacho هو أول شخصية جماهيرية بالذكاء الاصطناعي في أمريكا اللاتينية.',
@@ -237,9 +230,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'লাতিন আমেরিকার প্রথম ১০০% AI ক্রিয়েটিভ প্রোডাকশন কোম্পানি',
       title1: 'মানবিক', title2: 'সৃজনশীলতা।', title3: 'AI-এর শক্তি।', aiLabel: '',
-      subtitle: 'আমরা এমন কাজ তৈরি করি যা চমকে দেয় এবং আলোচনা তৈরি করে।',
+      subtitle: 'সৃজনশীলতা মানুষের, কিন্তু আমাদের শক্তি AI। আমরা ধারণা তৈরি করি, গল্প লিখি, ক্যাম্পেইন ডিজাইন করি এবং এমন অডিওভিজ্যুয়াল কনটেন্ট তৈরি করি যা ব্র্যান্ডকে উপেক্ষা করা অসম্ভব করে তোলে।',
       badge: 'আত্মকেন্দ্রিক অভিনেতা ছাড়া',
-      services: ['বিজ্ঞাপন', 'সিনেমা', 'কর্পোরেট', 'UGC'],
     },
     press: {
       eyebrow: 'মিডিয়ায় CACHO', headline: 'Cacho লাতিন আমেরিকার প্রথম গণজনপ্রিয় AI চরিত্র।',
@@ -264,9 +256,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'A PRIMEIRA PRODUTORA CRIATIVA 100% IA DA AMÉRICA LATINA',
       title1: 'CRIATIVIDADE', title2: 'HUMANA.', title3: 'POTÊNCIA', aiLabel: 'IA.',
-      subtitle: 'Criamos peças que surpreendem e fazem as pessoas falar.',
+      subtitle: 'A CRIATIVIDADE é HUMANA, mas nossa POTÊNCIA é a IA. Desenvolvemos conceitos, escrevemos histórias, criamos campanhas e produzimos conteúdo audiovisual para tornar as marcas impossíveis de ignorar.',
       badge: 'SEM ATORES EGOCÊNTRICOS',
-      services: ['COMERCIAIS', 'CINEMA', 'INSTITUCIONAIS', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO NA MÍDIA', headline: 'Cacho é o primeiro personagem de IA de alcance massivo da América Latina.',
@@ -291,9 +282,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'ПЕРВАЯ В ЛАТИНСКОЙ АМЕРИКЕ КРЕАТИВНАЯ СТУДИЯ НА 100% ИИ',
       title1: 'ЧЕЛОВЕЧЕСКАЯ', title2: 'КРЕАТИВНОСТЬ.', title3: 'СИЛА', aiLabel: 'ИИ.',
-      subtitle: 'Мы создаём работы, которые удивляют и вызывают обсуждение.',
+      subtitle: 'КРЕАТИВНОСТЬ — ЧЕЛОВЕЧЕСКАЯ, но наша СИЛА — ИИ. Мы разрабатываем концепции, пишем истории, создаём кампании и производим аудиовизуальный контент, благодаря которому бренды невозможно игнорировать.',
       badge: 'БЕЗ ЭГОЦЕНТРИЧНЫХ АКТЁРОВ',
-      services: ['РЕКЛАМА', 'КИНО', 'КОРПОРАТИВНОЕ', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO В СМИ', headline: 'Cacho — первый массовый ИИ-персонаж Латинской Америки.',
@@ -318,9 +308,8 @@ const SITE_COPY: Record<Language, SiteCopy> = {
     hero: {
       eyebrow: 'RUMAH PRODUKSI KREATIF 100% AI PERTAMA DI AMERIKA LATIN',
       title1: 'KREATIVITAS', title2: 'MANUSIA.', title3: 'TENAGA', aiLabel: 'AI.',
-      subtitle: 'Kami membuat karya yang mengejutkan dan menjadi bahan pembicaraan.',
+      subtitle: 'KREATIVITAS itu MANUSIAWI, tetapi KEKUATAN kami adalah AI. Kami mengembangkan konsep, menulis cerita, merancang kampanye, dan memproduksi konten audiovisual yang membuat merek mustahil diabaikan.',
       badge: 'TANPA AKTOR EGOSENTRIS',
-      services: ['IKLAN', 'FILM', 'KORPORAT', 'UGC'],
     },
     press: {
       eyebrow: 'CACHO DI MEDIA', headline: 'Cacho adalah karakter AI massal pertama di Amerika Latin.',
@@ -343,6 +332,105 @@ const SITE_COPY: Record<Language, SiteCopy> = {
   },
 };
 
+type AboutCopy = {
+  recognition: string;
+  pillars: Array<{ title: string; text: string }>;
+  cta: string;
+};
+
+const ABOUT_COPY: Record<Language, AboutCopy> = {
+  es: {
+    recognition: 'Reconocido por los medios más importantes del país.',
+    pillars: [
+      { title: 'Conceptos', text: 'Convertimos desafíos de marca en ideas que merecen ser vistas.' },
+      { title: 'Historias', text: 'Escribimos narrativas con personalidad, emoción y una mirada humana.' },
+      { title: 'Campañas + producción', text: 'Diseñamos campañas y producimos piezas audiovisuales con potencia IA.' },
+    ],
+    cta: 'Hacemos que las marcas sean imposibles de ignorar.',
+  },
+  en: {
+    recognition: "Recognized by Argentina's leading media outlets.",
+    pillars: [
+      { title: 'Concepts', text: 'We turn brand challenges into ideas worth watching.' },
+      { title: 'Stories', text: 'We write narratives with personality, emotion and a human point of view.' },
+      { title: 'Campaigns + production', text: 'We design campaigns and produce audiovisual work powered by AI.' },
+    ],
+    cta: 'We make brands impossible to ignore.',
+  },
+  zh: {
+    recognition: '获得阿根廷最重要媒体的认可。',
+    pillars: [
+      { title: '概念', text: '我们将品牌挑战转化为值得被看见的创意。' },
+      { title: '故事', text: '我们以个性、情感和人类视角书写叙事。' },
+      { title: '营销活动与制作', text: '我们设计营销活动，并以 AI 的力量制作视听作品。' },
+    ],
+    cta: '我们让品牌令人无法忽视。',
+  },
+  hi: {
+    recognition: 'अर्जेंटीना के प्रमुख मीडिया संस्थानों द्वारा मान्यता प्राप्त।',
+    pillars: [
+      { title: 'अवधारणाएँ', text: 'हम ब्रांड की चुनौतियों को देखने योग्य विचारों में बदलते हैं।' },
+      { title: 'कहानियाँ', text: 'हम व्यक्तित्व, भावना और मानवीय दृष्टिकोण वाली कहानियाँ लिखते हैं।' },
+      { title: 'अभियान + निर्माण', text: 'हम अभियान डिज़ाइन करते हैं और AI की शक्ति से ऑडियोविज़ुअल काम बनाते हैं।' },
+    ],
+    cta: 'हम ब्रांडों को नज़रअंदाज़ करना असंभव बनाते हैं।',
+  },
+  fr: {
+    recognition: "Reconnu par les médias les plus importants d'Argentine.",
+    pillars: [
+      { title: 'Concepts', text: 'Nous transformons les défis des marques en idées qui méritent d’être vues.' },
+      { title: 'Histoires', text: 'Nous écrivons des récits avec de la personnalité, de l’émotion et un regard humain.' },
+      { title: 'Campagnes + production', text: 'Nous concevons des campagnes et produisons des œuvres audiovisuelles propulsées par l’IA.' },
+    ],
+    cta: 'Nous rendons les marques impossibles à ignorer.',
+  },
+  ar: {
+    recognition: 'معترف به من أهم وسائل الإعلام في الأرجنتين.',
+    pillars: [
+      { title: 'المفاهيم', text: 'نحوّل تحديات العلامات التجارية إلى أفكار تستحق المشاهدة.' },
+      { title: 'القصص', text: 'نكتب سرديات تتمتع بالشخصية والعاطفة ونظرة إنسانية.' },
+      { title: 'الحملات + الإنتاج', text: 'نصمّم الحملات وننتج أعمالًا سمعية بصرية بقوة الذكاء الاصطناعي.' },
+    ],
+    cta: 'نجعل تجاهل العلامات التجارية أمرًا مستحيلًا.',
+  },
+  bn: {
+    recognition: 'আর্জেন্টিনার শীর্ষস্থানীয় সংবাদমাধ্যমগুলোর স্বীকৃতিপ্রাপ্ত।',
+    pillars: [
+      { title: 'ধারণা', text: 'আমরা ব্র্যান্ডের চ্যালেঞ্জকে দেখার যোগ্য আইডিয়ায় রূপান্তর করি।' },
+      { title: 'গল্প', text: 'আমরা ব্যক্তিত্ব, আবেগ ও মানবিক দৃষ্টিভঙ্গিসম্পন্ন গল্প লিখি।' },
+      { title: 'ক্যাম্পেইন + প্রোডাকশন', text: 'আমরা ক্যাম্পেইন ডিজাইন করি এবং AI-এর শক্তিতে অডিওভিজ্যুয়াল কাজ তৈরি করি।' },
+    ],
+    cta: 'আমরা ব্র্যান্ডকে উপেক্ষা করা অসম্ভব করে তুলি।',
+  },
+  pt: {
+    recognition: 'Reconhecido pelos meios de comunicação mais importantes da Argentina.',
+    pillars: [
+      { title: 'Conceitos', text: 'Transformamos desafios de marca em ideias que merecem ser vistas.' },
+      { title: 'Histórias', text: 'Escrevemos narrativas com personalidade, emoção e um olhar humano.' },
+      { title: 'Campanhas + produção', text: 'Criamos campanhas e produzimos peças audiovisuais com a potência da IA.' },
+    ],
+    cta: 'Tornamos as marcas impossíveis de ignorar.',
+  },
+  ru: {
+    recognition: 'Признан ведущими СМИ Аргентины.',
+    pillars: [
+      { title: 'Концепции', text: 'Мы превращаем задачи бренда в идеи, которые хочется увидеть.' },
+      { title: 'Истории', text: 'Мы пишем истории с характером, эмоциями и человеческим взглядом.' },
+      { title: 'Кампании + производство', text: 'Мы создаём кампании и аудиовизуальные работы с мощью ИИ.' },
+    ],
+    cta: 'Мы делаем бренды такими, что их невозможно игнорировать.',
+  },
+  id: {
+    recognition: 'Diakui oleh media-media terkemuka di Argentina.',
+    pillars: [
+      { title: 'Konsep', text: 'Kami mengubah tantangan merek menjadi ide yang layak ditonton.' },
+      { title: 'Cerita', text: 'Kami menulis narasi dengan karakter, emosi, dan sudut pandang manusia.' },
+      { title: 'Kampanye + produksi', text: 'Kami merancang kampanye dan memproduksi karya audiovisual dengan kekuatan AI.' },
+    ],
+    cta: 'Kami membuat merek mustahil diabaikan.',
+  },
+};
+
 const TRANSLATIONS: Record<Language, any> = {
   es: {
     nav: { trabajos: 'Trabajos', nosotros: 'Nosotros', contacto: 'Contacto' },
@@ -351,9 +439,9 @@ const TRANSLATIONS: Record<Language, any> = {
       title1: 'CREATIVIDAD',
       title2: 'HUMANA.',
       title3: 'POTENCIA',
-      subtitle: 'Creamos piezas que sorprenden y hacen hablar.',
+      subtitle: 'La CREATIVIDAD es HUMANA, pero nuestra POTENCIA es IA. Desarrollamos conceptos, escribimos historias, diseñamos campañas y producimos contenido audiovisual para que las marcas sean imposibles de ignorar.',
       badge: 'SIN ACTORES EGOCÉNTRICOS',
-      services: ['COMERCIALES', 'CINE', 'INSTITUCIONALES', 'UGC']
+      services: []
     },
     nosotros: {
       title: 'EL MUNDO CAMBIÓ.',
@@ -839,6 +927,7 @@ export default function App() {
 
   const t = TRANSLATIONS[currentLang];
   const siteCopy = SITE_COPY[currentLang];
+  const aboutCopy = ABOUT_COPY[currentLang];
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
@@ -1102,16 +1191,6 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {siteCopy.hero.services.map((service) => (
-                    <span
-                      key={service}
-                      className="rounded-full border border-white/10 bg-zinc-900/70 px-3 py-1.5 text-[10px] font-bold tracking-[0.12em] text-white/55 sm:text-xs"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
               </motion.div>
 
               <motion.div
@@ -1218,47 +1297,97 @@ export default function App() {
           </>
         ) : (
           /* Sección Nosotros */
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 max-w-4xl mx-auto relative"
+            className="relative mx-auto max-w-7xl overflow-hidden px-5 pb-12 pt-32 sm:px-6 sm:pb-20 sm:pt-40"
           >
-             {/* Logo de Fondo en Nosotros también */}
-             <div className="absolute top-0 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] opacity-20 pointer-events-none z-0">
-                 <img 
-                    src="/logo-cacho.png" 
-                    alt="Logo Background" 
-                    className="w-full h-full object-contain mix-blend-screen"
-                 />
-              </div>
-
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-8 uppercase relative z-10">
-              {t.nosotros.title}<br/>
-              <span className="text-[#F27D26]">{t.nosotros.subtitle}</span>
-            </h2>
-            
-            <div className="space-y-8 text-white/80 text-lg sm:text-xl leading-relaxed relative z-10">
-              <p>
-                {t.nosotros.p1}
-              </p>
-              <p>
-                {t.nosotros.p2Part1} <strong className="text-white">CACHO.Ai</strong> {t.nosotros.p2Part2} <strong className="text-[#F27D26]">{t.nosotros.p2Part3}</strong>{t.nosotros.p2Part4}
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 py-8">
-                {t.nosotros.cards.map((card: any, idx: number) => (
-                  <div key={idx} className="bg-zinc-900/50 border border-white/10 p-6 rounded-3xl">
-                    <Sparkles className="w-8 h-8 text-[#F27D26] mb-4" />
-                    <h3 className="text-white font-bold text-xl mb-2 uppercase">{card.title}</h3>
-                    <p className="text-sm text-white/60">{card.text}</p>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-2xl sm:text-3xl font-bold text-white text-center pt-4 uppercase">
-                {t.nosotros.cta}
-              </p>
+            <div className="pointer-events-none absolute -right-32 top-8 z-0 h-[420px] w-[420px] opacity-10 sm:h-[680px] sm:w-[680px] lg:-right-24 lg:top-0">
+              <img src="/logo-cacho.png" alt="" className="h-full w-full object-contain mix-blend-screen" />
             </div>
+
+            <div className="relative z-10 grid gap-8 xl:grid-cols-[1.25fr_0.75fr] xl:items-center xl:gap-14">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/70 sm:text-xs">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                  {siteCopy.hero.eyebrow}
+                </div>
+
+                <h1 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[0.86] tracking-tighter sm:text-6xl lg:text-7xl">
+                  {siteCopy.hero.title1}<br />
+                  <span className="text-[#F27D26]">{siteCopy.hero.title2}</span><br />
+                  {siteCopy.hero.title3}
+                  {siteCopy.hero.aiLabel && <> <span className="text-[#F27D26]">{siteCopy.hero.aiLabel}</span></>}
+                </h1>
+
+                <p className="mt-7 max-w-3xl border-s-2 border-[#F27D26] ps-5 text-base font-medium leading-relaxed text-white/75 sm:text-lg lg:text-xl">
+                  {siteCopy.hero.subtitle}
+                </p>
+              </div>
+
+              <motion.aside
+                initial={{ opacity: 0, rotate: 0, y: 18 }}
+                animate={{ opacity: 1, rotate: 2, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="rounded-[2rem] border-2 border-black bg-[#F27D26] p-5 text-black shadow-[0_25px_80px_rgba(0,0,0,0.55)] sm:p-7"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/60">
+                    {siteCopy.press.eyebrow}
+                  </span>
+                  <span className="h-px flex-1 bg-black/25" />
+                  <span className="h-2 w-2 rounded-full bg-black" />
+                </div>
+
+                <h2 className="mt-5 text-2xl font-black uppercase leading-[0.92] tracking-[-0.04em] sm:text-3xl">
+                  {siteCopy.press.headline}
+                </h2>
+                <p className="mt-3 text-sm font-bold text-black/65 sm:text-base">{aboutCopy.recognition}</p>
+
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <a
+                    href="https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={siteCopy.press.clarinAria}
+                    className="group/media flex min-h-16 items-center justify-between gap-2 rounded-2xl border border-black/25 bg-black/[0.06] px-4 py-3 transition-colors hover:bg-black/[0.13]"
+                  >
+                    <img src={CLARIN_LOGO_SRC} alt="Clarín" className="h-7 w-auto max-w-[105px] object-contain brightness-0" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover/media:translate-x-0.5 group-hover/media:-translate-y-0.5" />
+                  </a>
+                  <a
+                    href="https://www.infobae.com/tendencias/2026/07/31/el-fenomeno-detras-de-cacho-el-influencer-creado-con-inteligencia-artificial-que-paso-de-un-hobby-a-trabajar-con-grandes-marcas/"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={siteCopy.press.infobaeAria}
+                    className="group/media flex min-h-16 items-center justify-between gap-2 rounded-2xl border border-black/25 bg-black/[0.06] px-4 py-3 transition-colors hover:bg-black/[0.13]"
+                  >
+                    <img src={INFOBAE_LOGO_SRC} alt="Infobae" className="h-7 w-auto max-w-[105px] object-contain brightness-0" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover/media:translate-x-0.5 group-hover/media:-translate-y-0.5" />
+                  </a>
+                </div>
+              </motion.aside>
+            </div>
+
+            <div className="relative z-10 mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-16">
+              {aboutCopy.pillars.map((pillar, index) => (
+                <article
+                  key={pillar.title}
+                  className="group rounded-3xl border border-white/10 bg-zinc-950/80 p-6 transition-colors hover:border-[#F27D26]/60 sm:p-7"
+                >
+                  <div className="mb-8 flex items-center gap-3">
+                    <span className="text-xs font-black tracking-[0.2em] text-[#F27D26]">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="h-px flex-1 bg-white/15 transition-colors group-hover:bg-[#F27D26]/60" />
+                  </div>
+                  <h2 className="text-xl font-black uppercase leading-tight text-white sm:text-2xl">{pillar.title}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55 sm:text-base">{pillar.text}</p>
+                </article>
+              ))}
+            </div>
+
+            <p className="relative z-10 mx-auto mt-12 max-w-5xl text-center text-3xl font-black uppercase leading-[0.95] tracking-tighter text-white sm:mt-16 sm:text-5xl lg:text-6xl">
+              {aboutCopy.cta}
+            </p>
           </motion.section>
         )}
 

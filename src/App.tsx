@@ -1195,7 +1195,7 @@ export default function App() {
                       }`}
                     >
                       {sectionVideos.map(({ video, index }, position) => {
-                        const isFeatured = !isShort && (position === 0 || position === 5);
+                        const isFeatured = !isShort && (position === 0 || position === 5 || video.id === 'M3VQ0VydAUc');
                         return (
                           <PortfolioVideoCard
                             key={video.id}

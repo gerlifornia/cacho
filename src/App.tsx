@@ -332,6 +332,65 @@ const SITE_COPY: Record<Language, SiteCopy> = {
   },
 };
 
+type HeroProcessCopy = {
+  label: string;
+  steps: string[];
+  result: string;
+};
+
+const HERO_PROCESS_COPY: Record<Language, HeroProcessCopy> = {
+  es: {
+    label: 'DEL CONCEPTO A LA PANTALLA',
+    steps: ['CONCEPTOS', 'HISTORIAS', 'CAMPAÑAS', 'PRODUCCIÓN'],
+    result: 'MARCAS IMPOSIBLES DE IGNORAR',
+  },
+  en: {
+    label: 'FROM CONCEPT TO SCREEN',
+    steps: ['CONCEPTS', 'STORIES', 'CAMPAIGNS', 'PRODUCTION'],
+    result: 'BRANDS IMPOSSIBLE TO IGNORE',
+  },
+  zh: {
+    label: '从创意到画面',
+    steps: ['概念', '故事', '营销活动', '制作'],
+    result: '让品牌令人无法忽视',
+  },
+  hi: {
+    label: 'विचार से पर्दे तक',
+    steps: ['अवधारणाएँ', 'कहानियाँ', 'अभियान', 'निर्माण'],
+    result: 'ऐसे ब्रांड जिन्हें नज़रअंदाज़ करना असंभव है',
+  },
+  fr: {
+    label: "DU CONCEPT À L'ÉCRAN",
+    steps: ['CONCEPTS', 'HISTOIRES', 'CAMPAGNES', 'PRODUCTION'],
+    result: 'DES MARQUES IMPOSSIBLES À IGNORER',
+  },
+  ar: {
+    label: 'من الفكرة إلى الشاشة',
+    steps: ['مفاهيم', 'قصص', 'حملات', 'إنتاج'],
+    result: 'علامات تجارية يستحيل تجاهلها',
+  },
+  bn: {
+    label: 'ধারণা থেকে পর্দায়',
+    steps: ['ধারণা', 'গল্প', 'ক্যাম্পেইন', 'প্রোডাকশন'],
+    result: 'এমন ব্র্যান্ড যা উপেক্ষা করা অসম্ভব',
+  },
+  pt: {
+    label: 'DO CONCEITO À TELA',
+    steps: ['CONCEITOS', 'HISTÓRIAS', 'CAMPANHAS', 'PRODUÇÃO'],
+    result: 'MARCAS IMPOSSÍVEIS DE IGNORAR',
+  },
+  ru: {
+    label: 'ОТ ИДЕИ ДО ЭКРАНА',
+    steps: ['КОНЦЕПЦИИ', 'ИСТОРИИ', 'КАМПАНИИ', 'ПРОИЗВОДСТВО'],
+    result: 'БРЕНДЫ, КОТОРЫЕ НЕВОЗМОЖНО ИГНОРИРОВАТЬ',
+  },
+  id: {
+    label: 'DARI KONSEP KE LAYAR',
+    steps: ['KONSEP', 'CERITA', 'KAMPANYE', 'PRODUKSI'],
+    result: 'MEREK YANG MUSTAHIL DIABAIKAN',
+  },
+};
+
 type AboutCopy = {
   recognition: string;
   pillars: Array<{ title: string; text: string }>;
@@ -927,6 +986,7 @@ export default function App() {
 
   const t = TRANSLATIONS[currentLang];
   const siteCopy = SITE_COPY[currentLang];
+  const heroProcess = HERO_PROCESS_COPY[currentLang];
   const aboutCopy = ABOUT_COPY[currentLang];
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -1174,21 +1234,47 @@ export default function App() {
                   {siteCopy.hero.eyebrow}
                 </div>
 
-                <h1 className="mt-5 max-w-3xl text-5xl font-black uppercase leading-[0.86] tracking-tighter sm:text-6xl lg:text-7xl">
+                <h1 className="mt-5 max-w-2xl text-4xl font-black uppercase leading-[0.88] tracking-tighter sm:text-5xl lg:text-6xl">
                   {siteCopy.hero.title1}<br/>
                   <span className="text-[#F27D26]">{siteCopy.hero.title2}</span><br/>
                   {siteCopy.hero.title3}
                   {siteCopy.hero.aiLabel && <> <span className="text-[#F27D26]">{siteCopy.hero.aiLabel}</span></>}
                 </h1>
 
-                <div className="mt-7 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+                <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                   <div className="inline-flex -rotate-2 items-center gap-2 rounded-full border-2 border-[#F27D26] bg-[#F27D26]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-[#F27D26] shadow-[0_0_30px_rgba(242,125,38,0.12)] sm:text-sm">
                     <Flame className="h-4 w-4 fill-current" />
                     {siteCopy.hero.badge}
                   </div>
-                  <p className="max-w-md border-s-2 border-white/15 ps-4 text-base font-medium leading-relaxed text-white/75 sm:text-lg">
-                    {siteCopy.hero.subtitle}
-                  </p>
+                </div>
+
+                <div className="mt-5 max-w-2xl border-y border-white/15 py-4">
+                  <div className="flex items-center gap-3">
+                    <p className="shrink-0 text-[9px] font-black uppercase tracking-[0.2em] text-[#F27D26] sm:text-[10px]">
+                      {heroProcess.label}
+                    </p>
+                    <span className="h-px flex-1 bg-gradient-to-r from-[#F27D26]/60 to-transparent" />
+                  </div>
+
+                  <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4 sm:gap-3">
+                    {heroProcess.steps.map((step, index) => (
+                      <div key={step} className="flex items-baseline gap-2 sm:block">
+                        <span className="text-[9px] font-black tracking-[0.14em] text-white/30">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <p className="text-[10px] font-black uppercase tracking-[0.08em] text-white/75 sm:mt-1 sm:text-[11px]">
+                          {step}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-[#F27D26] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.13em] text-black sm:text-[10px]">
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                    {heroProcess.result}
+                  </div>
+
+                  <p className="sr-only">{siteCopy.hero.subtitle}</p>
                 </div>
 
               </motion.div>

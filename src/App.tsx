@@ -445,6 +445,109 @@ type AboutStoryCopy = {
   source: string;
 };
 
+type AboutManifestoCopy = {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroText: string;
+  actorsEyebrow: string;
+  actorsTitle: string;
+  actorsCounterpoint: string;
+  actorsText: string;
+};
+
+const ABOUT_MANIFESTO_COPY: Record<Language, AboutManifestoCopy> = {
+  es: {
+    heroEyebrow: 'LA PRIMERA PRODUCTORA CREATIVA 100% IA DE LATAM',
+    heroTitle: 'CREAMOS MUNDOS QUE NO EXISTÍAN. Y PERSONAJES QUE SE SIENTEN REALES.',
+    heroText: 'Partimos de una idea humana y usamos IA para llevarla más lejos: desarrollamos conceptos, escribimos historias, dirigimos emociones y producimos contenido audiovisual para que las marcas sean imposibles de ignorar.',
+    actorsEyebrow: 'NUESTRO MANIFIESTO / 01',
+    actorsTitle: 'SIN ACTORES EGOCÉNTRICOS.',
+    actorsCounterpoint: 'NO ES CONTRA LOS ACTORES. ES A FAVOR DE LA IDEA.',
+    actorsText: 'Respetamos y admiramos el oficio actoral. Lo que cuestionamos es un sistema que a veces pone toda la atención en quien aparece frente a cámara y deja fuera de foco a quienes imaginaron, escribieron y dirigieron la obra. Con personajes creados por IA podemos construir presencias coherentes, disponibles y profundamente expresivas, sin que el ego se interponga entre la idea y su ejecución. Cacho no busca una cara que se lleve el crédito: reivindica a quienes trabajan detrás de escena. La tecnología nos permite crear mundos y personalidades capaces de emocionar con humanidad, mientras el reconocimiento vuelve al concepto, al guion, la dirección y al equipo creativo.',
+  },
+  en: {
+    heroEyebrow: 'LATIN AMERICA’S FIRST 100% AI CREATIVE PRODUCTION COMPANY',
+    heroTitle: 'WE CREATE WORLDS THAT DID NOT EXIST. AND CHARACTERS THAT FEEL REAL.',
+    heroText: 'We begin with a human idea and use AI to take it further: we develop concepts, write stories, direct emotion and produce audiovisual content that makes brands impossible to ignore.',
+    actorsEyebrow: 'OUR MANIFESTO / 01',
+    actorsTitle: 'NO EGOCENTRIC ACTORS.',
+    actorsCounterpoint: 'THIS IS NOT AGAINST ACTORS. IT IS FOR THE IDEA.',
+    actorsText: 'We respect and admire the craft of acting. What we question is a system that sometimes places all attention on the person in front of the camera while those who imagined, wrote and directed the work fade from view. With AI-created characters, we can build consistent, available and deeply expressive presences without ego getting between the idea and its execution. Cacho does not seek a face to take the credit: he champions the people working behind the scenes. Technology lets us create worlds and personalities that move audiences with humanity, while recognition returns to the concept, script, direction and creative team.',
+  },
+  zh: {
+    heroEyebrow: '拉丁美洲首家 100% AI 创意制作公司',
+    heroTitle: '我们创造不存在的世界，以及让人感到真实的角色。',
+    heroText: '我们从人的创意出发，用 AI 将它推向更远：开发概念、书写故事、指导情感并制作让品牌无法被忽视的视听内容。',
+    actorsEyebrow: '我们的宣言 / 01',
+    actorsTitle: '不要自我中心的演员。',
+    actorsCounterpoint: '这不是反对演员，而是捍卫创意。',
+    actorsText: '我们尊重并欣赏表演这门专业。我们质疑的是一种有时把全部目光放在镜头前的人身上，却让构思、写作和导演作品的人被忽略的体系。AI 角色让我们创造稳定、随时可用且富有表现力的存在，不让自我阻隔创意与执行。Cacho 不寻找一张独占功劳的脸，而是让幕后创作者回到聚光灯下。技术帮助我们创造具有人性与感染力的世界和角色，让荣誉重新属于概念、剧本、导演与创意团队。',
+  },
+  hi: {
+    heroEyebrow: 'लैटिन अमेरिका की पहली 100% AI क्रिएटिव प्रोडक्शन कंपनी',
+    heroTitle: 'हम ऐसे संसार बनाते हैं जो पहले नहीं थे। और ऐसे किरदार जो सच लगते हैं।',
+    heroText: 'हम एक मानवीय विचार से शुरू करते हैं और AI से उसे आगे ले जाते हैं: कॉन्सेप्ट बनाते हैं, कहानियाँ लिखते हैं, भावनाओं को निर्देशित करते हैं और ऐसा ऑडियोविज़ुअल कंटेंट बनाते हैं जिसे नज़रअंदाज़ करना असंभव हो।',
+    actorsEyebrow: 'हमारा घोषणापत्र / 01',
+    actorsTitle: 'अहंकारी अभिनेता नहीं।',
+    actorsCounterpoint: 'यह अभिनेताओं के खिलाफ नहीं, विचार के पक्ष में है।',
+    actorsText: 'हम अभिनय के पेशे का सम्मान और प्रशंसा करते हैं। हमारा सवाल उस व्यवस्था से है जो कभी-कभी कैमरे के सामने दिखने वाले व्यक्ति को पूरा श्रेय देती है और कल्पना, लेखन व निर्देशन करने वालों को पीछे छोड़ देती है। AI से बने किरदार हमें निरंतर, उपलब्ध और गहराई से अभिव्यंजक उपस्थिति बनाने देते हैं, जहाँ अहंकार विचार और उसके निष्पादन के बीच नहीं आता। Cacho श्रेय लेने वाला चेहरा नहीं ढूँढता; वह पर्दे के पीछे काम करने वालों को सामने लाता है। तकनीक हमें मानवीय संवेदना वाले संसार और व्यक्तित्व बनाने देती है, जबकि पहचान फिर कॉन्सेप्ट, स्क्रिप्ट, निर्देशन और क्रिएटिव टीम को मिलती है।',
+  },
+  fr: {
+    heroEyebrow: 'LA PREMIÈRE SOCIÉTÉ DE PRODUCTION CRÉATIVE 100 % IA D’AMÉRIQUE LATINE',
+    heroTitle: 'NOUS CRÉONS DES MONDES QUI N’EXISTAIENT PAS. ET DES PERSONNAGES QUI SEMBLENT RÉELS.',
+    heroText: 'Nous partons d’une idée humaine et utilisons l’IA pour l’emmener plus loin : concepts, récits, direction des émotions et contenus audiovisuels qui rendent les marques impossibles à ignorer.',
+    actorsEyebrow: 'NOTRE MANIFESTE / 01',
+    actorsTitle: 'SANS ACTEURS ÉGOCENTRIQUES.',
+    actorsCounterpoint: 'CE N’EST PAS CONTRE LES ACTEURS. C’EST POUR L’IDÉE.',
+    actorsText: 'Nous respectons et admirons le métier d’acteur. Nous remettons en question un système qui place parfois toute l’attention sur la personne devant la caméra et laisse dans l’ombre ceux qui ont imaginé, écrit et réalisé l’œuvre. Les personnages créés par IA nous permettent de construire des présences cohérentes, disponibles et profondément expressives, sans que l’ego s’interpose entre l’idée et son exécution. Cacho ne cherche pas un visage qui s’attribue tout le mérite : il remet en lumière les équipes de l’ombre. La technologie permet de créer des mondes et des personnalités émouvants et humains, tout en rendant la reconnaissance au concept, au scénario, à la réalisation et à l’équipe créative.',
+  },
+  ar: {
+    heroEyebrow: 'أول شركة إنتاج إبداعي بالذكاء الاصطناعي 100٪ في أمريكا اللاتينية',
+    heroTitle: 'نصنع عوالم لم تكن موجودة، وشخصيات تبدو حقيقية.',
+    heroText: 'نبدأ بفكرة إنسانية ونستخدم الذكاء الاصطناعي لدفعها أبعد: نطوّر المفاهيم ونكتب القصص ونوجّه المشاعر وننتج محتوى بصرياً يجعل العلامات التجارية عصية على التجاهل.',
+    actorsEyebrow: 'بياننا / 01',
+    actorsTitle: 'من دون ممثلين متمحورين حول ذواتهم.',
+    actorsCounterpoint: 'لسنا ضد الممثلين، بل نقف مع الفكرة.',
+    actorsText: 'نحترم مهنة التمثيل ونقدّرها. ما ننتقده هو نظام يضع أحياناً كل الاهتمام على من يظهر أمام الكاميرا، بينما يتوارى من تخيّل العمل وكتبه وأخرجه. تمنحنا الشخصيات المصنوعة بالذكاء الاصطناعي حضوراً متسقاً ومتوافراً وعميق التعبير، من دون أن تقف الأنا بين الفكرة وتنفيذها. لا يبحث Cacho عن وجه ينفرد بالفضل، بل يعيد الاعتبار إلى العاملين خلف الكواليس. تتيح لنا التقنية صنع عوالم وشخصيات مؤثرة بإنسانيتها، فيما يعود التقدير إلى الفكرة والنص والإخراج والفريق الإبداعي.',
+  },
+  bn: {
+    heroEyebrow: 'লাতিন আমেরিকার প্রথম ১০০% AI ক্রিয়েটিভ প্রোডাকশন কোম্পানি',
+    heroTitle: 'আমরা এমন জগৎ তৈরি করি যা আগে ছিল না। আর এমন চরিত্র, যাদের সত্যি মনে হয়।',
+    heroText: 'আমরা মানবিক একটি ধারণা থেকে শুরু করি এবং AI দিয়ে তাকে আরও দূরে নিয়ে যাই: কনসেপ্ট তৈরি করি, গল্প লিখি, আবেগ পরিচালনা করি এবং এমন অডিওভিজ্যুয়াল কনটেন্ট বানাই যা ব্র্যান্ডকে উপেক্ষা করা অসম্ভব করে।',
+    actorsEyebrow: 'আমাদের ম্যানিফেস্টো / 01',
+    actorsTitle: 'আত্মকেন্দ্রিক অভিনেতা নয়।',
+    actorsCounterpoint: 'এটি অভিনেতাদের বিরুদ্ধে নয়, ধারণার পক্ষে।',
+    actorsText: 'আমরা অভিনয় পেশাকে সম্মান ও শ্রদ্ধা করি। আমাদের প্রশ্ন সেই ব্যবস্থাকে নিয়ে, যা কখনও ক্যামেরার সামনের মানুষটির ওপর সব আলো ফেলে এবং যাঁরা কাজটি কল্পনা, লেখা ও পরিচালনা করেছেন তাঁদের আড়াল করে দেয়। AI-নির্মিত চরিত্র দিয়ে আমরা ধারাবাহিক, সহজলভ্য ও গভীরভাবে অভিব্যক্তিশীল উপস্থিতি তৈরি করতে পারি, যেখানে অহং ধারণা ও বাস্তবায়নের মাঝে বাধা হয় না। Cacho কৃতিত্ব নেওয়ার মুখ খোঁজে না; সে পর্দার পেছনের মানুষদের সামনে আনে। প্রযুক্তি আমাদের মানবিক অনুভূতিসম্পন্ন জগৎ ও ব্যক্তিত্ব তৈরি করতে দেয় এবং স্বীকৃতি ফিরিয়ে দেয় কনসেপ্ট, স্ক্রিপ্ট, পরিচালনা ও ক্রিয়েটিভ টিমকে।',
+  },
+  pt: {
+    heroEyebrow: 'A PRIMEIRA PRODUTORA CRIATIVA 100% IA DA AMÉRICA LATINA',
+    heroTitle: 'CRIAMOS MUNDOS QUE NÃO EXISTIAM. E PERSONAGENS QUE PARECEM REAIS.',
+    heroText: 'Partimos de uma ideia humana e usamos IA para levá-la mais longe: desenvolvemos conceitos, escrevemos histórias, dirigimos emoções e produzimos conteúdo audiovisual para tornar as marcas impossíveis de ignorar.',
+    actorsEyebrow: 'NOSSO MANIFESTO / 01',
+    actorsTitle: 'SEM ATORES EGOCÊNTRICOS.',
+    actorsCounterpoint: 'NÃO É CONTRA OS ATORES. É A FAVOR DA IDEIA.',
+    actorsText: 'Respeitamos e admiramos o ofício da atuação. O que questionamos é um sistema que às vezes concentra toda a atenção em quem aparece diante da câmera e deixa fora de foco quem imaginou, escreveu e dirigiu a obra. Com personagens criados por IA, podemos construir presenças coerentes, disponíveis e profundamente expressivas, sem que o ego fique entre a ideia e sua execução. Cacho não procura um rosto para levar o crédito: valoriza quem trabalha nos bastidores. A tecnologia nos permite criar mundos e personalidades capazes de emocionar com humanidade, enquanto o reconhecimento volta ao conceito, ao roteiro, à direção e à equipe criativa.',
+  },
+  ru: {
+    heroEyebrow: 'ПЕРВАЯ В ЛАТИНСКОЙ АМЕРИКЕ КРЕАТИВНАЯ СТУДИЯ НА 100% С ИИ',
+    heroTitle: 'МЫ СОЗДАЁМ МИРЫ, КОТОРЫХ НЕ БЫЛО. И ПЕРСОНАЖЕЙ, КОТОРЫЕ КАЖУТСЯ ЖИВЫМИ.',
+    heroText: 'Мы начинаем с человеческой идеи и с помощью ИИ развиваем её дальше: создаём концепции, пишем истории, режиссируем эмоции и производим контент, который невозможно проигнорировать.',
+    actorsEyebrow: 'НАШ МАНИФЕСТ / 01',
+    actorsTitle: 'БЕЗ ЭГОЦЕНТРИЧНЫХ АКТЁРОВ.',
+    actorsCounterpoint: 'ЭТО НЕ ПРОТИВ АКТЁРОВ. ЭТО ЗА ИДЕЮ.',
+    actorsText: 'Мы уважаем и ценим актёрское мастерство. Мы спорим с системой, которая порой отдаёт всё внимание человеку в кадре, оставляя в тени тех, кто придумал, написал и поставил работу. Персонажи, созданные с ИИ, позволяют строить цельные, доступные и глубоко выразительные образы без эго между идеей и её воплощением. Cacho не ищет лицо, которое заберёт всю славу: он возвращает внимание людям за кадром. Технология помогает создавать миры и личности, способные трогать по-человечески, а признание возвращается концепции, сценарию, режиссуре и творческой команде.',
+  },
+  id: {
+    heroEyebrow: 'RUMAH PRODUKSI KREATIF 100% AI PERTAMA DI AMERIKA LATIN',
+    heroTitle: 'KAMI MENCIPTAKAN DUNIA YANG BELUM PERNAH ADA. DAN KARAKTER YANG TERASA NYATA.',
+    heroText: 'Kami memulai dari ide manusia lalu memakai AI untuk membawanya lebih jauh: mengembangkan konsep, menulis cerita, mengarahkan emosi, dan memproduksi konten audiovisual yang membuat merek mustahil diabaikan.',
+    actorsEyebrow: 'MANIFESTO KAMI / 01',
+    actorsTitle: 'TANPA AKTOR EGOSENTRIS.',
+    actorsCounterpoint: 'INI BUKAN MELAWAN AKTOR. INI MEMBELA IDE.',
+    actorsText: 'Kami menghormati dan mengagumi profesi akting. Yang kami pertanyakan adalah sistem yang kadang memusatkan seluruh perhatian pada sosok di depan kamera, sementara orang yang membayangkan, menulis, dan menyutradarai karya itu luput dari sorotan. Karakter buatan AI memungkinkan kami membangun sosok yang konsisten, tersedia, dan sangat ekspresif tanpa ego menghalangi ide dan pelaksanaannya. Cacho tidak mencari wajah untuk mengambil semua kredit; ia mengangkat orang-orang di balik layar. Teknologi membantu kami menciptakan dunia dan kepribadian yang menyentuh secara manusiawi, sementara pengakuan kembali kepada konsep, naskah, penyutradaraan, dan tim kreatif.',
+  },
+};
+
 const ABOUT_STORY_COPY: Record<Language, AboutStoryCopy> = {
   es: {
     manifesto: 'MANIFIESTO CACHO / 01',
@@ -1126,6 +1229,7 @@ export default function App() {
   const siteCopy = SITE_COPY[currentLang];
   const aboutCopy = ABOUT_COPY[currentLang];
   const aboutStory = ABOUT_STORY_COPY[currentLang];
+  const aboutManifesto = ABOUT_MANIFESTO_COPY[currentLang];
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
@@ -1498,31 +1602,31 @@ export default function App() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 sm:pb-20 sm:pt-36"
+            className="relative mx-auto min-w-0 max-w-7xl overflow-x-clip px-4 pb-12 pt-24 sm:px-6 sm:pb-20 sm:pt-36"
           >
-            <div className="overflow-hidden rounded-[1.75rem] border-2 border-black bg-[#F27D26] text-black sm:rounded-[2.75rem]">
-              <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
-                <div className="flex min-h-[420px] flex-col justify-between p-6 sm:min-h-[520px] sm:p-10 lg:p-12">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/60 sm:text-xs">
-                      {aboutStory.manifesto}
+            <div className="overflow-hidden rounded-[1.5rem] border border-black/20 bg-[#E9E6DF] text-black sm:rounded-[2.75rem]">
+              <div className="grid min-w-0 lg:grid-cols-[1.06fr_0.94fr]">
+                <div className="flex min-w-0 flex-col justify-between p-6 sm:min-h-[560px] sm:p-10 lg:p-12">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span className="min-w-0 text-[9px] font-black uppercase leading-relaxed tracking-[0.16em] text-black/60 sm:text-xs sm:tracking-[0.2em]">
+                      {aboutManifesto.heroEyebrow}
                     </span>
-                    <span className="h-px flex-1 bg-black/25" />
-                    <span className="h-2 w-2 rounded-full bg-black" />
+                    <span className="hidden h-px flex-1 bg-black/25 sm:block" />
+                    <span className="h-2 w-2 shrink-0 rounded-full bg-[#F27D26]" />
                   </div>
 
-                  <div className="py-10">
-                    <h1 className="max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
-                      {siteCopy.hero.badge}
+                  <div className="min-w-0 py-10 sm:py-14">
+                    <h1 className="max-w-4xl break-words text-[clamp(2.35rem,10.5vw,6.25rem)] font-black uppercase leading-[0.86] tracking-[-0.06em] [overflow-wrap:anywhere] sm:text-[clamp(3.5rem,7vw,6.25rem)]">
+                      {aboutManifesto.heroTitle}
                     </h1>
                   </div>
 
-                  <p className="max-w-3xl border-t border-black/25 pt-5 text-sm font-bold leading-relaxed text-black/75 sm:text-base lg:text-lg">
-                    {siteCopy.hero.subtitle}
+                  <p className="max-w-3xl border-s-2 border-[#F27D26] ps-4 text-sm font-bold leading-relaxed text-black/70 sm:ps-5 sm:text-lg">
+                    {aboutManifesto.heroText}
                   </p>
                 </div>
 
-                <div className="relative min-h-[360px] overflow-hidden border-t-2 border-black bg-black lg:min-h-full lg:border-s-2 lg:border-t-0">
+                <div className="relative min-h-[330px] overflow-hidden border-t border-black/20 bg-black sm:min-h-[470px] lg:min-h-full lg:border-s lg:border-t-0">
                   <img
                     src="https://img.youtube.com/vi/67FMhfAcCBk/maxresdefault.jpg"
                     onError={(event) => {
@@ -1531,11 +1635,11 @@ export default function App() {
                     alt={siteCopy.press.headline}
                     className="absolute inset-0 h-full w-full object-cover opacity-90"
                   />
-                  <div className="absolute inset-4 border border-white/40 sm:inset-6" />
-                  <div className="absolute bottom-6 start-6 rounded-full bg-[#F27D26] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-black sm:bottom-8 sm:start-8 sm:text-xs">
+                  <div className="absolute inset-4 border border-white/35 sm:inset-6" />
+                  <div className="absolute bottom-6 start-6 max-w-[calc(100%-3rem)] rounded-full bg-[#F27D26] px-4 py-2 text-[9px] font-black uppercase tracking-[0.13em] text-black sm:bottom-8 sm:start-8 sm:text-xs sm:tracking-[0.16em]">
                     {aboutStory.storyEyebrow}
                   </div>
-                  <span className="absolute end-7 top-6 text-5xl font-black tracking-tighter text-white/85 sm:end-9 sm:top-8 sm:text-7xl">01</span>
+                  <span className="absolute end-7 top-6 text-4xl font-black tracking-tighter text-white/85 sm:end-9 sm:top-8 sm:text-7xl">01</span>
                 </div>
               </div>
             </div>
@@ -1571,6 +1675,35 @@ export default function App() {
                 >
                   {aboutStory.source} <ArrowUpRight className="h-4 w-4" />
                 </a>
+              </div>
+            </div>
+
+            <div className="mt-16 overflow-hidden rounded-[1.5rem] border border-black bg-[#F27D26] text-black sm:rounded-[2.75rem]">
+              <div className="grid min-w-0 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="flex min-w-0 flex-col justify-between border-b border-black/25 p-6 sm:min-h-[470px] sm:p-10 lg:border-b-0 lg:border-e lg:p-12">
+                  <div className="flex items-center gap-3">
+                    <Flame className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+                    <p className="text-[9px] font-black uppercase tracking-[0.18em] text-black/60 sm:text-xs sm:tracking-[0.22em]">{aboutManifesto.actorsEyebrow}</p>
+                    <span className="h-px flex-1 bg-black/25" />
+                  </div>
+                  <h2 className="my-10 max-w-3xl break-words text-[clamp(2.65rem,12vw,6.5rem)] font-black uppercase leading-[0.8] tracking-[-0.07em] [overflow-wrap:anywhere] sm:text-[clamp(4rem,7vw,6.5rem)]">
+                    {aboutManifesto.actorsTitle}
+                  </h2>
+                  <p className="max-w-xl border-t border-black/25 pt-5 text-sm font-black uppercase leading-tight tracking-[-0.02em] sm:text-xl">
+                    {aboutManifesto.actorsCounterpoint}
+                  </p>
+                </div>
+
+                <div className="flex min-w-0 flex-col justify-between p-6 sm:p-10 lg:p-12">
+                  <span className="text-[4.5rem] font-black leading-none tracking-[-0.08em] text-black/10 sm:text-[8rem]">“</span>
+                  <p className="-mt-6 max-w-3xl text-base font-bold leading-[1.65] text-black/75 sm:-mt-10 sm:text-xl lg:text-2xl">
+                    {aboutManifesto.actorsText}
+                  </p>
+                  <div className="mt-8 flex items-center gap-4 sm:mt-12">
+                    <span className="h-2.5 w-2.5 rounded-full bg-black" />
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-black/55 sm:text-xs">CACHO.AI — FILM PRODUCTION</span>
+                  </div>
+                </div>
               </div>
             </div>
 

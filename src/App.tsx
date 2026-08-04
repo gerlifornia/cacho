@@ -490,6 +490,203 @@ const ABOUT_COPY: Record<Language, AboutCopy> = {
   },
 };
 
+type AboutStoryCopy = {
+  manifesto: string;
+  storyEyebrow: string;
+  storyTitle: string;
+  storyText: string;
+  craftEyebrow: string;
+  craftTitle: string;
+  craftText: string;
+  stats: Array<{ value: string; label: string }>;
+  capabilitiesEyebrow: string;
+  capabilitiesTitle: string;
+  source: string;
+};
+
+const ABOUT_STORY_COPY: Record<Language, AboutStoryCopy> = {
+  es: {
+    manifesto: 'MANIFIESTO CACHO / 01',
+    storyEyebrow: 'DE HOBBY A FENÓMENO',
+    storyTitle: 'CACHO NACIÓ PARA HACER UN HUMOR MÁS LIBRE, REAL Y DISRUPTIVO.',
+    storyText: 'Creado por Emmanuel Altamirano y Esteban Molina, Cacho debutó en diciembre en el Obelisco. Su primer video superó los diez millones de reproducciones y el experimento se convirtió en el primer personaje IA masivo de LATAM, con campañas, televisión y una comunidad que ya cruzó fronteras.',
+    craftEyebrow: 'NO ES APRETAR UN BOTÓN',
+    craftTitle: 'DETRÁS DE CADA PLANO HAY PERSONAS.',
+    craftText: 'Creativos, guionistas y realizadores trabajan el ritmo, la iluminación, la actuación, el montaje y cada decisión visual. La IA acelera la producción; la mirada sigue siendo humana.',
+    stats: [
+      { value: '10M+', label: 'REPRODUCCIONES EN EL PRIMER VIDEO' },
+      { value: 'DIC.', label: 'DEBUT EN EL OBELISCO' },
+      { value: 'ARG → MX', label: 'ALCANCE REGIONAL' },
+      { value: 'IDEA + IA', label: 'NUESTRO MÉTODO' },
+    ],
+    capabilitiesEyebrow: 'LO QUE HACEMOS',
+    capabilitiesTitle: 'DE UNA IDEA A UN UNIVERSO DE MARCA.',
+    source: 'Historia y cifras publicadas por Infobae.',
+  },
+  en: {
+    manifesto: 'THE CACHO MANIFESTO / 01',
+    storyEyebrow: 'FROM HOBBY TO PHENOMENON',
+    storyTitle: 'CACHO WAS BORN TO MAKE HUMOR FREER, REALER AND MORE DISRUPTIVE.',
+    storyText: "Created by Emmanuel Altamirano and Esteban Molina, Cacho debuted in December at Buenos Aires' Obelisk. His first video passed ten million views, and the experiment became Latin America’s first mass-audience AI character, spanning campaigns, television and a community beyond Argentina.",
+    craftEyebrow: 'THIS IS NOT PUSHING A BUTTON',
+    craftTitle: 'THERE ARE PEOPLE BEHIND EVERY SHOT.',
+    craftText: 'Creatives, writers and filmmakers shape rhythm, lighting, performance, editing and every visual decision. AI accelerates production; the point of view remains human.',
+    stats: [
+      { value: '10M+', label: 'VIEWS ON THE FIRST VIDEO' },
+      { value: 'DEC.', label: 'DEBUT AT THE OBELISK' },
+      { value: 'ARG → MX', label: 'REGIONAL REACH' },
+      { value: 'IDEA + AI', label: 'OUR METHOD' },
+    ],
+    capabilitiesEyebrow: 'WHAT WE DO',
+    capabilitiesTitle: 'FROM ONE IDEA TO AN ENTIRE BRAND UNIVERSE.',
+    source: 'Story and figures published by Infobae.',
+  },
+  zh: {
+    manifesto: 'CACHO 宣言 / 01',
+    storyEyebrow: '从兴趣实验到文化现象',
+    storyTitle: 'CACHO 为更自由、更真实、更具颠覆性的幽默而生。',
+    storyText: 'Cacho 由 Emmanuel Altamirano 与 Esteban Molina 创造，12 月在布宜诺斯艾利斯方尖碑首次亮相。首支视频播放量突破一千万，这个实验由此成为拉丁美洲首个大众化 AI 角色，并走入广告、电视和跨越国界的社群。',
+    craftEyebrow: '这不是按一下按钮',
+    craftTitle: '每一个镜头背后都有人。',
+    craftText: '创意、编剧与影像团队共同掌控节奏、灯光、表演、剪辑及每一项视觉决定。AI 加速制作，但观点始终来自人。',
+    stats: [
+      { value: '10M+', label: '首支视频播放量' },
+      { value: '12月', label: '方尖碑首次亮相' },
+      { value: 'ARG → MX', label: '区域影响力' },
+      { value: '创意 + AI', label: '我们的方法' },
+    ],
+    capabilitiesEyebrow: '我们做什么',
+    capabilitiesTitle: '从一个创意到完整的品牌宇宙。',
+    source: '故事与数据来源：Infobae。',
+  },
+  hi: {
+    manifesto: 'CACHO घोषणापत्र / 01',
+    storyEyebrow: 'शौक से सांस्कृतिक घटना तक',
+    storyTitle: 'CACHO का जन्म अधिक स्वतंत्र, वास्तविक और अलग हास्य के लिए हुआ।',
+    storyText: 'Emmanuel Altamirano और Esteban Molina द्वारा बनाया गया Cacho दिसंबर में ब्यूनस आयर्स के ओबेलिस्क पर सामने आया। उसके पहले वीडियो ने एक करोड़ से अधिक व्यू पाए और यह प्रयोग लैटिन अमेरिका का पहला व्यापक लोकप्रिय AI किरदार बन गया।',
+    craftEyebrow: 'यह सिर्फ बटन दबाना नहीं है',
+    craftTitle: 'हर शॉट के पीछे लोग हैं।',
+    craftText: 'क्रिएटिव, लेखक और फिल्ममेकर गति, रोशनी, अभिनय, संपादन और हर दृश्य निर्णय पर काम करते हैं। AI निर्माण को तेज़ करता है; नज़र इंसानी रहती है।',
+    stats: [
+      { value: '10M+', label: 'पहले वीडियो पर व्यू' },
+      { value: 'दिसं.', label: 'ओबेलिस्क पर शुरुआत' },
+      { value: 'ARG → MX', label: 'क्षेत्रीय पहुँच' },
+      { value: 'विचार + AI', label: 'हमारा तरीका' },
+    ],
+    capabilitiesEyebrow: 'हम क्या करते हैं',
+    capabilitiesTitle: 'एक विचार से पूरे ब्रांड यूनिवर्स तक।',
+    source: 'कहानी और आँकड़े Infobae द्वारा प्रकाशित।',
+  },
+  fr: {
+    manifesto: 'LE MANIFESTE CACHO / 01',
+    storyEyebrow: 'DU HOBBY AU PHÉNOMÈNE',
+    storyTitle: 'CACHO EST NÉ POUR UN HUMOUR PLUS LIBRE, PLUS RÉEL ET PLUS DISRUPTIF.',
+    storyText: 'Créé par Emmanuel Altamirano et Esteban Molina, Cacho a fait ses débuts en décembre à l’Obélisque de Buenos Aires. Sa première vidéo a dépassé dix millions de vues et l’expérience est devenue le premier personnage IA grand public d’Amérique latine.',
+    craftEyebrow: 'CE N’EST PAS APPUYER SUR UN BOUTON',
+    craftTitle: 'IL Y A DES HUMAINS DERRIÈRE CHAQUE PLAN.',
+    craftText: 'Créatifs, scénaristes et réalisateurs travaillent le rythme, la lumière, le jeu, le montage et chaque décision visuelle. L’IA accélère la production ; le regard reste humain.',
+    stats: [
+      { value: '10M+', label: 'VUES SUR LA PREMIÈRE VIDÉO' },
+      { value: 'DÉC.', label: 'DÉBUT À L’OBÉLISQUE' },
+      { value: 'ARG → MX', label: 'PORTÉE RÉGIONALE' },
+      { value: 'IDÉE + IA', label: 'NOTRE MÉTHODE' },
+    ],
+    capabilitiesEyebrow: 'CE QUE NOUS FAISONS',
+    capabilitiesTitle: 'D’UNE IDÉE À TOUT UN UNIVERS DE MARQUE.',
+    source: 'Histoire et chiffres publiés par Infobae.',
+  },
+  ar: {
+    manifesto: 'بيان CACHO / 01',
+    storyEyebrow: 'من هواية إلى ظاهرة',
+    storyTitle: 'وُلد CACHO ليقدّم فكاهة أكثر حرية وواقعية وجرأة.',
+    storyText: 'ابتكر Emmanuel Altamirano وEsteban Molina شخصية Cacho، وظهرت لأول مرة في ديسمبر عند مسلة بوينس آيرس. تجاوز الفيديو الأول عشرة ملايين مشاهدة، وتحولت التجربة إلى أول شخصية جماهيرية بالذكاء الاصطناعي في أمريكا اللاتينية.',
+    craftEyebrow: 'الأمر ليس مجرد ضغطة زر',
+    craftTitle: 'خلف كل لقطة أشخاص حقيقيون.',
+    craftText: 'يعمل المبدعون والكتّاب وصنّاع الأفلام على الإيقاع والإضاءة والأداء والمونتاج وكل قرار بصري. الذكاء الاصطناعي يسرّع الإنتاج، لكن الرؤية تظل إنسانية.',
+    stats: [
+      { value: '10M+', label: 'مشاهدة للفيديو الأول' },
+      { value: 'ديسمبر', label: 'الظهور الأول عند المسلة' },
+      { value: 'ARG → MX', label: 'انتشار إقليمي' },
+      { value: 'فكرة + AI', label: 'منهجنا' },
+    ],
+    capabilitiesEyebrow: 'ما الذي نفعله',
+    capabilitiesTitle: 'من فكرة واحدة إلى عالم كامل للعلامة التجارية.',
+    source: 'القصة والأرقام منشورة في Infobae.',
+  },
+  bn: {
+    manifesto: 'CACHO ম্যানিফেস্টো / 01',
+    storyEyebrow: 'শখ থেকে আলোচিত ঘটনা',
+    storyTitle: 'আরও স্বাধীন, বাস্তব ও ব্যতিক্রমী হাস্যরস তৈরির জন্য CACHO-র জন্ম।',
+    storyText: 'Emmanuel Altamirano ও Esteban Molina নির্মিত Cacho ডিসেম্বর মাসে বুয়েনস আইরেসের ওবেলিস্কে আত্মপ্রকাশ করে। প্রথম ভিডিওটি এক কোটির বেশি ভিউ পায় এবং এই পরীক্ষা লাতিন আমেরিকার প্রথম গণজনপ্রিয় AI চরিত্রে পরিণত হয়।',
+    craftEyebrow: 'এটি শুধু একটি বোতাম চাপা নয়',
+    craftTitle: 'প্রতিটি শটের পেছনে মানুষ আছে।',
+    craftText: 'ক্রিয়েটিভ, লেখক ও নির্মাতারা ছন্দ, আলো, অভিনয়, সম্পাদনা এবং প্রতিটি ভিজ্যুয়াল সিদ্ধান্তে কাজ করেন। AI প্রোডাকশন দ্রুত করে; দৃষ্টিভঙ্গি থাকে মানবিক।',
+    stats: [
+      { value: '10M+', label: 'প্রথম ভিডিওর ভিউ' },
+      { value: 'ডিসে.', label: 'ওবেলিস্কে আত্মপ্রকাশ' },
+      { value: 'ARG → MX', label: 'আঞ্চলিক পৌঁছ' },
+      { value: 'আইডিয়া + AI', label: 'আমাদের পদ্ধতি' },
+    ],
+    capabilitiesEyebrow: 'আমরা যা করি',
+    capabilitiesTitle: 'একটি আইডিয়া থেকে সম্পূর্ণ ব্র্যান্ড ইউনিভার্স।',
+    source: 'গল্প ও পরিসংখ্যান Infobae-এ প্রকাশিত।',
+  },
+  pt: {
+    manifesto: 'MANIFESTO CACHO / 01',
+    storyEyebrow: 'DE HOBBY A FENÔMENO',
+    storyTitle: 'CACHO NASCEU PARA FAZER UM HUMOR MAIS LIVRE, REAL E DISRUPTIVO.',
+    storyText: 'Criado por Emmanuel Altamirano e Esteban Molina, Cacho estreou em dezembro no Obelisco de Buenos Aires. Seu primeiro vídeo superou dez milhões de visualizações e o experimento virou o primeiro personagem de IA de alcance massivo da América Latina.',
+    craftEyebrow: 'NÃO É APENAS APERTAR UM BOTÃO',
+    craftTitle: 'HÁ PESSOAS POR TRÁS DE CADA PLANO.',
+    craftText: 'Criativos, roteiristas e realizadores trabalham ritmo, iluminação, atuação, montagem e cada decisão visual. A IA acelera a produção; o olhar continua humano.',
+    stats: [
+      { value: '10M+', label: 'VISUALIZAÇÕES NO PRIMEIRO VÍDEO' },
+      { value: 'DEZ.', label: 'ESTREIA NO OBELISCO' },
+      { value: 'ARG → MX', label: 'ALCANCE REGIONAL' },
+      { value: 'IDEIA + IA', label: 'NOSSO MÉTODO' },
+    ],
+    capabilitiesEyebrow: 'O QUE FAZEMOS',
+    capabilitiesTitle: 'DE UMA IDEIA A UM UNIVERSO INTEIRO DE MARCA.',
+    source: 'História e números publicados pelo Infobae.',
+  },
+  ru: {
+    manifesto: 'МАНИФЕСТ CACHO / 01',
+    storyEyebrow: 'ОТ ХОББИ К ФЕНОМЕНУ',
+    storyTitle: 'CACHO РОДИЛСЯ РАДИ БОЛЕЕ СВОБОДНОГО, ЖИВОГО И СМЕЛОГО ЮМОРА.',
+    storyText: 'Созданный Emmanuel Altamirano и Esteban Molina, Cacho дебютировал в декабре у Обелиска в Буэнос-Айресе. Первое видео набрало более десяти миллионов просмотров, а эксперимент стал первым массовым ИИ-персонажем Латинской Америки.',
+    craftEyebrow: 'ЭТО НЕ ПРОСТО НАЖАТЬ КНОПКУ',
+    craftTitle: 'ЗА КАЖДЫМ КАДРОМ СТОЯТ ЛЮДИ.',
+    craftText: 'Креаторы, сценаристы и режиссёры работают над ритмом, светом, актёрской игрой, монтажом и каждым визуальным решением. ИИ ускоряет производство, но взгляд остаётся человеческим.',
+    stats: [
+      { value: '10M+', label: 'ПРОСМОТРОВ ПЕРВОГО ВИДЕО' },
+      { value: 'ДЕК.', label: 'ДЕБЮТ У ОБЕЛИСКА' },
+      { value: 'ARG → MX', label: 'РЕГИОНАЛЬНЫЙ ОХВАТ' },
+      { value: 'ИДЕЯ + ИИ', label: 'НАШ МЕТОД' },
+    ],
+    capabilitiesEyebrow: 'ЧТО МЫ ДЕЛАЕМ',
+    capabilitiesTitle: 'ОТ ОДНОЙ ИДЕИ ДО ЦЕЛОЙ ВСЕЛЕННОЙ БРЕНДА.',
+    source: 'История и цифры опубликованы Infobae.',
+  },
+  id: {
+    manifesto: 'MANIFESTO CACHO / 01',
+    storyEyebrow: 'DARI HOBI MENJADI FENOMENA',
+    storyTitle: 'CACHO LAHIR UNTUK HUMOR YANG LEBIH BEBAS, NYATA, DAN DISRUPTIF.',
+    storyText: 'Diciptakan oleh Emmanuel Altamirano dan Esteban Molina, Cacho debut pada Desember di Obelisk Buenos Aires. Video pertamanya melampaui sepuluh juta tayangan dan eksperimen ini menjadi karakter AI massal pertama di Amerika Latin.',
+    craftEyebrow: 'INI BUKAN SEKADAR MENEKAN TOMBOL',
+    craftTitle: 'ADA MANUSIA DI BALIK SETIAP SHOT.',
+    craftText: 'Tim kreatif, penulis, dan pembuat film mengerjakan ritme, pencahayaan, akting, penyuntingan, dan setiap keputusan visual. AI mempercepat produksi; sudut pandangnya tetap manusiawi.',
+    stats: [
+      { value: '10M+', label: 'TAYANGAN VIDEO PERTAMA' },
+      { value: 'DES.', label: 'DEBUT DI OBELISK' },
+      { value: 'ARG → MX', label: 'JANGKAUAN REGIONAL' },
+      { value: 'IDE + AI', label: 'METODE KAMI' },
+    ],
+    capabilitiesEyebrow: 'APA YANG KAMI KERJAKAN',
+    capabilitiesTitle: 'DARI SATU IDE MENJADI SEMESTA MEREK.',
+    source: 'Kisah dan angka diterbitkan oleh Infobae.',
+  },
+};
+
 const TRANSLATIONS: Record<Language, any> = {
   es: {
     nav: { trabajos: 'Trabajos', nosotros: 'Nosotros', contacto: 'Contacto' },
@@ -988,6 +1185,7 @@ export default function App() {
   const siteCopy = SITE_COPY[currentLang];
   const heroProcess = HERO_PROCESS_COPY[currentLang];
   const aboutCopy = ABOUT_COPY[currentLang];
+  const aboutStory = ABOUT_STORY_COPY[currentLang];
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(true);
@@ -1386,92 +1584,142 @@ export default function App() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative mx-auto max-w-7xl overflow-hidden px-5 pb-12 pt-32 sm:px-6 sm:pb-20 sm:pt-40"
+            className="relative mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 sm:pb-20 sm:pt-36"
           >
-            <div className="pointer-events-none absolute -right-32 top-8 z-0 h-[420px] w-[420px] opacity-10 sm:h-[680px] sm:w-[680px] lg:-right-24 lg:top-0">
-              <img src="/logo-cacho.png" alt="" className="h-full w-full object-contain mix-blend-screen" />
-            </div>
-
-            <div className="relative z-10 grid gap-8 xl:grid-cols-[1.25fr_0.75fr] xl:items-center xl:gap-14">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/70 sm:text-xs">
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                  {siteCopy.hero.eyebrow}
-                </div>
-
-                <h1 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[0.86] tracking-tighter sm:text-6xl lg:text-7xl">
-                  {siteCopy.hero.title1}<br />
-                  <span className="text-[#F27D26]">{siteCopy.hero.title2}</span><br />
-                  {siteCopy.hero.title3}
-                  {siteCopy.hero.aiLabel && <> <span className="text-[#F27D26]">{siteCopy.hero.aiLabel}</span></>}
-                </h1>
-
-                <p className="mt-7 max-w-3xl border-s-2 border-[#F27D26] ps-5 text-base font-medium leading-relaxed text-white/75 sm:text-lg lg:text-xl">
-                  {siteCopy.hero.subtitle}
-                </p>
-              </div>
-
-              <motion.aside
-                initial={{ opacity: 0, rotate: 0, y: 18 }}
-                animate={{ opacity: 1, rotate: 2, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="rounded-[2rem] border-2 border-black bg-[#F27D26] p-5 text-black shadow-[0_25px_80px_rgba(0,0,0,0.55)] sm:p-7"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/60">
-                    {siteCopy.press.eyebrow}
-                  </span>
-                  <span className="h-px flex-1 bg-black/25" />
-                  <span className="h-2 w-2 rounded-full bg-black" />
-                </div>
-
-                <h2 className="mt-5 text-2xl font-black uppercase leading-[0.92] tracking-[-0.04em] sm:text-3xl">
-                  {siteCopy.press.headline}
-                </h2>
-                <p className="mt-3 text-sm font-bold text-black/65 sm:text-base">{aboutCopy.recognition}</p>
-
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  <a
-                    href="https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={siteCopy.press.clarinAria}
-                    className="group/media flex min-h-16 items-center justify-between gap-2 rounded-2xl border border-black/25 bg-black/[0.06] px-4 py-3 transition-colors hover:bg-black/[0.13]"
-                  >
-                    <img src={CLARIN_LOGO_SRC} alt="Clarín" className="h-7 w-auto max-w-[105px] object-contain brightness-0" />
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover/media:translate-x-0.5 group-hover/media:-translate-y-0.5" />
-                  </a>
-                  <a
-                    href="https://www.infobae.com/tendencias/2026/07/31/el-fenomeno-detras-de-cacho-el-influencer-creado-con-inteligencia-artificial-que-paso-de-un-hobby-a-trabajar-con-grandes-marcas/"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={siteCopy.press.infobaeAria}
-                    className="group/media flex min-h-16 items-center justify-between gap-2 rounded-2xl border border-black/25 bg-black/[0.06] px-4 py-3 transition-colors hover:bg-black/[0.13]"
-                  >
-                    <img src={INFOBAE_LOGO_SRC} alt="Infobae" className="h-7 w-auto max-w-[105px] object-contain brightness-0" />
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover/media:translate-x-0.5 group-hover/media:-translate-y-0.5" />
-                  </a>
-                </div>
-              </motion.aside>
-            </div>
-
-            <div className="relative z-10 mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-16">
-              {aboutCopy.pillars.map((pillar, index) => (
-                <article
-                  key={pillar.title}
-                  className="group rounded-3xl border border-white/10 bg-zinc-950/80 p-6 transition-colors hover:border-[#F27D26]/60 sm:p-7"
-                >
-                  <div className="mb-8 flex items-center gap-3">
-                    <span className="text-xs font-black tracking-[0.2em] text-[#F27D26]">{String(index + 1).padStart(2, '0')}</span>
-                    <span className="h-px flex-1 bg-white/15 transition-colors group-hover:bg-[#F27D26]/60" />
+            <div className="overflow-hidden rounded-[1.75rem] border-2 border-black bg-[#F27D26] text-black sm:rounded-[2.75rem]">
+              <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
+                <div className="flex min-h-[420px] flex-col justify-between p-6 sm:min-h-[520px] sm:p-10 lg:p-12">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/60 sm:text-xs">
+                      {aboutStory.manifesto}
+                    </span>
+                    <span className="h-px flex-1 bg-black/25" />
+                    <span className="h-2 w-2 rounded-full bg-black" />
                   </div>
-                  <h2 className="text-xl font-black uppercase leading-tight text-white sm:text-2xl">{pillar.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-white/55 sm:text-base">{pillar.text}</p>
-                </article>
+
+                  <div className="py-10">
+                    <h1 className="max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
+                      {siteCopy.hero.badge}
+                    </h1>
+                  </div>
+
+                  <p className="max-w-3xl border-t border-black/25 pt-5 text-sm font-bold leading-relaxed text-black/75 sm:text-base lg:text-lg">
+                    {siteCopy.hero.subtitle}
+                  </p>
+                </div>
+
+                <div className="relative min-h-[360px] overflow-hidden border-t-2 border-black bg-black lg:min-h-full lg:border-s-2 lg:border-t-0">
+                  <img
+                    src="https://img.youtube.com/vi/67FMhfAcCBk/maxresdefault.jpg"
+                    onError={(event) => {
+                      event.currentTarget.src = 'https://img.youtube.com/vi/67FMhfAcCBk/hqdefault.jpg';
+                    }}
+                    alt={siteCopy.press.headline}
+                    className="absolute inset-0 h-full w-full object-cover opacity-90"
+                  />
+                  <div className="absolute inset-4 border border-white/40 sm:inset-6" />
+                  <div className="absolute bottom-6 start-6 rounded-full bg-[#F27D26] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-black sm:bottom-8 sm:start-8 sm:text-xs">
+                    {aboutStory.storyEyebrow}
+                  </div>
+                  <span className="absolute end-7 top-6 text-5xl font-black tracking-tighter text-white/85 sm:end-9 sm:top-8 sm:text-7xl">01</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 overflow-hidden rounded-2xl border border-white/15 bg-black sm:mt-4 lg:grid-cols-4">
+              {aboutStory.stats.map((stat, index) => (
+                <div
+                  key={stat.value}
+                  className={`min-h-32 p-5 sm:min-h-40 sm:p-6 ${index % 2 !== 0 ? 'border-s border-white/15' : ''} ${index > 1 ? 'border-t border-white/15 lg:border-t-0' : ''} ${index > 0 ? 'lg:border-s lg:border-white/15' : ''}`}
+                >
+                  <p className="text-2xl font-black uppercase tracking-[-0.05em] text-[#F27D26] sm:text-4xl">{stat.value}</p>
+                  <p className="mt-3 max-w-[13rem] text-[9px] font-black uppercase leading-relaxed tracking-[0.14em] text-white/55 sm:text-[11px]">
+                    {stat.label}
+                  </p>
+                </div>
               ))}
             </div>
 
-            <p className="relative z-10 mx-auto mt-12 max-w-5xl text-center text-3xl font-black uppercase leading-[0.95] tracking-tighter text-white sm:mt-16 sm:text-5xl lg:text-6xl">
+            <div className="mt-16 grid gap-8 border-t border-white/15 pt-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16 lg:pt-12">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26] sm:text-xs">{aboutStory.storyEyebrow}</p>
+                <h2 className="mt-5 text-3xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white sm:text-5xl lg:text-6xl">
+                  {aboutStory.storyTitle}
+                </h2>
+              </div>
+              <div className="flex flex-col justify-end">
+                <p className="max-w-2xl text-base font-medium leading-relaxed text-white/65 sm:text-xl">{aboutStory.storyText}</p>
+                <a
+                  href="https://www.infobae.com/tendencias/2026/07/31/el-fenomeno-detras-de-cacho-el-influencer-creado-con-inteligencia-artificial-que-paso-de-un-hobby-a-trabajar-con-grandes-marcas/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex w-fit items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-[#F27D26] hover:text-white sm:text-xs"
+                >
+                  {aboutStory.source} <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-16 grid overflow-hidden rounded-[1.75rem] border border-white/15 bg-zinc-950 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative min-h-[300px] overflow-hidden sm:min-h-[430px]">
+                <img
+                  src="https://img.youtube.com/vi/oomjGUHKFlY/maxresdefault.jpg"
+                  onError={(event) => {
+                    event.currentTarget.src = 'https://img.youtube.com/vi/oomjGUHKFlY/hqdefault.jpg';
+                  }}
+                  alt="CACHO.Ai"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <span className="absolute bottom-5 start-5 bg-black px-3 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white sm:bottom-7 sm:start-7 sm:text-xs">CACHO.Ai / FILM PRODUCTION</span>
+              </div>
+              <div className="flex flex-col justify-center border-t border-white/15 p-6 sm:p-10 lg:border-s lg:border-t-0 lg:p-12">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26] sm:text-xs">{aboutStory.craftEyebrow}</p>
+                <h2 className="mt-5 text-3xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-5xl">{aboutStory.craftTitle}</h2>
+                <p className="mt-6 text-sm font-medium leading-relaxed text-white/60 sm:text-lg">{aboutStory.craftText}</p>
+              </div>
+            </div>
+
+            <div className="mt-16 overflow-hidden rounded-[1.75rem] bg-[#E9E6DF] text-black sm:rounded-[2.25rem]">
+              <div className="grid gap-6 border-b border-black/20 p-6 sm:p-10 lg:grid-cols-[0.6fr_1.4fr] lg:items-end lg:p-12">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-black/55 sm:text-xs">{aboutStory.capabilitiesEyebrow}</p>
+                <h2 className="text-3xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-5xl lg:text-6xl">{aboutStory.capabilitiesTitle}</h2>
+              </div>
+
+              <div className="grid sm:grid-cols-3">
+                {aboutCopy.pillars.map((pillar, index) => (
+                  <article
+                    key={pillar.title}
+                    className={`min-h-56 p-6 sm:p-8 lg:min-h-64 lg:p-10 ${index > 0 ? 'border-t border-black/20 sm:border-s sm:border-t-0' : ''}`}
+                  >
+                    <div className="mb-12 flex items-center gap-3">
+                      <span className="text-xs font-black tracking-[0.2em] text-[#F27D26]">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="h-px flex-1 bg-black/20" />
+                    </div>
+                    <h3 className="text-xl font-black uppercase leading-tight sm:text-2xl">{pillar.title}</h3>
+                    <p className="mt-4 text-sm font-medium leading-relaxed text-black/55 sm:text-base">{pillar.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-6 border-y border-white/15 py-7 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26]">{siteCopy.press.eyebrow}</p>
+                <p className="mt-2 text-sm font-bold text-white/60 sm:text-base">{aboutCopy.recognition}</p>
+              </div>
+              <div className="flex items-center gap-6 sm:gap-9">
+                <a href="https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html" target="_blank" rel="noreferrer" aria-label={siteCopy.press.clarinAria} className="group flex items-center gap-2 rounded-lg bg-white px-3 py-2">
+                  <img src={CLARIN_LOGO_SRC} alt="Clarín" className="h-5 w-auto max-w-[90px] object-contain" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-black transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <a href="https://www.infobae.com/tendencias/2026/07/31/el-fenomeno-detras-de-cacho-el-influencer-creado-con-inteligencia-artificial-que-paso-de-un-hobby-a-trabajar-con-grandes-marcas/" target="_blank" rel="noreferrer" aria-label={siteCopy.press.infobaeAria} className="group flex items-center gap-2 rounded-lg bg-white px-3 py-2">
+                  <img src={INFOBAE_LOGO_SRC} alt="Infobae" className="h-5 w-auto max-w-[90px] object-contain" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-black transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
+
+            <p className="mx-auto mt-14 max-w-5xl text-center text-3xl font-black uppercase leading-[0.95] tracking-tighter text-white sm:mt-20 sm:text-5xl">
               {aboutCopy.cta}
             </p>
           </motion.section>

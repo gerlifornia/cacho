@@ -969,6 +969,11 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   {
+    id: "LLIwEkrWP4s", isShort: false,
+    titles: localizedTitle("Boceto para Agencia Bon Jovi x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
     id: "67FMhfAcCBk", isShort: false,
     titles: localizedTitle("Publicidad Mundial Argentina x Cacho"),
     descKey: "generated_ai"
@@ -976,12 +981,14 @@ const VIDEOS = [
   {
     id: "f7KgP33ytiA", isShort: false,
     titles: localizedTitle("Avianca animada x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "otJEBDL1NXQ", isShort: false,
     titles: localizedTitle("AVIANCA  seguros de la tierra al cielo x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "IBh1BRPHbKo", isShort: false,
@@ -1016,7 +1023,8 @@ const VIDEOS = [
   {
     id: "2tQwIZGvhPk", isShort: true,
     titles: localizedTitle("Nike x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "IMMDsV006bk", isShort: true,
@@ -1031,7 +1039,8 @@ const VIDEOS = [
   {
     id: "uuA2uO6F1n4", isShort: true,
     titles: localizedTitle("Fernet x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "aeJ72DcaYC0", isShort: true,
@@ -1046,12 +1055,14 @@ const VIDEOS = [
   {
     id: "8jIrO55s1FM", isShort: true,
     titles: localizedTitle("Tau x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "tTIRyt2Fmas", isShort: true,
     titles: localizedTitle("Franui x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "-YkX1zSSMvQ", isShort: true,
@@ -1061,12 +1072,14 @@ const VIDEOS = [
   {
     id: "I4ZDCC7B6Bg", isShort: true,
     titles: localizedTitle("Colgate x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   },
   {
     id: "Hcvqa2eruh8", isShort: true,
     titles: localizedTitle("Mercado pago x cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isSpecAd: true
   }
 ];
 
@@ -1215,6 +1228,11 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         >
           {title}
         </h3>
+        {video.isSpecAd && (
+          <p className="mt-1.5 text-[8px] font-black uppercase tracking-[0.18em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
+            Spec ad
+          </p>
+        )}
         {video.id === 'oomjGUHKFlY' && (
           <p className="mt-2 max-w-2xl text-[8px] font-semibold leading-snug tracking-[0.04em] text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px] lg:text-xs">
             {CREATIVE_HUB_CREDIT[currentLang]}
@@ -1594,7 +1612,7 @@ export default function App() {
                       }`}
                     >
                       {sectionVideos.map(({ video, index }, position) => {
-                        const isFeatured = !isShort && (position === 0 || position === 5 || video.id === 'M3VQ0VydAUc');
+                        const isFeatured = !isShort && (position === 0 || position === 5 || video.id === 'M3VQ0VydAUc' || video.id === 'LLIwEkrWP4s');
                         return (
                           <PortfolioVideoCard
                             key={video.id}

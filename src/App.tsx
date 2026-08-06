@@ -1652,7 +1652,7 @@ export default function App() {
                   </div>
 
                   <div className="min-w-0 py-10 sm:py-14">
-                    <h1 className="max-w-4xl break-words text-[clamp(2.35rem,10.5vw,6.25rem)] font-black uppercase leading-[0.86] tracking-[-0.06em] [overflow-wrap:anywhere] sm:text-[clamp(3.5rem,7vw,6.25rem)]">
+                    <h1 className="max-w-4xl break-normal text-[clamp(2.2rem,9.5vw,6.25rem)] font-black uppercase leading-[0.86] tracking-[-0.06em] [hyphens:none] [overflow-wrap:normal] [word-break:normal] sm:text-[clamp(3.5rem,7vw,6.25rem)]">
                       {aboutManifesto.heroTitle}
                     </h1>
                   </div>
@@ -1722,7 +1722,7 @@ export default function App() {
                     <p className="text-[9px] font-black uppercase tracking-[0.18em] text-black/60 sm:text-xs sm:tracking-[0.22em]">{aboutManifesto.actorsEyebrow}</p>
                     <span className="h-px flex-1 bg-black/25" />
                   </div>
-                  <h2 className="my-10 max-w-3xl break-words text-[clamp(2.65rem,12vw,6.5rem)] font-black uppercase leading-[0.8] tracking-[-0.07em] [overflow-wrap:anywhere] sm:text-[clamp(4rem,7vw,6.5rem)]">
+                  <h2 className="my-10 max-w-3xl break-normal text-[clamp(2.2rem,9.5vw,6.5rem)] font-black uppercase leading-[0.82] tracking-[-0.06em] [hyphens:none] [overflow-wrap:normal] [word-break:normal] sm:text-[clamp(4rem,7vw,6.5rem)] sm:leading-[0.8] sm:tracking-[-0.07em]">
                     {aboutManifesto.actorsTitle}
                   </h2>
                   <p className="max-w-xl border-t border-black/25 pt-5 text-sm font-black uppercase leading-tight tracking-[-0.02em] sm:text-xl">

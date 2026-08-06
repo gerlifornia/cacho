@@ -958,6 +958,32 @@ const CREATIVE_HUB_CREDIT: Record<Language, string> = {
   id: 'Karya dibuat untuk agensi Creative Hub.',
 };
 
+const FAN34_SPEC_CREDIT: Record<Language, string> = {
+  es: 'Spec ad para la agencia Fan#34',
+  en: 'Spec ad for the Fan#34 agency',
+  zh: '为 Fan#34 代理公司制作的 Spec ad',
+  hi: 'Fan#34 एजेंसी के लिए Spec ad',
+  fr: 'Spec ad pour l’agence Fan#34',
+  ar: 'إعلان تجريبي لصالح وكالة Fan#34',
+  bn: 'Fan#34 এজেন্সির জন্য Spec ad',
+  pt: 'Spec ad para a agência Fan#34',
+  ru: 'Spec ad для агентства Fan#34',
+  id: 'Spec ad untuk agensi Fan#34',
+};
+
+const FAN34_WORK_CREDIT: Record<Language, string> = {
+  es: 'Trabajo para la agencia Fan#34',
+  en: 'Work created for the Fan#34 agency',
+  zh: '为 Fan#34 代理公司制作',
+  hi: 'Fan#34 एजेंसी के लिए काम',
+  fr: 'Travail réalisé pour l’agence Fan#34',
+  ar: 'عمل لصالح وكالة Fan#34',
+  bn: 'Fan#34 এজেন্সির জন্য কাজ',
+  pt: 'Trabalho realizado para a agência Fan#34',
+  ru: 'Работа для агентства Fan#34',
+  id: 'Karya untuk agensi Fan#34',
+};
+
 // Lista de videos con soporte multilenguaje
 const localizedTitle = (title: string): Record<Language, string> =>
   Object.fromEntries(LANGUAGES.map(({ code }) => [code, title])) as Record<Language, string>;
@@ -970,7 +996,7 @@ const VIDEOS = [
   },
   {
     id: "LLIwEkrWP4s", isShort: false,
-    titles: localizedTitle("Boceto para Agencia Bon Jovi x Cacho"),
+    titles: localizedTitle("Spec Ad Bon Jovi para Agencia x Cacho"),
     descKey: "generated_ai"
   },
   {
@@ -1040,23 +1066,27 @@ const VIDEOS = [
     id: "uuA2uO6F1n4", isShort: true,
     titles: localizedTitle("Fernet x Cacho"),
     descKey: "generated_ai",
-    isSpecAd: true
+    isSpecAd: true,
+    isFan34Spec: true
   },
   {
     id: "aeJ72DcaYC0", isShort: true,
     titles: localizedTitle("Liliana x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isFan34Work: true
   },
   {
     id: "_sQgV29AmKQ", isShort: true,
     titles: localizedTitle("Liliana x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isFan34Work: true
   },
   {
     id: "8jIrO55s1FM", isShort: true,
     titles: localizedTitle("Tau x Cacho"),
     descKey: "generated_ai",
-    isSpecAd: true
+    isSpecAd: true,
+    isFan34Spec: true
   },
   {
     id: "tTIRyt2Fmas", isShort: true,
@@ -1067,13 +1097,15 @@ const VIDEOS = [
   {
     id: "-YkX1zSSMvQ", isShort: true,
     titles: localizedTitle("Manchester x Cacho"),
-    descKey: "generated_ai"
+    descKey: "generated_ai",
+    isFan34Work: true
   },
   {
     id: "I4ZDCC7B6Bg", isShort: true,
     titles: localizedTitle("Colgate x Cacho"),
     descKey: "generated_ai",
-    isSpecAd: true
+    isSpecAd: true,
+    isFan34Spec: true
   },
   {
     id: "Hcvqa2eruh8", isShort: true,
@@ -1228,11 +1260,19 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         >
           {title}
         </h3>
-        {video.isSpecAd && (
+        {video.isFan34Spec ? (
+          <p className="mt-1.5 text-[8px] font-black uppercase leading-snug tracking-[0.14em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
+            {FAN34_SPEC_CREDIT[currentLang]}
+          </p>
+        ) : video.isFan34Work ? (
+          <p className="mt-1.5 text-[8px] font-black uppercase leading-snug tracking-[0.14em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
+            {FAN34_WORK_CREDIT[currentLang]}
+          </p>
+        ) : video.isSpecAd ? (
           <p className="mt-1.5 text-[8px] font-black uppercase tracking-[0.18em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
             Spec ad
           </p>
-        )}
+        ) : null}
         {video.id === 'oomjGUHKFlY' && (
           <p className="mt-2 max-w-2xl text-[8px] font-semibold leading-snug tracking-[0.04em] text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px] lg:text-xs">
             {CREATIVE_HUB_CREDIT[currentLang]}

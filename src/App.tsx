@@ -1605,7 +1605,7 @@ export default function App() {
                     </div>
 
                     <div
-                      className={`grid items-start ${
+                      className={`grid items-start lg:grid-flow-row-dense ${
                         isShort
                           ? 'grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3'
                           : 'grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2'

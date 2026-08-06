@@ -1092,7 +1092,8 @@ const VIDEOS = [
     id: "tTIRyt2Fmas", isShort: true,
     titles: localizedTitle("Franui x Cacho"),
     descKey: "generated_ai",
-    isSpecAd: true
+    isSpecAd: true,
+    isFan34Spec: true
   },
   {
     id: "-YkX1zSSMvQ", isShort: true,

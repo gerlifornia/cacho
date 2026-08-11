@@ -1225,7 +1225,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
       {shouldRenderPreview && (
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute -inset-[8%] h-[116%] w-[116%] transition-opacity duration-300 ${
+          className={`pointer-events-none absolute -inset-[10%] h-[120%] w-[120%] transition-opacity duration-200 ${
             previewReady ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -1258,6 +1258,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               event.target.playVideo();
             }}
             onPlay={() => {
+              setPreviewReady(false);
               if (previewRevealTimerRef.current !== null) {
                 window.clearTimeout(previewRevealTimerRef.current);
               }
@@ -1266,7 +1267,23 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               previewRevealTimerRef.current = window.setTimeout(() => {
                 setPreviewReady(true);
                 previewRevealTimerRef.current = null;
-              }, 2400);
+              }, 6000);
+            }}
+            onStateChange={(event) => {
+              if (event.data !== 1) {
+                if (previewRevealTimerRef.current !== null) {
+                  window.clearTimeout(previewRevealTimerRef.current);
+                  previewRevealTimerRef.current = null;
+                }
+                setPreviewReady(false);
+              }
+            }}
+            onError={() => {
+              if (previewRevealTimerRef.current !== null) {
+                window.clearTimeout(previewRevealTimerRef.current);
+                previewRevealTimerRef.current = null;
+              }
+              setPreviewReady(false);
             }}
           />
         </div>

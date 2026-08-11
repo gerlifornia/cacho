@@ -1000,6 +1000,11 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   {
+    id: "LLIwEkrWP4s", isShort: false,
+    titles: localizedTitle("Spec Ad Bon Jovi para Agencia x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
     id: "f7KgP33ytiA", isShort: false,
     titles: localizedTitle("Avianca animada x Cacho"),
     descKey: "generated_ai",
@@ -1442,17 +1447,23 @@ export default function App() {
 
   const indexedVideos = VIDEOS.map((video, index) => ({ video, index }));
   const findVideo = (id: string) => indexedVideos.find(({ video }) => video.id === id);
-  const topWidescreen = ['Q9ZKoUoT4w0', '_16VPifqFgc']
+  const cachoHero = findVideo('Q9ZKoUoT4w0');
+  const topWidescreen = ['LLIwEkrWP4s', '_16VPifqFgc']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const waveVideo = findVideo('oomjGUHKFlY');
   const verticalSpotlight = ['2tQwIZGvhPk', 'uuA2uO6F1n4', 'IMMDsV006bk']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const lostDayVideo = findVideo('IBh1BRPHbKo');
+  const widescreenTail = ['oomjGUHKFlY', '2Y8FpsZsIoo', 'U2EtsosufFI', 'M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
+    .map(findVideo)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const featuredIds = new Set([
+    ...(cachoHero ? [cachoHero.video.id] : []),
     ...topWidescreen.map(({ video }) => video.id),
     ...verticalSpotlight.map(({ video }) => video.id),
-    ...(waveVideo ? [waveVideo.video.id] : []),
+    ...(lostDayVideo ? [lostDayVideo.video.id] : []),
+    ...widescreenTail.map(({ video }) => video.id),
   ]);
   const remainingWidescreen = indexedVideos.filter(
     ({ video }) => !video.isShort && !featuredIds.has(video.id),
@@ -1461,9 +1472,11 @@ export default function App() {
     ({ video }) => video.isShort && !featuredIds.has(video.id),
   );
   const portfolioOrder = [
+    ...(cachoHero ? [cachoHero] : []),
     ...topWidescreen,
-    ...(waveVideo ? [waveVideo] : []),
     ...verticalSpotlight,
+    ...(lostDayVideo ? [lostDayVideo] : []),
+    ...widescreenTail,
     ...remainingWidescreen,
     ...remainingVertical,
   ];
@@ -1652,19 +1665,22 @@ export default function App() {
 
             {/* Portfolio Feed - Galería cinematográfica curada */}
             <section className="relative z-10 px-4 sm:px-6">
-              <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
-                <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                  <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
-                    {siteCopy.gallery.widescreen}
-                  </p>
+              {cachoHero && (
+                <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-2">
+                  <PortfolioVideoCard
+                    video={cachoHero.video}
+                    index={cachoHero.index}
+                    position={displayPosition.get(cachoHero.video.id) ?? cachoHero.index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
-                  {String(topWidescreen.length + (waveVideo ? 1 : 0)).padStart(2, '0')} {siteCopy.gallery.pieces}
-                </p>
-              </div>
+              )}
 
-              <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-2">
+              <div className="mt-4 grid grid-cols-1 items-start gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-2">
                 {topWidescreen.map(({ video, index }) => (
                   <PortfolioVideoCard
                     key={video.id}
@@ -1680,34 +1696,7 @@ export default function App() {
                 ))}
               </div>
 
-              {waveVideo && (
-                <div className="mt-4 grid grid-cols-1 items-start gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-2">
-                  <PortfolioVideoCard
-                    video={waveVideo.video}
-                    index={waveVideo.index}
-                    position={displayPosition.get(waveVideo.video.id) ?? waveVideo.index}
-                    currentLang={currentLang}
-                    galleryCopy={siteCopy.gallery}
-                    isFeatured
-                    previewsEnabled={activeIndex === null}
-                    onOpen={openVideo}
-                  />
-                </div>
-              )}
-
-              <div className="mt-16 sm:mt-24">
-                <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
-                  <div className="flex items-center gap-3">
-                    <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
-                      {siteCopy.gallery.vertical}
-                    </p>
-                  </div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
-                    {String(verticalSpotlight.length).padStart(2, '0')} {siteCopy.gallery.pieces}
-                  </p>
-                </div>
-
+              <div className="mt-10 sm:mt-16">
                 <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
                   {verticalSpotlight.map(({ video, index }) => (
                     <PortfolioVideoCard
@@ -1725,22 +1714,25 @@ export default function App() {
                 </div>
               </div>
 
-              {remainingWidescreen.length > 0 && (
-                <div className="mt-16 sm:mt-24">
-                  <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
-                    <div className="flex items-center gap-3">
-                      <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
-                        {siteCopy.gallery.widescreen}
-                      </p>
-                    </div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
-                      {String(remainingWidescreen.length).padStart(2, '0')} {siteCopy.gallery.pieces}
-                    </p>
-                  </div>
+              {lostDayVideo && (
+                <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:mt-16 sm:gap-6 lg:grid-cols-2">
+                  <PortfolioVideoCard
+                    video={lostDayVideo.video}
+                    index={lostDayVideo.index}
+                    position={displayPosition.get(lostDayVideo.video.id) ?? lostDayVideo.index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
+                </div>
+              )}
 
+              {(widescreenTail.length > 0 || remainingWidescreen.length > 0) && (
+                <div className="mt-4 sm:mt-6">
                   <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-flow-row-dense lg:grid-cols-2">
-                    {remainingWidescreen.map(({ video, index }) => (
+                    {[...widescreenTail, ...remainingWidescreen].map(({ video, index }) => (
                       <PortfolioVideoCard
                         key={video.id}
                         video={video}
@@ -1748,7 +1740,7 @@ export default function App() {
                         position={displayPosition.get(video.id) ?? index}
                         currentLang={currentLang}
                         galleryCopy={siteCopy.gallery}
-                        isFeatured={video.id === 'IBh1BRPHbKo' || video.id === 'M3VQ0VydAUc'}
+                        isFeatured={video.id === 'oomjGUHKFlY' || video.id === 'M3VQ0VydAUc'}
                         previewsEnabled={activeIndex === null}
                         onOpen={openVideo}
                       />
@@ -1758,19 +1750,7 @@ export default function App() {
               )}
 
               {remainingVertical.length > 0 && (
-                <div className="mt-16 sm:mt-24">
-                  <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
-                    <div className="flex items-center gap-3">
-                      <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
-                        {siteCopy.gallery.vertical}
-                      </p>
-                    </div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
-                      {String(remainingVertical.length).padStart(2, '0')} {siteCopy.gallery.pieces}
-                    </p>
-                  </div>
-
+                <div className="mt-10 sm:mt-16">
                   <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
                     {remainingVertical.map(({ video, index }) => (
                       <PortfolioVideoCard

@@ -995,13 +995,8 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   {
-    id: "LLIwEkrWP4s", isShort: false,
-    titles: localizedTitle("Spec Ad Bon Jovi para Agencia x Cacho"),
-    descKey: "generated_ai"
-  },
-  {
-    id: "67FMhfAcCBk", isShort: false,
-    titles: localizedTitle("Publicidad Mundial Argentina x Cacho"),
+    id: "Q9ZKoUoT4w0", isShort: false,
+    titles: localizedTitle("Campaña anti Argentina x Cacho"),
     descKey: "generated_ai"
   },
   {
@@ -1445,6 +1440,37 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeIndex, handleNext, handlePrevious]);
 
+  const indexedVideos = VIDEOS.map((video, index) => ({ video, index }));
+  const findVideo = (id: string) => indexedVideos.find(({ video }) => video.id === id);
+  const topWidescreen = ['Q9ZKoUoT4w0', '_16VPifqFgc']
+    .map(findVideo)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const waveVideo = findVideo('oomjGUHKFlY');
+  const verticalSpotlight = ['2tQwIZGvhPk', 'uuA2uO6F1n4', 'IMMDsV006bk']
+    .map(findVideo)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const featuredIds = new Set([
+    ...topWidescreen.map(({ video }) => video.id),
+    ...verticalSpotlight.map(({ video }) => video.id),
+    ...(waveVideo ? [waveVideo.video.id] : []),
+  ]);
+  const remainingWidescreen = indexedVideos.filter(
+    ({ video }) => !video.isShort && !featuredIds.has(video.id),
+  );
+  const remainingVertical = indexedVideos.filter(
+    ({ video }) => video.isShort && !featuredIds.has(video.id),
+  );
+  const portfolioOrder = [
+    ...topWidescreen,
+    ...(waveVideo ? [waveVideo] : []),
+    ...verticalSpotlight,
+    ...remainingWidescreen,
+    ...remainingVertical,
+  ];
+  const displayPosition = new Map(
+    portfolioOrder.map(({ video }, position) => [video.id, position]),
+  );
+
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#F27D26] selection:text-white relative">
       {/* Header Semántico */}
@@ -1624,54 +1650,144 @@ export default function App() {
               </motion.div>
             </section>
 
-            {/* Portfolio Feed - Galería cinematográfica */}
+            {/* Portfolio Feed - Galería cinematográfica curada */}
             <section className="relative z-10 px-4 sm:px-6">
-              {[false, true].map((isShort) => {
-                const sectionVideos = VIDEOS
-                  .map((video, index) => ({ video, index }))
-                  .filter(({ video }) => video.isShort === isShort);
+              <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
+                <div className="flex items-center gap-3">
+                  <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                  <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
+                    {siteCopy.gallery.widescreen}
+                  </p>
+                </div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
+                  {String(topWidescreen.length + (waveVideo ? 1 : 0)).padStart(2, '0')} {siteCopy.gallery.pieces}
+                </p>
+              </div>
 
-                return (
-                  <div key={isShort ? 'verticales' : 'horizontales'} className={isShort ? 'mt-16 sm:mt-24' : ''}>
-                    <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
-                      <div className="flex items-center gap-3">
-                        <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
-                        <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
-                          {isShort ? siteCopy.gallery.vertical : siteCopy.gallery.widescreen}
-                        </p>
-                      </div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
-                        {String(sectionVideos.length).padStart(2, '0')} {siteCopy.gallery.pieces}
+              <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-2">
+                {topWidescreen.map(({ video, index }) => (
+                  <PortfolioVideoCard
+                    key={video.id}
+                    video={video}
+                    index={index}
+                    position={displayPosition.get(video.id) ?? index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured={false}
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
+                ))}
+              </div>
+
+              {waveVideo && (
+                <div className="mt-4 grid grid-cols-1 items-start gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-2">
+                  <PortfolioVideoCard
+                    video={waveVideo.video}
+                    index={waveVideo.index}
+                    position={displayPosition.get(waveVideo.video.id) ?? waveVideo.index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
+                </div>
+              )}
+
+              <div className="mt-16 sm:mt-24">
+                <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
+                  <div className="flex items-center gap-3">
+                    <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
+                      {siteCopy.gallery.vertical}
+                    </p>
+                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
+                    {String(verticalSpotlight.length).padStart(2, '0')} {siteCopy.gallery.pieces}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
+                  {verticalSpotlight.map(({ video, index }) => (
+                    <PortfolioVideoCard
+                      key={video.id}
+                      video={video}
+                      index={index}
+                      position={displayPosition.get(video.id) ?? index}
+                      currentLang={currentLang}
+                      galleryCopy={siteCopy.gallery}
+                      isFeatured={false}
+                      previewsEnabled={activeIndex === null}
+                      onOpen={openVideo}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {remainingWidescreen.length > 0 && (
+                <div className="mt-16 sm:mt-24">
+                  <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
+                    <div className="flex items-center gap-3">
+                      <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
+                        {siteCopy.gallery.widescreen}
                       </p>
                     </div>
-
-                    <div
-                      className={`grid items-start lg:grid-flow-row-dense ${
-                        isShort
-                          ? 'grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3'
-                          : 'grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2'
-                      }`}
-                    >
-                      {sectionVideos.map(({ video, index }, position) => {
-                        const isFeatured = !isShort && (position === 0 || position === 5 || video.id === 'M3VQ0VydAUc' || video.id === 'LLIwEkrWP4s');
-                        return (
-                          <PortfolioVideoCard
-                            key={video.id}
-                            video={video}
-                            index={index}
-                            position={position}
-                            currentLang={currentLang}
-                            galleryCopy={siteCopy.gallery}
-                            isFeatured={isFeatured}
-                            previewsEnabled={activeIndex === null}
-                            onOpen={openVideo}
-                          />
-                        );
-                      })}
-                    </div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
+                      {String(remainingWidescreen.length).padStart(2, '0')} {siteCopy.gallery.pieces}
+                    </p>
                   </div>
-                );
-              })}
+
+                  <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-flow-row-dense lg:grid-cols-2">
+                    {remainingWidescreen.map(({ video, index }) => (
+                      <PortfolioVideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                        position={displayPosition.get(video.id) ?? index}
+                        currentLang={currentLang}
+                        galleryCopy={siteCopy.gallery}
+                        isFeatured={video.id === 'IBh1BRPHbKo' || video.id === 'M3VQ0VydAUc'}
+                        previewsEnabled={activeIndex === null}
+                        onOpen={openVideo}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {remainingVertical.length > 0 && (
+                <div className="mt-16 sm:mt-24">
+                  <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/15 pb-4 sm:mb-7">
+                    <div className="flex items-center gap-3">
+                      <span className="h-2 w-2 rounded-full bg-[#F27D26] shadow-[0_0_14px_rgba(242,125,38,0.9)]" />
+                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/75 sm:text-xs">
+                        {siteCopy.gallery.vertical}
+                      </p>
+                    </div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-xs">
+                      {String(remainingVertical.length).padStart(2, '0')} {siteCopy.gallery.pieces}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
+                    {remainingVertical.map(({ video, index }) => (
+                      <PortfolioVideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                        position={displayPosition.get(video.id) ?? index}
+                        currentLang={currentLang}
+                        galleryCopy={siteCopy.gallery}
+                        isFeatured={false}
+                        previewsEnabled={activeIndex === null}
+                        onOpen={openVideo}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </section>
           </>
         ) : (

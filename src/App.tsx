@@ -1138,7 +1138,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   onOpen,
 }: PortfolioVideoCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
-  const previewRevealTimerRef = useRef<number | null>(null);
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [previewReady, setPreviewReady] = useState(false);
   const title = video.titles[currentLang] || video.titles.en || video.titles.es;
@@ -1147,10 +1146,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   useEffect(() => {
     const card = cardRef.current;
     if (!card || !previewsEnabled) {
-      if (previewRevealTimerRef.current !== null) {
-        window.clearTimeout(previewRevealTimerRef.current);
-        previewRevealTimerRef.current = null;
-      }
       setIsNearViewport(false);
       setPreviewReady(false);
       return;
@@ -1164,13 +1159,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsNearViewport(entry.isIntersecting);
-        if (!entry.isIntersecting) {
-          if (previewRevealTimerRef.current !== null) {
-            window.clearTimeout(previewRevealTimerRef.current);
-            previewRevealTimerRef.current = null;
-          }
-          setPreviewReady(false);
-        }
+        if (!entry.isIntersecting) setPreviewReady(false);
       },
       {
         rootMargin: '280px 0px',
@@ -1179,13 +1168,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
     );
 
     observer.observe(card);
-    return () => {
-      observer.disconnect();
-      if (previewRevealTimerRef.current !== null) {
-        window.clearTimeout(previewRevealTimerRef.current);
-        previewRevealTimerRef.current = null;
-      }
-    };
+    return () => observer.disconnect();
   }, [previewsEnabled]);
 
   const openVideo = () => onOpen(index);
@@ -1225,7 +1208,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
       {shouldRenderPreview && (
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute -inset-[10%] h-[120%] w-[120%] transition-opacity duration-200 ${
+          className={`pointer-events-none absolute -inset-[5%] h-[110%] w-[110%] transition-opacity duration-500 ${
             previewReady ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -1257,34 +1240,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               event.target.setVolume(0);
               event.target.playVideo();
             }}
-            onPlay={() => {
-              setPreviewReady(false);
-              if (previewRevealTimerRef.current !== null) {
-                window.clearTimeout(previewRevealTimerRef.current);
-              }
-              // YouTube muestra durante un instante su título, controles y degradados.
-              // Revelamos la vista previa cuando esa interfaz ya terminó de ocultarse.
-              previewRevealTimerRef.current = window.setTimeout(() => {
-                setPreviewReady(true);
-                previewRevealTimerRef.current = null;
-              }, 6000);
-            }}
-            onStateChange={(event) => {
-              if (event.data !== 1) {
-                if (previewRevealTimerRef.current !== null) {
-                  window.clearTimeout(previewRevealTimerRef.current);
-                  previewRevealTimerRef.current = null;
-                }
-                setPreviewReady(false);
-              }
-            }}
-            onError={() => {
-              if (previewRevealTimerRef.current !== null) {
-                window.clearTimeout(previewRevealTimerRef.current);
-                previewRevealTimerRef.current = null;
-              }
-              setPreviewReady(false);
-            }}
+            onPlay={() => setPreviewReady(true)}
           />
         </div>
       )}

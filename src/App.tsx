@@ -1451,16 +1451,18 @@ export default function App() {
   const topWidescreen = ['LLIwEkrWP4s', '_16VPifqFgc']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const waveVideo = findVideo('oomjGUHKFlY');
   const verticalSpotlight = ['2tQwIZGvhPk', 'uuA2uO6F1n4', 'IMMDsV006bk']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const lostDayVideo = findVideo('IBh1BRPHbKo');
-  const widescreenTail = ['oomjGUHKFlY', '2Y8FpsZsIoo', 'U2EtsosufFI', 'M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
+  const widescreenTail = ['2Y8FpsZsIoo', 'U2EtsosufFI', 'M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const featuredIds = new Set([
     ...(cachoHero ? [cachoHero.video.id] : []),
     ...topWidescreen.map(({ video }) => video.id),
+    ...(waveVideo ? [waveVideo.video.id] : []),
     ...verticalSpotlight.map(({ video }) => video.id),
     ...(lostDayVideo ? [lostDayVideo.video.id] : []),
     ...widescreenTail.map(({ video }) => video.id),
@@ -1474,6 +1476,7 @@ export default function App() {
   const portfolioOrder = [
     ...(cachoHero ? [cachoHero] : []),
     ...topWidescreen,
+    ...(waveVideo ? [waveVideo] : []),
     ...verticalSpotlight,
     ...(lostDayVideo ? [lostDayVideo] : []),
     ...widescreenTail,
@@ -1696,6 +1699,21 @@ export default function App() {
                 ))}
               </div>
 
+              {waveVideo && (
+                <div className="mt-4 grid grid-cols-1 items-start gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-2">
+                  <PortfolioVideoCard
+                    video={waveVideo.video}
+                    index={waveVideo.index}
+                    position={displayPosition.get(waveVideo.video.id) ?? waveVideo.index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
+                </div>
+              )}
+
               <div className="mt-10 sm:mt-16">
                 <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
                   {verticalSpotlight.map(({ video, index }) => (
@@ -1740,7 +1758,7 @@ export default function App() {
                         position={displayPosition.get(video.id) ?? index}
                         currentLang={currentLang}
                         galleryCopy={siteCopy.gallery}
-                        isFeatured={video.id === 'oomjGUHKFlY' || video.id === 'M3VQ0VydAUc'}
+                        isFeatured={video.id === 'M3VQ0VydAUc'}
                         previewsEnabled={activeIndex === null}
                         onOpen={openVideo}
                       />

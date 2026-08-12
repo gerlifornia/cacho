@@ -1138,6 +1138,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   onOpen,
 }: PortfolioVideoCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
+  const previewRevealTimerRef = useRef<number | null>(null);
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [previewReady, setPreviewReady] = useState(false);
   const title = video.titles[currentLang] || video.titles.en || video.titles.es;
@@ -1146,6 +1147,10 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   useEffect(() => {
     const card = cardRef.current;
     if (!card || !previewsEnabled) {
+      if (previewRevealTimerRef.current !== null) {
+        window.clearTimeout(previewRevealTimerRef.current);
+        previewRevealTimerRef.current = null;
+      }
       setIsNearViewport(false);
       setPreviewReady(false);
       return;
@@ -1159,7 +1164,13 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsNearViewport(entry.isIntersecting);
-        if (!entry.isIntersecting) setPreviewReady(false);
+        if (!entry.isIntersecting) {
+          if (previewRevealTimerRef.current !== null) {
+            window.clearTimeout(previewRevealTimerRef.current);
+            previewRevealTimerRef.current = null;
+          }
+          setPreviewReady(false);
+        }
       },
       {
         rootMargin: '280px 0px',
@@ -1168,7 +1179,13 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
     );
 
     observer.observe(card);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (previewRevealTimerRef.current !== null) {
+        window.clearTimeout(previewRevealTimerRef.current);
+        previewRevealTimerRef.current = null;
+      }
+    };
   }, [previewsEnabled]);
 
   const openVideo = () => onOpen(index);
@@ -1208,7 +1225,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
       {shouldRenderPreview && (
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute -inset-[5%] h-[110%] w-[110%] transition-opacity duration-500 ${
+          className={`pointer-events-none absolute -inset-[10%] h-[120%] w-[120%] transition-opacity duration-200 ${
             previewReady ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -1240,7 +1257,34 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               event.target.setVolume(0);
               event.target.playVideo();
             }}
-            onPlay={() => setPreviewReady(true)}
+            onPlay={() => {
+              setPreviewReady(false);
+              if (previewRevealTimerRef.current !== null) {
+                window.clearTimeout(previewRevealTimerRef.current);
+              }
+              // YouTube muestra durante un instante su título, controles y degradados.
+              // Revelamos la vista previa cuando esa interfaz ya terminó de ocultarse.
+              previewRevealTimerRef.current = window.setTimeout(() => {
+                setPreviewReady(true);
+                previewRevealTimerRef.current = null;
+              }, 6000);
+            }}
+            onStateChange={(event) => {
+              if (event.data !== 1) {
+                if (previewRevealTimerRef.current !== null) {
+                  window.clearTimeout(previewRevealTimerRef.current);
+                  previewRevealTimerRef.current = null;
+                }
+                setPreviewReady(false);
+              }
+            }}
+            onError={() => {
+              if (previewRevealTimerRef.current !== null) {
+                window.clearTimeout(previewRevealTimerRef.current);
+                previewRevealTimerRef.current = null;
+              }
+              setPreviewReady(false);
+            }}
           />
         </div>
       )}
@@ -1456,7 +1500,13 @@ export default function App() {
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const lostDayVideo = findVideo('IBh1BRPHbKo');
-  const widescreenTail = ['2Y8FpsZsIoo', 'U2EtsosufFI', 'M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
+  const torbeCampanella = ['2Y8FpsZsIoo', 'U2EtsosufFI']
+    .map(findVideo)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const fan34VerticalRow = ['_sQgV29AmKQ', '8jIrO55s1FM', 'tTIRyt2Fmas']
+    .map(findVideo)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const widescreenTail = ['M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const featuredIds = new Set([
@@ -1465,6 +1515,8 @@ export default function App() {
     ...(waveVideo ? [waveVideo.video.id] : []),
     ...verticalSpotlight.map(({ video }) => video.id),
     ...(lostDayVideo ? [lostDayVideo.video.id] : []),
+    ...torbeCampanella.map(({ video }) => video.id),
+    ...fan34VerticalRow.map(({ video }) => video.id),
     ...widescreenTail.map(({ video }) => video.id),
   ]);
   const remainingWidescreen = indexedVideos.filter(
@@ -1479,6 +1531,8 @@ export default function App() {
     ...(waveVideo ? [waveVideo] : []),
     ...verticalSpotlight,
     ...(lostDayVideo ? [lostDayVideo] : []),
+    ...torbeCampanella,
+    ...fan34VerticalRow,
     ...widescreenTail,
     ...remainingWidescreen,
     ...remainingVertical,
@@ -1744,6 +1798,46 @@ export default function App() {
                     previewsEnabled={activeIndex === null}
                     onOpen={openVideo}
                   />
+                </div>
+              )}
+
+              {torbeCampanella.length > 0 && (
+                <div className="mt-4 sm:mt-6">
+                  <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-2">
+                    {torbeCampanella.map(({ video, index }) => (
+                      <PortfolioVideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                        position={displayPosition.get(video.id) ?? index}
+                        currentLang={currentLang}
+                        galleryCopy={siteCopy.gallery}
+                        isFeatured={false}
+                        previewsEnabled={activeIndex === null}
+                        onOpen={openVideo}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {fan34VerticalRow.length > 0 && (
+                <div className="mt-10 sm:mt-16">
+                  <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
+                    {fan34VerticalRow.map(({ video, index }) => (
+                      <PortfolioVideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                        position={displayPosition.get(video.id) ?? index}
+                        currentLang={currentLang}
+                        galleryCopy={siteCopy.gallery}
+                        isFeatured={false}
+                        previewsEnabled={activeIndex === null}
+                        onOpen={openVideo}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
 

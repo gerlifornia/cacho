@@ -1022,6 +1022,18 @@ const VIDEOS = [
     descKey: "generated_ai"
   },
   {
+    id: "et_FJ1YoXxg", isShort: false,
+    titles: localizedTitle("Vinnic x Cacho"),
+    descKey: "generated_ai",
+    isFan34Work: true
+  },
+  {
+    id: "ETbeFjhkiAA", isShort: false,
+    titles: localizedTitle("Bolden x Cacho"),
+    descKey: "generated_ai",
+    isFan34Work: true
+  },
+  {
     id: "IBh1BRPHbKo", isShort: false,
     titles: localizedTitle("Otro Dia Perdido x Cacho"),
     descKey: "generated_ai"
@@ -1477,7 +1489,14 @@ export default function App() {
   const fan34VerticalRow = ['_sQgV29AmKQ', '8jIrO55s1FM', 'tTIRyt2Fmas']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const widescreenTail = ['M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ', '6h5qgDVIORU']
+  const widescreenTail = [
+    'M3VQ0VydAUc',
+    'f7KgP33ytiA',
+    'otJEBDL1NXQ',
+    'ETbeFjhkiAA',
+    '6h5qgDVIORU',
+    'et_FJ1YoXxg',
+  ]
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const featuredIds = new Set([
@@ -1823,7 +1842,7 @@ export default function App() {
                         position={displayPosition.get(video.id) ?? index}
                         currentLang={currentLang}
                         galleryCopy={siteCopy.gallery}
-                        isFeatured={video.id === 'M3VQ0VydAUc' || video.id === '6h5qgDVIORU'}
+                        isFeatured={video.id === 'M3VQ0VydAUc' || video.id === 'ETbeFjhkiAA'}
                         previewsEnabled={activeIndex === null}
                         onOpen={openVideo}
                       />

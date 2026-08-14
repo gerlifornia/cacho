@@ -1566,7 +1566,7 @@ export default function App() {
             <img
               src={HEADER_SEAL_SRC}
               alt="Cacho.ai Film Production"
-              className="pointer-events-none absolute start-2 top-[2.7rem] w-12 object-contain opacity-95 sm:start-4 sm:top-[3rem] sm:w-20"
+              className="pointer-events-none absolute start-1/2 top-[2.7rem] w-12 -translate-x-1/2 object-contain opacity-95 sm:top-[3rem] sm:w-20"
             />
             
             {/* Language Selector (Absolute positioned below logo) */}

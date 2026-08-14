@@ -946,16 +946,16 @@ const COMMON_DESCS: Record<string, Record<Language, string>> = {
 };
 
 const CREATIVE_HUB_CREDIT: Record<Language, string> = {
-  es: 'Pieza realizada para la agencia Creative Hub.',
-  en: 'Piece created for the Creative Hub agency.',
-  zh: '为 Creative Hub 代理公司制作。',
-  hi: 'Creative Hub एजेंसी के लिए निर्मित।',
-  fr: 'Pièce réalisée pour l’agence Creative Hub.',
-  ar: 'عمل أُنجز لصالح وكالة Creative Hub.',
-  bn: 'Creative Hub এজেন্সির জন্য নির্মিত।',
-  pt: 'Peça realizada para a agência Creative Hub.',
-  ru: 'Работа создана для агентства Creative Hub.',
-  id: 'Karya dibuat untuk agensi Creative Hub.',
+  es: 'Pieza realizada para la agencia Creactive Hub.',
+  en: 'Piece created for the Creactive Hub agency.',
+  zh: '为 Creactive Hub 代理公司制作。',
+  hi: 'Creactive Hub एजेंसी के लिए निर्मित।',
+  fr: 'Pièce réalisée pour l’agence Creactive Hub.',
+  ar: 'عمل أُنجز لصالح وكالة Creactive Hub.',
+  bn: 'Creactive Hub এজেন্সির জন্য নির্মিত।',
+  pt: 'Peça realizada para a agência Creactive Hub.',
+  ru: 'Работа создана для агентства Creactive Hub.',
+  id: 'Karya dibuat untuk agensi Creactive Hub.',
 };
 
 const FAN34_SPEC_CREDIT: Record<Language, string> = {
@@ -1301,7 +1301,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
             Spec ad
           </p>
         ) : null}
-        {video.id === 'oomjGUHKFlY' && (
+        {(video.id === 'oomjGUHKFlY' || video.id === 'IMMDsV006bk') && (
           <p className="mt-2 max-w-2xl text-[8px] font-semibold leading-snug tracking-[0.04em] text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px] lg:text-xs">
             {CREATIVE_HUB_CREDIT[currentLang]}
           </p>

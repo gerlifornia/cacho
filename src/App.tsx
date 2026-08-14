@@ -1017,6 +1017,11 @@ const VIDEOS = [
     isSpecAd: true
   },
   {
+    id: "6h5qgDVIORU", isShort: false,
+    titles: localizedTitle("Otro Día Perdido (Día del Niño) x Cacho"),
+    descKey: "generated_ai"
+  },
+  {
     id: "IBh1BRPHbKo", isShort: false,
     titles: localizedTitle("Otro Dia Perdido x Cacho"),
     descKey: "generated_ai"
@@ -1138,7 +1143,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   onOpen,
 }: PortfolioVideoCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
-  const previewRevealTimerRef = useRef<number | null>(null);
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [previewReady, setPreviewReady] = useState(false);
   const title = video.titles[currentLang] || video.titles.en || video.titles.es;
@@ -1147,10 +1151,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   useEffect(() => {
     const card = cardRef.current;
     if (!card || !previewsEnabled) {
-      if (previewRevealTimerRef.current !== null) {
-        window.clearTimeout(previewRevealTimerRef.current);
-        previewRevealTimerRef.current = null;
-      }
       setIsNearViewport(false);
       setPreviewReady(false);
       return;
@@ -1165,10 +1165,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
       ([entry]) => {
         setIsNearViewport(entry.isIntersecting);
         if (!entry.isIntersecting) {
-          if (previewRevealTimerRef.current !== null) {
-            window.clearTimeout(previewRevealTimerRef.current);
-            previewRevealTimerRef.current = null;
-          }
           setPreviewReady(false);
         }
       },
@@ -1181,10 +1177,6 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
     observer.observe(card);
     return () => {
       observer.disconnect();
-      if (previewRevealTimerRef.current !== null) {
-        window.clearTimeout(previewRevealTimerRef.current);
-        previewRevealTimerRef.current = null;
-      }
     };
   }, [previewsEnabled]);
 
@@ -1257,34 +1249,13 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
               event.target.setVolume(0);
               event.target.playVideo();
             }}
-            onPlay={() => {
-              setPreviewReady(false);
-              if (previewRevealTimerRef.current !== null) {
-                window.clearTimeout(previewRevealTimerRef.current);
-              }
-              // YouTube muestra durante un instante su título, controles y degradados.
-              // Revelamos la vista previa cuando esa interfaz ya terminó de ocultarse.
-              previewRevealTimerRef.current = window.setTimeout(() => {
-                setPreviewReady(true);
-                previewRevealTimerRef.current = null;
-              }, 6000);
-            }}
+            onPlay={() => setPreviewReady(true)}
             onStateChange={(event) => {
               if (event.data !== 1) {
-                if (previewRevealTimerRef.current !== null) {
-                  window.clearTimeout(previewRevealTimerRef.current);
-                  previewRevealTimerRef.current = null;
-                }
                 setPreviewReady(false);
               }
             }}
-            onError={() => {
-              if (previewRevealTimerRef.current !== null) {
-                window.clearTimeout(previewRevealTimerRef.current);
-                previewRevealTimerRef.current = null;
-              }
-              setPreviewReady(false);
-            }}
+            onError={() => setPreviewReady(false)}
           />
         </div>
       )}
@@ -1506,7 +1477,7 @@ export default function App() {
   const fan34VerticalRow = ['_sQgV29AmKQ', '8jIrO55s1FM', 'tTIRyt2Fmas']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const widescreenTail = ['M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ']
+  const widescreenTail = ['M3VQ0VydAUc', 'f7KgP33ytiA', 'otJEBDL1NXQ', '6h5qgDVIORU']
     .map(findVideo)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const featuredIds = new Set([
@@ -1852,7 +1823,7 @@ export default function App() {
                         position={displayPosition.get(video.id) ?? index}
                         currentLang={currentLang}
                         galleryCopy={siteCopy.gallery}
-                        isFeatured={video.id === 'M3VQ0VydAUc'}
+                        isFeatured={video.id === 'M3VQ0VydAUc' || video.id === '6h5qgDVIORU'}
                         previewsEnabled={activeIndex === null}
                         onOpen={openVideo}
                       />

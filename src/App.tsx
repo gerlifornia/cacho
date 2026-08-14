@@ -1549,16 +1549,16 @@ export default function App() {
       <header className="fixed top-0 w-full z-40 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-md p-4 sm:p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
           {/* Logo y Selector de Idioma */}
-          <div className="relative">
+          <div className="relative w-[88px] sm:w-[116px]">
             <motion.button
               type="button"
               aria-label="CACHO.Ai"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-1.5 sm:gap-2 cursor-pointer shrink-0"
+              className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 sm:gap-2"
               onClick={() => handleTabChange('trabajos')}
             >
-              <span className="text-lg font-black uppercase leading-none tracking-tighter sm:text-2xl">
+              <span className="whitespace-nowrap text-lg font-black uppercase leading-none tracking-tighter sm:text-2xl">
                 CACHO<span className="text-[#F27D26]">.Ai</span>
               </span>
             </motion.button>

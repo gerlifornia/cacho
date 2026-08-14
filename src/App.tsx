@@ -1181,8 +1181,10 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         }
       },
       {
-        rootMargin: '280px 0px',
-        threshold: 0.05,
+        // Evita cargar videos fuera de pantalla: varios streams simultáneos hacen
+        // que YouTube reduzca especialmente Nike y Fernet a baja resolución.
+        rootMargin: '0px',
+        threshold: 0.12,
       },
     );
 
@@ -1240,6 +1242,8 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
             className="pointer-events-none h-full w-full"
             iframeClassName="pointer-events-none h-full w-full"
             opts={{
+              width: video.isShort ? '1080' : '1920',
+              height: video.isShort ? '1920' : '1080',
               playerVars: {
                 autoplay: 1,
                 controls: 0,
@@ -1624,9 +1628,9 @@ export default function App() {
         {activeTab === 'trabajos' ? (
           <>
             {/* Hero Section */}
-            <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-start relative overflow-hidden">
+            <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-6 text-start relative overflow-visible">
               {/* Logo de Fondo (Placeholder - User should replace src) */}
-              <div className="pointer-events-none absolute right-3 top-[18%] z-0 h-[280px] w-[280px] opacity-15 sm:right-4 sm:top-1/2 sm:h-[500px] sm:w-[500px] sm:-translate-y-1/2 sm:opacity-20 lg:right-6 lg:h-[540px] lg:w-[540px] xl:right-8 xl:h-[560px] xl:w-[560px] xl:opacity-25">
+              <div className="pointer-events-none absolute right-2 top-[18%] z-0 h-[300px] w-[300px] opacity-15 sm:right-0 sm:top-[58%] sm:h-[620px] sm:w-[620px] sm:-translate-y-1/2 sm:opacity-20 lg:right-2 lg:top-[66%] lg:h-[780px] lg:w-[780px] xl:right-4 xl:top-[70%] xl:h-[900px] xl:w-[900px] xl:opacity-25">
                  {/* Reemplazar este src con la URL del logo real */}
                  <img 
                     src="/logo-cacho.png" 

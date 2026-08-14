@@ -1254,14 +1254,21 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
                 cc_load_policy: 0,
                 showinfo: 0,
                 mute: 1,
+                vq: 'hd1080',
               },
             }}
             onReady={(event) => {
               event.target.mute();
               event.target.setVolume(0);
+              // YouTube suele iniciar algunas vistas previas en 360p cuando hay
+              // varios reproductores visibles. Solicitamos HD antes de reproducir.
+              event.target.setPlaybackQuality('hd1080');
               event.target.playVideo();
             }}
-            onPlay={() => setPreviewReady(true)}
+            onPlay={(event) => {
+              event.target.setPlaybackQuality('hd1080');
+              setPreviewReady(true);
+            }}
             onStateChange={(event) => {
               if (event.data !== 1) {
                 setPreviewReady(false);

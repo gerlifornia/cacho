@@ -1546,8 +1546,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#F27D26] selection:text-white relative">
       {/* Header Semántico */}
-      <header className="fixed top-0 w-full z-40 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-md p-4 sm:p-6">
-        <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
+      <header className="fixed top-0 z-40 w-full bg-gradient-to-b from-black/90 to-transparent py-4 backdrop-blur-md sm:py-6">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
           {/* Logo y Selector de Idioma */}
           <div className="relative w-[88px] sm:w-[116px]">
             <motion.button

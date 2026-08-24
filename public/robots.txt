@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Allow: /videos/
 
-Sitemap: https://cacho.ai/sitemap.xml
+Sitemap: https://www.cacho.ai/sitemap.xml

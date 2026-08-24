@@ -50,7 +50,7 @@
     <meta name="twitter:image" content="https://cacho.ai/whatsapp.jpeg" />
     <meta name="twitter:image:alt" content="Portfolio audiovisual de CACHO.Ai" />
 
-    <!-- Datos estructurados de la marca y el sitio -->
+    <!-- Datos estructurados de la marca, servicios, preguntas frecuentes y portfolio -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -62,17 +62,22 @@
           "url": "https://cacho.ai/",
           "description": "Productora creativa latinoamericana especializada en comerciales, cine, videos institucionales y contenido UGC con inteligencia artificial.",
           "inLanguage": ["es", "en", "zh", "hi", "fr", "ar", "bn", "pt", "ru", "id"],
-          "publisher": { "@id": "https://cacho.ai/#organization" }
+          "publisher": { "@id": "https://cacho.ai/#organization" },
+          "mainEntity": { "@id": "https://cacho.ai/#organization" }
         },
         {
           "@type": ["Organization", "ProfessionalService"],
           "@id": "https://cacho.ai/#organization",
           "name": "CACHO.Ai",
+          "alternateName": ["CACHO AI", "Cacho.ai", "CACHO Film Production"],
           "url": "https://cacho.ai/",
           "logo": "https://cacho.ai/logo-cacho.png",
           "image": "https://cacho.ai/whatsapp.jpeg",
-          "description": "Productora creativa latinoamericana de piezas audiovisuales realizadas con inteligencia artificial y creatividad humana.",
-          "areaServed": "Latin America",
+          "description": "La primera productora creativa 100% IA de Latinoamérica: creatividad humana, potencia IA y producción audiovisual para marcas.",
+          "slogan": "La creatividad es humana. La potencia es IA.",
+          "areaServed": ["Latin America", "North America", "Europe", "Worldwide"],
+          "serviceType": ["AI video production", "Creative direction", "Advertising production", "Branded content"],
+          "knowsAbout": ["producción audiovisual con inteligencia artificial", "generative video", "AI commercials", "creative campaigns", "film production", "UGC content"],
           "knowsLanguage": ["es", "en", "zh", "hi", "fr", "ar", "bn", "pt", "ru", "id"],
           "sameAs": ["https://instagram.com/soycachoo"],
           "subjectOf": [
@@ -88,13 +93,64 @@
           "makesOffer": [
             {
               "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Producción creativa de videos con inteligencia artificial" }
+              "itemOffered": {
+                "@type": "Service",
+                "@id": "https://cacho.ai/#ai-video-production",
+                "name": "Producción creativa de videos con inteligencia artificial",
+                "serviceType": "AI video production",
+                "areaServed": "Worldwide",
+                "provider": { "@id": "https://cacho.ai/#organization" }
+              }
             },
             {
               "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Comerciales, cine, videos institucionales y contenido UGC" }
+              "itemOffered": {
+                "@type": "Service",
+                "@id": "https://cacho.ai/#commercials-and-content",
+                "name": "Comerciales, cine, videos institucionales y contenido UGC",
+                "serviceType": "Commercials, film, corporate video and UGC",
+                "areaServed": "Worldwide",
+                "provider": { "@id": "https://cacho.ai/#organization" }
+              }
             }
           ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://cacho.ai/#faq",
+          "url": "https://cacho.ai/#preguntas-frecuentes",
+          "inLanguage": "es",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es CACHO.Ai?",
+              "acceptedAnswer": { "@type": "Answer", "text": "CACHO.Ai es la primera productora creativa 100% IA de Latinoamérica. Combinamos creatividad humana con inteligencia artificial para desarrollar conceptos, historias, campañas y contenido audiovisual." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué servicios ofrece una productora creativa con IA?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Producimos comerciales, cine, videos institucionales, branded content, piezas para redes sociales y contenido UGC con flujos de trabajo de inteligencia artificial y dirección creativa humana." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿CACHO.Ai trabaja con marcas y agencias?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sí. Trabajamos con marcas, agencias y equipos creativos de Latinoamérica y del mundo, desde el concepto y el guion hasta la producción audiovisual final." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué diferencia a CACHO.Ai de una agencia tradicional?",
+              "acceptedAnswer": { "@type": "Answer", "text": "CACHO.Ai une dirección creativa humana con producción generativa: permite crear mundos, personajes y campañas con velocidad, escala y una identidad visual propia." }
+            }
+          ]
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://cacho.ai/#portfolio",
+          "url": "https://cacho.ai/",
+          "name": "Portfolio audiovisual de CACHO.Ai",
+          "description": "Selección de comerciales, piezas de cine, branded content y videos verticales producidos con inteligencia artificial.",
+          "isPartOf": { "@id": "https://cacho.ai/#website" },
+          "about": { "@id": "https://cacho.ai/#organization" }
         }
       ]
     }

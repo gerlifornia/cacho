@@ -985,6 +985,30 @@ const FAN34_WORK_CREDIT: Record<Language, string> = {
   id: 'Karya untuk agensi Fan#34',
 };
 
+type FaqItem = { question: string; answer: string };
+const FAQ_COPY: Partial<Record<Language, { title: string; intro: string; items: FaqItem[] }>> = {
+  es: {
+    title: 'Preguntas frecuentes sobre producción audiovisual con IA',
+    intro: 'Respuestas rápidas sobre nuestro proceso, servicios y forma de trabajar con marcas y agencias.',
+    items: [
+      { question: '¿Qué es CACHO.Ai?', answer: 'CACHO.Ai es la primera productora creativa 100% IA de Latinoamérica. Combinamos creatividad humana con inteligencia artificial para desarrollar conceptos, historias, campañas y contenido audiovisual.' },
+      { question: '¿Qué servicios ofrece una productora creativa con IA?', answer: 'Producimos comerciales, cine, videos institucionales, branded content, piezas para redes sociales y contenido UGC con dirección creativa humana y flujos de trabajo generativos.' },
+      { question: '¿CACHO.Ai trabaja con marcas y agencias?', answer: 'Sí. Trabajamos con marcas, agencias y equipos creativos de Latinoamérica y del mundo, desde el concepto y el guion hasta la producción audiovisual final.' },
+      { question: '¿Qué diferencia a CACHO.Ai de una agencia tradicional?', answer: 'Unimos dirección creativa humana con producción generativa para crear mundos, personajes y campañas con velocidad, escala y una identidad visual propia.' },
+    ],
+  },
+  en: {
+    title: 'Frequently asked questions about AI video production',
+    intro: 'Quick answers about our process, services and work with brands and agencies.',
+    items: [
+      { question: 'What is CACHO.Ai?', answer: 'CACHO.Ai is Latin America’s first 100% AI creative production company. We combine human creativity with artificial intelligence to develop concepts, stories, campaigns and audiovisual content.' },
+      { question: 'What services does an AI creative production company offer?', answer: 'We produce commercials, films, corporate videos, branded content, social pieces and UGC with human creative direction and generative workflows.' },
+      { question: 'Does CACHO.Ai work with brands and agencies?', answer: 'Yes. We work with brands, agencies and creative teams in Latin America and worldwide, from concept and script through final audiovisual production.' },
+      { question: 'What makes CACHO.Ai different?', answer: 'We combine human creative direction with generative production to build worlds, characters and campaigns with speed, scale and a distinctive visual identity.' },
+    ],
+  },
+};
+
 // Lista de videos con soporte multilenguaje
 const localizedTitle = (title: string): Record<Language, string> =>
   Object.fromEntries(LANGUAGES.map(({ code }) => [code, title])) as Record<Language, string>;
@@ -1198,24 +1222,20 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
   const openVideo = () => onOpen(index);
 
   return (
-    <motion.article
+    <motion.a
+      href={`/videos/${video.id}`}
       ref={cardRef}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55, delay: (position % 4) * 0.05 }}
-      role="button"
-      tabIndex={0}
       aria-label={`${galleryCopy.openVideo}: ${title}`}
       className={`group relative w-full touch-manipulation cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 outline-none transition-[border-color,transform] duration-500 hover:border-[#F27D26]/70 focus-visible:border-[#F27D26] focus-visible:ring-2 focus-visible:ring-[#F27D26]/60 sm:rounded-3xl ${
         video.isShort ? 'aspect-[9/16]' : 'aspect-video'
       } ${isFeatured ? 'lg:col-span-2' : ''}`}
-      onClick={openVideo}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          openVideo();
-        }
+      onClick={(event) => {
+        event.preventDefault();
+        openVideo();
       }}
     >
       <img
@@ -1227,6 +1247,10 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         alt={`${galleryCopy.thumbnail}: ${title}`}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
         loading={position < 3 && !video.isShort ? 'eager' : 'lazy'}
+        decoding="async"
+        width={video.isShort ? 1080 : 1920}
+        height={video.isShort ? 1920 : 1080}
+        fetchPriority={position < 2 ? 'high' : 'auto'}
       />
 
       {shouldRenderPreview && (
@@ -1320,9 +1344,119 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         )}
       </div>
 
-    </motion.article>
+    </motion.a>
   );
 });
+
+function VideoLandingPage({
+  video,
+  currentLang,
+}: {
+  video: (typeof VIDEOS)[number];
+  currentLang: Language;
+}) {
+  const title = video.titles[currentLang] || video.titles.es;
+  const canonicalUrl = `https://cacho.ai/videos/${video.id}`;
+  const description = currentLang === 'en'
+    ? `Watch ${title}, an audiovisual portfolio piece by CACHO.Ai, Latin America's first 100% AI creative production company.`
+    : `Mirá ${title}, una pieza audiovisual del portfolio de CACHO.Ai, la primera productora creativa 100% IA de Latinoamérica.`;
+
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    document.title = `${title} | CACHO.Ai`;
+    updateMetaContent('meta[name="description"]', description);
+    updateMetaContent('meta[property="og:title"]', `${title} | CACHO.Ai`);
+    updateMetaContent('meta[property="og:description"]', description);
+    updateMetaContent('meta[property="og:url"]', canonicalUrl);
+    updateMetaContent('meta[name="twitter:title"]', `${title} | CACHO.Ai`);
+    updateMetaContent('meta[name="twitter:description"]', description);
+    updateMetaContent('meta[name="twitter:url"]', canonicalUrl);
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical) canonical.href = canonicalUrl;
+
+    let schema = document.querySelector<HTMLScriptElement>('#video-page-schema');
+    if (!schema) {
+      schema = document.createElement('script');
+      schema.id = 'video-page-schema';
+      schema.type = 'application/ld+json';
+      document.head.appendChild(schema);
+    }
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      '@id': `${canonicalUrl}#video`,
+      name: title,
+      description,
+      url: canonicalUrl,
+      thumbnailUrl: `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`,
+      embedUrl: `https://www.youtube.com/embed/${video.id}`,
+      contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+      publisher: { '@id': 'https://cacho.ai/#organization' },
+      isFamilyFriendly: true,
+      inLanguage: currentLang,
+    });
+
+    return () => {
+      schema?.remove();
+      const homeCanonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      if (homeCanonical) homeCanonical.href = 'https://cacho.ai/';
+    };
+  }, [canonicalUrl, currentLang, description, title, video.id]);
+
+  return (
+    <div className="min-h-screen bg-[#050505] text-white font-sans">
+      <header className="border-b border-white/10 px-6 py-5 sm:px-10">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <a href="/" className="text-xl font-black uppercase tracking-tight sm:text-2xl">
+            CACHO<span className="text-[#F27D26]">.Ai</span>
+          </a>
+          <a href="/" className="text-[10px] font-black uppercase tracking-[0.18em] text-white/60 hover:text-[#F27D26]">
+            Portfolio
+          </a>
+        </div>
+      </header>
+      <main className="mx-auto max-w-5xl px-5 pb-20 pt-10 sm:px-8 sm:pt-16">
+        <nav aria-label="Breadcrumb" className="mb-8 text-[10px] font-black uppercase tracking-[0.18em] text-white/45">
+          <a href="/" className="hover:text-[#F27D26]">CACHO.Ai</a>
+          <span className="mx-2 text-[#F27D26]">/</span>
+          Portfolio audiovisual
+        </nav>
+        <article itemScope itemType="https://schema.org/VideoObject">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26]">Pieza audiovisual · CACHO.Ai</p>
+          <h1 itemProp="name" className="mt-4 max-w-4xl text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+            {title}
+          </h1>
+          <p itemProp="description" className="mt-6 max-w-3xl text-base leading-relaxed text-white/70 sm:text-xl">
+            {description}
+          </p>
+          <div className="mt-10 aspect-video overflow-hidden rounded-2xl border border-white/15 bg-black shadow-2xl sm:rounded-3xl">
+            <YouTube
+              videoId={video.id}
+              title={title}
+              className="h-full w-full"
+              iframeClassName="h-full w-full"
+              opts={{
+                width: '1920',
+                height: '1080',
+                playerVars: { controls: 1, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, cc_load_policy: 0 },
+              }}
+            />
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-white/55">
+            {video.isSpecAd && <span className="rounded-full border border-[#F27D26]/60 px-3 py-1 font-bold uppercase tracking-[0.12em] text-[#F27D26]">Spec ad</span>}
+            {video.isFan34Spec && <span>Spec ad para la agencia Fan#34</span>}
+            {video.isFan34Work && <span>Trabajo para la agencia Fan#34</span>}
+            {video.id === 'oomjGUHKFlY' && <span>{CREATIVE_HUB_CREDIT[currentLang]}</span>}
+          </div>
+        </article>
+        <a href="/" className="mt-12 inline-flex text-xs font-black uppercase tracking-[0.18em] text-[#F27D26] hover:text-white">
+          ← Volver al portfolio
+        </a>
+      </main>
+    </div>
+  );
+}
 
 const updateMetaContent = (selector: string, content: string) => {
   const element = document.querySelector<HTMLMetaElement>(selector);
@@ -1542,9 +1676,33 @@ export default function App() {
   const displayPosition = new Map(
     portfolioOrder.map(({ video }, position) => [video.id, position]),
   );
+  const requestedVideoId = window.location.pathname.match(/^\/videos\/([^/]+)\/?$/)?.[1];
+  const requestedVideo = requestedVideoId ? findVideo(requestedVideoId) : undefined;
+
+  if (requestedVideo) {
+    return <VideoLandingPage video={requestedVideo.video} currentLang={currentLang} />;
+  }
+  const faq = FAQ_COPY[currentLang] || FAQ_COPY.es!;
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#F27D26] selection:text-white relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            '@id': 'https://cacho.ai/#video-list',
+            name: 'Portfolio audiovisual de CACHO.Ai',
+            itemListElement: portfolioOrder.map(({ video }, position) => ({
+              '@type': 'ListItem',
+              position: position + 1,
+              name: video.titles[currentLang] || video.titles.es,
+              url: `https://cacho.ai/videos/${video.id}`,
+            })),
+          }),
+        }}
+      />
       {/* Header Semántico */}
       <header className="fixed top-0 z-40 w-full bg-gradient-to-b from-black/90 to-transparent py-4 backdrop-blur-md sm:py-6">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
@@ -2069,6 +2227,29 @@ export default function App() {
             </p>
           </motion.section>
         )}
+
+        {/* FAQ semántico: contenido útil para usuarios y motores de respuesta */}
+        <section id="preguntas-frecuentes" className="mx-auto mt-20 max-w-5xl px-6 sm:mt-28">
+          <div className="border-t border-white/15 pt-8 sm:pt-10">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F27D26]">CACHO.Ai / GEO + AEO</p>
+            <h2 className="mt-3 max-w-3xl text-3xl font-black uppercase leading-[0.94] tracking-[-0.045em] sm:text-5xl">
+              {faq.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">{faq.intro}</p>
+            <div className="mt-8 divide-y divide-white/15 rounded-2xl border border-white/15 bg-white/[0.02]">
+              {faq.items.map((item) => (
+                <details key={item.question} className="group px-5 py-5 sm:px-7">
+                  <summary className="cursor-pointer list-none pr-8 text-sm font-bold text-white marker:hidden sm:text-base">
+                    <span className="relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:text-xl after:font-normal after:text-[#F27D26] after:content-['+'] group-open:after:content-['−']">
+                      {item.question}
+                    </span>
+                  </summary>
+                  <p className="max-w-3xl pt-3 text-sm leading-relaxed text-white/60 sm:text-base">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Contact Section */}
         <section id="contacto" className="mt-24 sm:mt-32 px-6">

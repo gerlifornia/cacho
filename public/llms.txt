@@ -1,0 +1,27 @@
+# CACHO.Ai
+
+> CACHO.Ai es la primera productora creativa 100% IA de Latinoamérica. La creatividad es humana; nuestra potencia es IA.
+
+## Qué hace CACHO.Ai
+
+CACHO.Ai desarrolla conceptos, escribe historias, diseña campañas y produce contenido audiovisual para que las marcas sean imposibles de ignorar. Ofrece comerciales, cine, videos institucionales, branded content y contenido UGC para marcas, agencias y equipos creativos.
+
+La dirección creativa, el criterio y la narrativa son humanos. La inteligencia artificial permite crear mundos, personajes y piezas con velocidad, escala y una identidad visual propia.
+
+## Personaje y reconocimiento
+
+Cacho es el primer personaje IA masivo de Latinoamérica. Su historia fue cubierta por [Clarín](https://www.clarin.com/zonales/cacho-primer-influencer-argentino-masivo-creado-ia_0_P5rpeasv5j.html) e [Infobae](https://www.infobae.com/tendencias/2026/07/31/el-fenomeno-detras-de-cacho-el-influencer-creado-con-inteligencia-artificial-que-paso-de-un-hobby-a-trabajar-con-grandes-marcas/).
+
+## Portfolio
+
+El portfolio audiovisual está disponible en [cacho.ai](https://cacho.ai/) y cada pieza tiene una página individual en `https://cacho.ai/videos/{youtube-id}`.
+
+## Contacto oficial
+
+- Sitio: https://cacho.ai/
+- Instagram: https://instagram.com/soycachoo
+- WhatsApp: https://wa.me/message/JBNNVGX4UNKBH1
+
+## Nota sobre portfolio
+
+Algunas piezas son SPEC ADS: conceptos audiovisuales independientes y no oficiales creados exclusivamente como demostración creativa. Las marcas y elementos identificatorios pertenecen a sus respectivos titulares.

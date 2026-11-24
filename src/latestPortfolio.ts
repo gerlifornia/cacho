@@ -36,7 +36,6 @@ export const latestPortfolio = [
   ["QH36fKFHoRw", "Chinfield", "video institucional"],
   ["pkup7kWxHxg", "Snack good show", "Spec Ad para Fan#34"],
   ["W4DM487Lf2g", "Mi Club", "Discoteca"],
-  ["RoMXqz5Qu-Y", "Pruebas de realismo"],
 ] as const satisfies readonly (readonly [id: string, title: string, credit?: string])[];
 
 type LatestVideoId = (typeof latestPortfolio)[number][0];

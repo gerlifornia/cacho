@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Instagram, MessageCircle, Flame, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { latestPortfolio } from './latestPortfolio';
+import { latestPortfolio, latestPortfolioRows } from './latestPortfolio';
 
 const CLARIN_LOGO_SRC = 'https://upload.wikimedia.org/wikipedia/commons/7/73/Clar%C3%ADn_logo.svg';
 const INFOBAE_LOGO_SRC = 'https://upload.wikimedia.org/wikipedia/commons/2/22/Infobae_logo.svg';
@@ -1180,6 +1180,80 @@ const latestPortfolioVideos: PortfolioVideo[] = latestPortfolio.map(([id, title,
 
 const VIDEOS = [...originalPortfolioVideos, ...latestPortfolioVideos];
 
+const indexedVideos = VIDEOS.map((video, index) => ({ video, index }));
+const originalIndexedVideos = indexedVideos.slice(0, originalPortfolioVideos.length);
+const latestIndexedVideos = indexedVideos.slice(originalPortfolioVideos.length);
+const latestVideosById = new Map(latestIndexedVideos.map((entry) => [entry.video.id, entry]));
+const featuredLatestIds = new Set<string>(latestPortfolioRows.flat());
+const latestFeaturedRows = latestPortfolioRows.map((row) =>
+  row.map((id) => latestVideosById.get(id)!),
+);
+const remainingLatestVideos = latestIndexedVideos.filter(({ video }) => !featuredLatestIds.has(video.id));
+const findVideo = (id: string) => indexedVideos.find(({ video }) => video.id === id);
+const cachoHero = findVideo('Q9ZKoUoT4w0');
+const topWidescreen = ['LLIwEkrWP4s', '_16VPifqFgc']
+  .map(findVideo)
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const waveVideo = findVideo('oomjGUHKFlY');
+const verticalSpotlight = ['2tQwIZGvhPk', 'uuA2uO6F1n4', 'IMMDsV006bk']
+  .map(findVideo)
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const lostDayVideo = findVideo('IBh1BRPHbKo');
+const torbeCampanella = ['2Y8FpsZsIoo', 'U2EtsosufFI']
+  .map(findVideo)
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const fan34VerticalRow = ['_sQgV29AmKQ', '8jIrO55s1FM', 'tTIRyt2Fmas']
+  .map(findVideo)
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const widescreenTail = [
+  'M3VQ0VydAUc',
+  'f7KgP33ytiA',
+  'otJEBDL1NXQ',
+  'ETbeFjhkiAA',
+  '6h5qgDVIORU',
+  'et_FJ1YoXxg',
+]
+  .map(findVideo)
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const featuredIds = new Set([
+  ...(cachoHero ? [cachoHero.video.id] : []),
+  ...topWidescreen.map(({ video }) => video.id),
+  ...(waveVideo ? [waveVideo.video.id] : []),
+  ...verticalSpotlight.map(({ video }) => video.id),
+  ...(lostDayVideo ? [lostDayVideo.video.id] : []),
+  ...torbeCampanella.map(({ video }) => video.id),
+  ...fan34VerticalRow.map(({ video }) => video.id),
+  ...widescreenTail.map(({ video }) => video.id),
+]);
+const remainingWidescreen = originalIndexedVideos.filter(
+  ({ video }) => !video.isShort && !featuredIds.has(video.id),
+);
+const remainingVertical = originalIndexedVideos.filter(
+  ({ video }) => video.isShort && !featuredIds.has(video.id),
+);
+const portfolioOrder = [
+  ...latestFeaturedRows.flat(),
+  ...remainingLatestVideos,
+  ...(cachoHero ? [cachoHero] : []),
+  ...topWidescreen,
+  ...(waveVideo ? [waveVideo] : []),
+  ...verticalSpotlight,
+  ...(lostDayVideo ? [lostDayVideo] : []),
+  ...torbeCampanella,
+  ...fan34VerticalRow,
+  ...widescreenTail,
+  ...remainingWidescreen,
+  ...remainingVertical,
+];
+const displayPosition = new Map(
+  portfolioOrder.map(({ video }, position) => [video.id, position]),
+);
+
+function adjacentPortfolioIndex(index: number | null, offset: -1 | 1) {
+  const position = index === null ? (offset === 1 ? -1 : 0) : displayPosition.get(VIDEOS[index].id)!;
+  return portfolioOrder[(position + offset + portfolioOrder.length) % portfolioOrder.length].index;
+}
+
 type PortfolioVideoCardProps = {
   video: (typeof VIDEOS)[number];
   index: number;
@@ -1608,11 +1682,11 @@ export default function App() {
   }, []);
 
   const handlePrevious = useCallback(() => {
-    setActiveIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : VIDEOS.length - 1));
+    setActiveIndex((prev) => adjacentPortfolioIndex(prev, -1));
   }, []);
 
   const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev !== null && prev < VIDEOS.length - 1 ? prev + 1 : 0));
+    setActiveIndex((prev) => adjacentPortfolioIndex(prev, 1));
   }, []);
 
   // Touch handlers para swipe en móviles
@@ -1645,67 +1719,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeIndex, handleNext, handlePrevious]);
 
-  const indexedVideos = VIDEOS.map((video, index) => ({ video, index }));
-  const originalIndexedVideos = indexedVideos.slice(0, originalPortfolioVideos.length);
-  const latestIndexedVideos = indexedVideos.slice(originalPortfolioVideos.length);
-  const findVideo = (id: string) => indexedVideos.find(({ video }) => video.id === id);
-  const cachoHero = findVideo('Q9ZKoUoT4w0');
-  const topWidescreen = ['LLIwEkrWP4s', '_16VPifqFgc']
-    .map(findVideo)
-    .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const waveVideo = findVideo('oomjGUHKFlY');
-  const verticalSpotlight = ['2tQwIZGvhPk', 'uuA2uO6F1n4', 'IMMDsV006bk']
-    .map(findVideo)
-    .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const lostDayVideo = findVideo('IBh1BRPHbKo');
-  const torbeCampanella = ['2Y8FpsZsIoo', 'U2EtsosufFI']
-    .map(findVideo)
-    .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const fan34VerticalRow = ['_sQgV29AmKQ', '8jIrO55s1FM', 'tTIRyt2Fmas']
-    .map(findVideo)
-    .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const widescreenTail = [
-    'M3VQ0VydAUc',
-    'f7KgP33ytiA',
-    'otJEBDL1NXQ',
-    'ETbeFjhkiAA',
-    '6h5qgDVIORU',
-    'et_FJ1YoXxg',
-  ]
-    .map(findVideo)
-    .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  const featuredIds = new Set([
-    ...(cachoHero ? [cachoHero.video.id] : []),
-    ...topWidescreen.map(({ video }) => video.id),
-    ...(waveVideo ? [waveVideo.video.id] : []),
-    ...verticalSpotlight.map(({ video }) => video.id),
-    ...(lostDayVideo ? [lostDayVideo.video.id] : []),
-    ...torbeCampanella.map(({ video }) => video.id),
-    ...fan34VerticalRow.map(({ video }) => video.id),
-    ...widescreenTail.map(({ video }) => video.id),
-  ]);
-  const remainingWidescreen = originalIndexedVideos.filter(
-    ({ video }) => !video.isShort && !featuredIds.has(video.id),
-  );
-  const remainingVertical = originalIndexedVideos.filter(
-    ({ video }) => video.isShort && !featuredIds.has(video.id),
-  );
-  const portfolioOrder = [
-    ...(cachoHero ? [cachoHero] : []),
-    ...topWidescreen,
-    ...(waveVideo ? [waveVideo] : []),
-    ...verticalSpotlight,
-    ...(lostDayVideo ? [lostDayVideo] : []),
-    ...torbeCampanella,
-    ...fan34VerticalRow,
-    ...widescreenTail,
-    ...remainingWidescreen,
-    ...remainingVertical,
-    ...latestIndexedVideos,
-  ];
-  const displayPosition = new Map(
-    portfolioOrder.map(({ video }, position) => [video.id, position]),
-  );
   const requestedVideoId = window.location.pathname.match(/^\/videos\/([^/]+)\/?$/)?.[1];
   const requestedVideo = requestedVideoId ? findVideo(requestedVideoId) : undefined;
 
@@ -1918,6 +1931,45 @@ export default function App() {
 
             {/* Portfolio Feed - Galería cinematográfica curada */}
             <section className="relative z-10 px-4 sm:px-6">
+              <div className="mb-10 grid grid-cols-1 items-start gap-4 sm:mb-16 sm:gap-6 lg:grid-cols-2">
+                {latestFeaturedRows.map((row) => (
+                  <React.Fragment key={row[0].video.id}>
+                    {row.map(({ video, index }) => (
+                      <PortfolioVideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                        position={displayPosition.get(video.id) ?? index}
+                        currentLang={currentLang}
+                        galleryCopy={siteCopy.gallery}
+                        isFeatured={row.length === 1}
+                        previewsEnabled={activeIndex === null}
+                        onOpen={openVideo}
+                      />
+                    ))}
+                  </React.Fragment>
+                ))}
+                {remainingLatestVideos.map(({ video, index }, position) => (
+                  <div
+                    key={video.id}
+                    className={remainingLatestVideos.length % 2 === 1 && position === remainingLatestVideos.length - 1
+                      ? 'lg:col-span-2 lg:mx-auto lg:w-[calc((100%_-_1.5rem)/2)]'
+                      : undefined}
+                  >
+                    <PortfolioVideoCard
+                      video={video}
+                      index={index}
+                      position={displayPosition.get(video.id) ?? index}
+                      currentLang={currentLang}
+                      galleryCopy={siteCopy.gallery}
+                      isFeatured={false}
+                      previewsEnabled={activeIndex === null}
+                      onOpen={openVideo}
+                    />
+                  </div>
+                ))}
+              </div>
+
               {cachoHero && (
                 <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-2">
                   <PortfolioVideoCard
@@ -2077,21 +2129,6 @@ export default function App() {
                 </div>
               )}
 
-              <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:mt-16 sm:gap-6 lg:grid-cols-2">
-                {latestIndexedVideos.map(({ video, index }) => (
-                  <PortfolioVideoCard
-                    key={video.id}
-                    video={video}
-                    index={index}
-                    position={displayPosition.get(video.id) ?? index}
-                    currentLang={currentLang}
-                    galleryCopy={siteCopy.gallery}
-                    isFeatured={false}
-                    previewsEnabled={activeIndex === null}
-                    onOpen={openVideo}
-                  />
-                ))}
-              </div>
             </section>
           </>
         ) : (
@@ -2488,7 +2525,7 @@ export default function App() {
                   <ChevronLeft className="w-6 h-6" /> {siteCopy.gallery.previous}
                 </button>
                 <span className="text-white/40 text-sm">
-                  {activeIndex + 1} / {VIDEOS.length}
+                  {(displayPosition.get(VIDEOS[activeIndex].id) ?? activeIndex) + 1} / {VIDEOS.length}
                 </span>
                 <button 
                   onClick={handleNext}

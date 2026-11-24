@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Instagram, MessageCircle, Flame, X, ChevronLeft, ChevronRight, Globe, ArrowUpRight } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import YouTube from 'react-youtube';
+import { latestPortfolio } from './latestPortfolio';
 
 const CLARIN_LOGO_SRC = 'https://upload.wikimedia.org/wikipedia/commons/7/73/Clar%C3%ADn_logo.svg';
 const INFOBAE_LOGO_SRC = 'https://upload.wikimedia.org/wikipedia/commons/2/22/Infobae_logo.svg';
@@ -1013,7 +1014,18 @@ const FAQ_COPY: Partial<Record<Language, { title: string; intro: string; items: 
 const localizedTitle = (title: string): Record<Language, string> =>
   Object.fromEntries(LANGUAGES.map(({ code }) => [code, title])) as Record<Language, string>;
 
-const VIDEOS = [
+type PortfolioVideo = {
+  id: string;
+  isShort: boolean;
+  titles: Record<Language, string>;
+  descKey: string;
+  credit?: string;
+  isSpecAd?: boolean;
+  isFan34Spec?: boolean;
+  isFan34Work?: boolean;
+};
+
+const originalPortfolioVideos: PortfolioVideo[] = [
   {
     id: "oomjGUHKFlY", isShort: false,
     titles: localizedTitle("Creactive Hub x Cacho"),
@@ -1157,6 +1169,16 @@ const VIDEOS = [
     isSpecAd: true
   }
 ];
+
+const latestPortfolioVideos: PortfolioVideo[] = latestPortfolio.map(([id, title, credit]) => ({
+  id,
+  isShort: false,
+  titles: localizedTitle(title),
+  descKey: "generated_ai",
+  credit,
+}));
+
+const VIDEOS = [...originalPortfolioVideos, ...latestPortfolioVideos];
 
 type PortfolioVideoCardProps = {
   video: (typeof VIDEOS)[number];
@@ -1324,7 +1346,11 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
         >
           {title}
         </h3>
-        {video.isFan34Spec ? (
+        {video.credit ? (
+          <p className="mt-1.5 text-[8px] font-black uppercase leading-snug tracking-[0.14em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
+            {video.credit}
+          </p>
+        ) : video.isFan34Spec ? (
           <p className="mt-1.5 text-[8px] font-black uppercase leading-snug tracking-[0.14em] text-white/75 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] sm:text-[10px]">
             {FAN34_SPEC_CREDIT[currentLang]}
           </p>
@@ -1427,6 +1453,7 @@ function VideoLandingPage({
           <h1 itemProp="name" className="mt-4 max-w-4xl text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
             {title}
           </h1>
+          {video.credit && <p className="mt-3 text-sm font-semibold text-white/75">{video.credit}</p>}
           <p itemProp="description" className="mt-6 max-w-3xl text-base leading-relaxed text-white/70 sm:text-xl">
             {description}
           </p>
@@ -1619,6 +1646,8 @@ export default function App() {
   }, [activeIndex, handleNext, handlePrevious]);
 
   const indexedVideos = VIDEOS.map((video, index) => ({ video, index }));
+  const originalIndexedVideos = indexedVideos.slice(0, originalPortfolioVideos.length);
+  const latestIndexedVideos = indexedVideos.slice(originalPortfolioVideos.length);
   const findVideo = (id: string) => indexedVideos.find(({ video }) => video.id === id);
   const cachoHero = findVideo('Q9ZKoUoT4w0');
   const topWidescreen = ['LLIwEkrWP4s', '_16VPifqFgc']
@@ -1655,10 +1684,10 @@ export default function App() {
     ...fan34VerticalRow.map(({ video }) => video.id),
     ...widescreenTail.map(({ video }) => video.id),
   ]);
-  const remainingWidescreen = indexedVideos.filter(
+  const remainingWidescreen = originalIndexedVideos.filter(
     ({ video }) => !video.isShort && !featuredIds.has(video.id),
   );
-  const remainingVertical = indexedVideos.filter(
+  const remainingVertical = originalIndexedVideos.filter(
     ({ video }) => video.isShort && !featuredIds.has(video.id),
   );
   const portfolioOrder = [
@@ -1672,6 +1701,7 @@ export default function App() {
     ...widescreenTail,
     ...remainingWidescreen,
     ...remainingVertical,
+    ...latestIndexedVideos,
   ];
   const displayPosition = new Map(
     portfolioOrder.map(({ video }, position) => [video.id, position]),
@@ -2046,6 +2076,22 @@ export default function App() {
                   </div>
                 </div>
               )}
+
+              <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:mt-16 sm:gap-6 lg:grid-cols-2">
+                {latestIndexedVideos.map(({ video, index }) => (
+                  <PortfolioVideoCard
+                    key={video.id}
+                    video={video}
+                    index={index}
+                    position={displayPosition.get(video.id) ?? index}
+                    currentLang={currentLang}
+                    galleryCopy={siteCopy.gallery}
+                    isFeatured={false}
+                    previewsEnabled={activeIndex === null}
+                    onOpen={openVideo}
+                  />
+                ))}
+              </div>
             </section>
           </>
         ) : (

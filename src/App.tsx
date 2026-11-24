@@ -1326,7 +1326,7 @@ const PortfolioVideoCard = React.memo(function PortfolioVideoCard({
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55, delay: (position % 4) * 0.05 }}
       aria-label={`${galleryCopy.openVideo}: ${title}`}
-      className={`group relative w-full touch-manipulation cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 outline-none transition-[border-color,transform] duration-500 hover:border-[#F27D26]/70 focus-visible:border-[#F27D26] focus-visible:ring-2 focus-visible:ring-[#F27D26]/60 sm:rounded-3xl ${
+      className={`group relative block w-full touch-manipulation cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 outline-none transition-[border-color,transform] duration-500 hover:border-[#F27D26]/70 focus-visible:border-[#F27D26] focus-visible:ring-2 focus-visible:ring-[#F27D26]/60 sm:rounded-3xl ${
         video.isShort ? 'aspect-[9/16]' : 'aspect-video'
       } ${isFeatured ? 'lg:col-span-2' : ''}`}
       onClick={(event) => {

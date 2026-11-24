@@ -38,3 +38,27 @@ export const latestPortfolio = [
   ["W4DM487Lf2g", "Mi Club", "Discoteca"],
   ["RoMXqz5Qu-Y", "Pruebas de realismo"],
 ] as const satisfies readonly (readonly [id: string, title: string, credit?: string])[];
+
+type LatestVideoId = (typeof latestPortfolio)[number][0];
+
+// A single entry takes the full row. Two entries share it.
+export const latestPortfolioRows = [
+  ['Gbry0g5XvVQ'],                         // Cien Viejos 2
+  ['aH5wEMmTs84', 'BDK86ZlCVrE'],          // Egresan + Zuffa Detalles
+  ['EU5wQl03_tI'],                         // Banco Azteca
+  ['fRISQLrJ-5M', 'D-vevR9vp6w'],          // Unión Ganadera + La Selva
+  ['T6Oy4ya40LM'],                         // Cien Viejos 1
+  ['SVVuUyF42pw', 'cTnWfKhAZp8'],          // Nos Belmo + Ricardo y Diego
+  ['2xLItyHnOmY'],                         // Torneo de farmear traumas
+  ['3CpBsTqDOgg', 'pkup7kWxHxg'],          // Día de la Madre + Snack good show
+  ['ry9oRxCzbR4', 'h63ieQlg0iQ'],          // Atilio + Antiniños
+  ['CFxw5jKBkwQ', 'O9KEur-VW_w'],          // Zuffa ad 2 + Obras incompletas
+  ['l6oCqdbaQMk'],                         // Héctor
+  ['CwTDGbLCUZg', 'SFnzIT_hTi8'],          // Deye + Bolden
+  ['0Xz7w5Zr-Ds'],                         // Hombre melancolía
+  ['QHpR8EF-0wo', 'BHzVYKz1Vu0'],          // El paso + Woodman
+  ['zMWG0qTs-3Q'],                         // Deye BESS
+  ['dsyrci2KzJM', 'prer4Pmo5vk'],          // Día del Estudiante + Día del Niño
+  ['8A85v7EUeyU'],                         // Los 80 de Cacho
+  ['uS-hbe3Q38w'],                         // Vinnic
+] as const satisfies readonly (readonly [LatestVideoId] | readonly [LatestVideoId, LatestVideoId])[];

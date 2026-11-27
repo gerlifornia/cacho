@@ -1,6 +1,7 @@
 export const latestPortfolio = [
   ["Gbry0g5XvVQ", "Cien Viejos 2 x Mario Pergolini", "Otro Dia Perdido - El Trece TV"],
   ["aH5wEMmTs84", "Trailer \"Egresan\" para El Trece TV", "Otro Dia Perdido - El Trece TV"],
+  ["xLoAJjKpkhc", "Ataque al consumidor"],
   ["BDK86ZlCVrE", "Zuffa Detalles", "UFC"],
   ["EU5wQl03_tI", "Banco Azteca", "Director Gustavo, prod. hibrida ia"],
   ["fRISQLrJ-5M", "Unión Ganadera", "Disney +"],
@@ -40,10 +41,10 @@ export const latestPortfolio = [
 
 type LatestVideoId = (typeof latestPortfolio)[number][0];
 
-// A single entry takes the full row. Two entries share it.
+// A single entry takes the full row. Two or three entries share it.
 export const latestPortfolioRows = [
   ['Gbry0g5XvVQ'],                         // Cien Viejos 2
-  ['aH5wEMmTs84', 'BDK86ZlCVrE'],          // Egresan + Zuffa Detalles
+  ['aH5wEMmTs84', 'xLoAJjKpkhc', 'BDK86ZlCVrE'], // Egresan + Ataque al consumidor + Zuffa Detalles
   ['EU5wQl03_tI'],                         // Banco Azteca
   ['fRISQLrJ-5M', 'D-vevR9vp6w'],          // Unión Ganadera + La Selva
   ['T6Oy4ya40LM'],                         // Cien Viejos 1
@@ -60,4 +61,4 @@ export const latestPortfolioRows = [
   ['dsyrci2KzJM', 'prer4Pmo5vk'],          // Día del Estudiante + Día del Niño
   ['8A85v7EUeyU'],                         // Los 80 de Cacho
   ['uS-hbe3Q38w'],                         // Vinnic
-] as const satisfies readonly (readonly [LatestVideoId] | readonly [LatestVideoId, LatestVideoId])[];
+] as const satisfies readonly (readonly [LatestVideoId] | readonly [LatestVideoId, LatestVideoId] | readonly [LatestVideoId, LatestVideoId, LatestVideoId])[];

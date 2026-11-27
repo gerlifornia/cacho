@@ -1932,23 +1932,28 @@ export default function App() {
             {/* Portfolio Feed - Galería cinematográfica curada */}
             <section className="relative z-10 px-4 sm:px-6">
               <div className="mb-10 grid grid-cols-1 items-start gap-4 sm:mb-16 sm:gap-6 lg:grid-cols-2">
-                {latestFeaturedRows.map((row) => (
-                  <React.Fragment key={row[0].video.id}>
-                    {row.map(({ video, index }) => (
-                      <PortfolioVideoCard
-                        key={video.id}
-                        video={video}
-                        index={index}
-                        position={displayPosition.get(video.id) ?? index}
-                        currentLang={currentLang}
-                        galleryCopy={siteCopy.gallery}
-                        isFeatured={row.length === 1}
-                        previewsEnabled={activeIndex === null}
-                        onOpen={openVideo}
-                      />
-                    ))}
-                  </React.Fragment>
-                ))}
+                {latestFeaturedRows.map((row) => {
+                  const cards = row.map(({ video, index }) => (
+                    <PortfolioVideoCard
+                      key={video.id}
+                      video={video}
+                      index={index}
+                      position={displayPosition.get(video.id) ?? index}
+                      currentLang={currentLang}
+                      galleryCopy={siteCopy.gallery}
+                      isFeatured={row.length === 1}
+                      previewsEnabled={activeIndex === null}
+                      onOpen={openVideo}
+                    />
+                  ));
+                  return row.length === 3 ? (
+                    <div key={row[0].video.id} className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:col-span-2 lg:grid-cols-3">
+                      {cards}
+                    </div>
+                  ) : (
+                    <React.Fragment key={row[0].video.id}>{cards}</React.Fragment>
+                  );
+                })}
                 {remainingLatestVideos.map(({ video, index }, position) => (
                   <div
                     key={video.id}
